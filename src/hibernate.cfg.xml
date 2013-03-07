@@ -18,6 +18,9 @@
       <mapping class="renan.modelo.Operador" />
       <mapping class="renan.modelo.GrupoOperador" />
       <mapping class="renan.modelo.FuncionalidadeGrupoOperador" />
+      <mapping class="renan.modelo.TipoArmamento" />
+      <mapping class="renan.modelo.Armamento" />
+      <mapping class="renan.modelo.Cliente" />
       
 </session-factory>
 </hibernate-configuration>

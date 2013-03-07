@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 import renan.hibernate.Entidade;
 
 @Entity
-public class Operador implements Entidade {
+public class Operador extends Militar implements Entidade {
 
 	@Id
 	@GeneratedValue
