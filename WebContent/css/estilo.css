@@ -1,0 +1,83 @@
+
+table:hover{
+	cursor: pointer;
+}
+
+.esconder-mostrar-menu{
+	width: 50px; 
+	height: 20px; 
+	border-radius: 6px;
+	position:absolute; 
+	background: -webkit-gradient(linear, left top, left bottom, from(#D3D3D3), to(#363636)) repeat-X;
+	background: -moz-linear-gradient(top, #D3D3D3, #363636) repeat-X;
+}
+
+#esconder-menu{
+	margin-top: 5px;
+	top:25px; 
+	left:35%; 
+	right:50%; 
+}
+
+#mostrar-menu{
+	top:-75px; 
+	display: none;
+}
+
+.esconder-mostrar-menu p{
+	text-align:center;
+	font-size: 10px;
+	color: white;
+	padding-top: 1px;
+}
+
+.esconder-mostrar-menu p:hover{
+	font-weight: bold;
+}
+
+.esconder-mostrar-menu:hover{
+	cursor: pointer;
+	background: -webkit-gradient(linear, left top, left bottom, from(#363636), to(#D3D3D3)) repeat-X;
+	background: -moz-linear-gradient(top, #363636, #D3D3D3) repeat-X;
+}
+
+#impressao{
+	width: 25px; 
+	height: 25px; 
+	border-radius: 6px;
+	position:absolute; 
+	top:10px; 
+	left:50%; 
+	right:25%; 
+	background: #EEE9E9;
+}
+
+#icone-impressao{
+	padding-top: 5px;
+	padding-left: 5px;
+}
+
+#impressao:hover{
+	cursor: pointer;
+}
+
+#texto-imprimir{
+	width: 60px; 
+	height: 25px; 
+	border-radius: 6px;
+	box-shadow: 3px 3px 7px grey;
+	background: white;
+	position: absolute;
+	top: 18px;
+	right: 30px;
+	display: none;
+}
+
+#texto-imprimir p{
+	text-align:center;
+	font-size: 11px;
+	color: black;
+	padding-top: 4px;
+	padding-left: 3px;
+	font-weight: bold;
+}

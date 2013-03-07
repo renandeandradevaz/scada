@@ -1,0 +1,15 @@
+﻿Este projeto serve como base e template para qualquer projeto que venha ser feito em Java utilizando Hibernate e Vraptor.
+
+Contém funcionalidades úteis como:
+
+    * Busca no banco de dados utilizando filtros com o hibernate.
+    * Controle de funcionalidades por grupos de usuários. Onde pode se definir o que cada usuário pode ver.
+    * Css já pronto utilizando bootstrap.
+    * Menu separado por módulos.
+    * Sub-menu para dados representados em tabelas.
+    * Esquema de paginação de fácil utilização.
+    * Um gif do "what is love" quando você acessa a tela de login.
+    * Entre outras coisas.
+
+
+Obs: Só testei com firefox e chrome. E utilize versões do tomcat acima ou equivalentes a 7.
