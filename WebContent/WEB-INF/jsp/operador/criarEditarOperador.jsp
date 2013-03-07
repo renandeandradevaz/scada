@@ -26,6 +26,6 @@
         </div>
     </div>
     <button type="submit" class="btn btn-primary">Salvar</button>
-    <a class="btn btn-danger" href="<c:url value="/operador/listarOperadors"/>" > Cancelar </a>
+    <a class="btn btn-danger" href="<c:url value="/operador/listarOperadores"/>" > Cancelar </a>
   </fieldset>
 </form>

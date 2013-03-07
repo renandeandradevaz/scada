@@ -123,9 +123,9 @@ public class HibernateUtilTest {
 		popularBanco();
 		popularBanco();
 
-		List<Operador> operadors = hibernateUtil.buscar(new Operador(), 3);
-		assertEquals(10, operadors.size());
-		assertEquals("operador2.3", operadors.get(0).getLogin());
+		List<Operador> operadores = hibernateUtil.buscar(new Operador(), 3);
+		assertEquals(10, operadores.size());
+		assertEquals("operador2.3", operadores.get(0).getLogin());
 	}
 
 	@Test
@@ -135,16 +135,16 @@ public class HibernateUtilTest {
 		popularBanco();
 		popularBanco();
 
-		List<Operador> operadors = hibernateUtil.buscar(new Operador(), 2, Order.asc("login"));
-		assertEquals("operador1.2", operadors.get(0).getLogin());
-		assertEquals("operador1.2", operadors.get(1).getLogin());
-		assertEquals("operador1.3", operadors.get(2).getLogin());
-		assertEquals("operador1.3", operadors.get(3).getLogin());
-		assertEquals("operador1.3", operadors.get(4).getLogin());
-		assertEquals("operador1.3", operadors.get(5).getLogin());
-		assertEquals("operador1.4", operadors.get(6).getLogin());
-		assertEquals("operador1.4", operadors.get(7).getLogin());
-		assertEquals("operador1.4", operadors.get(8).getLogin());
+		List<Operador> operadores = hibernateUtil.buscar(new Operador(), 2, Order.asc("login"));
+		assertEquals("operador1.2", operadores.get(0).getLogin());
+		assertEquals("operador1.2", operadores.get(1).getLogin());
+		assertEquals("operador1.3", operadores.get(2).getLogin());
+		assertEquals("operador1.3", operadores.get(3).getLogin());
+		assertEquals("operador1.3", operadores.get(4).getLogin());
+		assertEquals("operador1.3", operadores.get(5).getLogin());
+		assertEquals("operador1.4", operadores.get(6).getLogin());
+		assertEquals("operador1.4", operadores.get(7).getLogin());
+		assertEquals("operador1.4", operadores.get(8).getLogin());
 
 	}
 
@@ -153,8 +153,8 @@ public class HibernateUtilTest {
 
 		List<SimpleExpression> restricoes = new ArrayList<SimpleExpression>();
 		restricoes.add(Restrictions.eq("login", "operador1.4"));
-		List<Operador> operadors = hibernateUtil.buscar(new Operador(), restricoes);
-		assertEquals(1, operadors.size());
+		List<Operador> operadores = hibernateUtil.buscar(new Operador(), restricoes);
+		assertEquals(1, operadores.size());
 	}
 
 	@Test

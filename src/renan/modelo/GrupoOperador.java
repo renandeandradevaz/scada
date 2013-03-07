@@ -19,7 +19,7 @@ public class GrupoOperador implements Entidade {
 	private String nome;
 
 	@OneToMany(mappedBy = "grupoOperador")
-	private List<Operador> operadors;
+	private List<Operador> operadores;
 
 	@OneToMany(mappedBy = "grupoOperador")
 	private List<FuncionalidadeGrupoOperador> funcionalidades;
@@ -48,12 +48,12 @@ public class GrupoOperador implements Entidade {
 		this.nome = nome;
 	}
 
-	public List<Operador> getOperadors() {
-		return operadors;
+	public List<Operador> getOperadores() {
+		return operadores;
 	}
 
-	public void setOperadors(List<Operador> operadors) {
-		this.operadors = operadors;
+	public void setOperadores(List<Operador> operadores) {
+		this.operadores = operadores;
 	}
 
 	public List<FuncionalidadeGrupoOperador> getFuncionalidades() {

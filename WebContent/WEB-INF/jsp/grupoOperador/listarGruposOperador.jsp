@@ -15,7 +15,7 @@
 	<button type="submit" class="btn btn-info">Pesquisar</button>
 </form>
 
-<h3> Grupos de operadors </h3>
+<h3> Grupos de operadores </h3>
 
 <c:set var="link" value="grupoOperador/listarGruposOperador" scope="request" />
 <%@ include file="/paginacao.jsp" %> 

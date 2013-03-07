@@ -57,30 +57,30 @@ public class GrupoOperadorController {
 		result.forwardTo(this).criarEditarGrupoOperador();
 	}
 
-	@Funcionalidade(nome = "Criar e editar grupo de operadors")
+	@Funcionalidade(nome = "Criar e editar grupo de operadores")
 	public void criarEditarGrupoOperador() {
 
 	}
 
 	@Path("/grupoOperador/excluirGrupoOperador/{grupoOperador.id}")
-	@Funcionalidade(nome = "Excluir grupo de operadors")
+	@Funcionalidade(nome = "Excluir grupo de operadores")
 	public void excluirGrupoOperador(GrupoOperador grupoOperador) {
 
-		GrupoOperador grupoOperadorSelecionado = hibernateUtil.selecionar(grupoOperador);
+		GrupoOperador grupoOperadoreselecionado = hibernateUtil.selecionar(grupoOperador);
 
-		if (grupoOperadorSelecionado.getOperadors().size() > 0) {
+		if (grupoOperadoreselecionado.getOperadores().size() > 0) {
 
-			validator.add(new ValidationMessage("Existem operadors vinculados a este grupo de operador. Se quiser remover este grupo de operador, por favor, exclua os operadors deste grupo ou vincule-os a outro grupo de operador", "Erro"));
+			validator.add(new ValidationMessage("Existem operadores vinculados a este grupo de operador. Se quiser remover este grupo de operador, por favor, exclua os operadores deste grupo ou vincule-os a outro grupo de operador", "Erro"));
 
 			validator.onErrorForwardTo(this).listarGruposOperador(null, null);
 		}
 
 		hibernateUtil.deletar(grupoOperador);
-		result.include("sucesso", "Grupo de operadors excluído com sucesso");
+		result.include("sucesso", "Grupo de operadores excluído com sucesso");
 		result.forwardTo(this).listarGruposOperador(null, null);
 	}
 
-	@Funcionalidade(nome = "Grupos de operadors", modulo = "Controle de acesso")
+	@Funcionalidade(nome = "Grupos de operadores", modulo = "Controle de acesso")
 	public void listarGruposOperador(GrupoOperador grupoOperador, Integer pagina) {
 
 		grupoOperador = (GrupoOperador) UtilController.preencherFiltros(grupoOperador, "grupoOperador", sessaoGeral);
@@ -102,9 +102,9 @@ public class GrupoOperadorController {
 
 		else {
 
-			GrupoOperador grupoOperadorSelecionado = hibernateUtil.selecionar(new GrupoOperador((Integer) sessaoGeral.getValor("idGrupoOperador")));
+			GrupoOperador grupoOperadoreselecionado = hibernateUtil.selecionar(new GrupoOperador((Integer) sessaoGeral.getValor("idGrupoOperador")));
 
-			if (!grupoOperador.getNome().equals(grupoOperadorSelecionado.getNome())) {
+			if (!grupoOperador.getNome().equals(grupoOperadoreselecionado.getNome())) {
 
 				validarNomesRepetidos(grupoOperador);
 			}
@@ -129,7 +129,7 @@ public class GrupoOperadorController {
 	}
 
 	@Path("/grupoOperador/vincularFuncionalidades/{grupoOperador.id}")
-	@Funcionalidade(nome = "Vincular funcionalidades ao grupo de operadors")
+	@Funcionalidade(nome = "Vincular funcionalidades ao grupo de operadores")
 	public void vincularFuncionalidades(GrupoOperador grupoOperador) {
 
 		grupoOperador = hibernateUtil.selecionar(grupoOperador);

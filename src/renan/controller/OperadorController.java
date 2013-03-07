@@ -53,7 +53,7 @@ public class OperadorController {
 
 			validator.add(new ValidationMessage("Não é possível editar o operador administrador", "Erro"));
 
-			validator.onErrorForwardTo(this).listarOperadors(null, null);
+			validator.onErrorForwardTo(this).listarOperadores(null, null);
 		}
 
 		sessaoGeral.adicionar("idOperador", operador.getId());
@@ -61,7 +61,7 @@ public class OperadorController {
 		result.forwardTo(this).criarEditarOperador();
 	}
 
-	@Funcionalidade(nome = "Criar e editar operadors")
+	@Funcionalidade(nome = "Criar e editar operadores")
 	public void criarEditarOperador() {
 
 		List<GrupoOperador> gruposOperador = hibernateUtil.buscar(new GrupoOperador());
@@ -72,18 +72,18 @@ public class OperadorController {
 	@Funcionalidade(nome = "Excluir operador")
 	public void excluirOperador(Operador operador) {
 
-		Operador operadorSelecionado = hibernateUtil.selecionar(operador);
+		Operador operadoreselecionado = hibernateUtil.selecionar(operador);
 
-		if (operadorSelecionado.getLogin().equals("administrador")) {
+		if (operadoreselecionado.getLogin().equals("administrador")) {
 
 			validator.add(new ValidationMessage("Não é possível excluir o operador administrador", "Erro"));
 
-			validator.onErrorForwardTo(this).listarOperadors(null, null);
+			validator.onErrorForwardTo(this).listarOperadores(null, null);
 		}
 
-		hibernateUtil.deletar(operadorSelecionado);
+		hibernateUtil.deletar(operadoreselecionado);
 		result.include("sucesso", "Operador excluído com sucesso");
-		result.forwardTo(this).listarOperadors(null, null);
+		result.forwardTo(this).listarOperadores(null, null);
 	}
 
 	@Funcionalidade(filhaDe = "criarEditarOperador")
@@ -96,9 +96,9 @@ public class OperadorController {
 
 		else {
 
-			Operador operadorSelecionado = hibernateUtil.selecionar(new Operador((Integer) sessaoGeral.getValor("idOperador")));
+			Operador operadoreselecionado = hibernateUtil.selecionar(new Operador((Integer) sessaoGeral.getValor("idOperador")));
 
-			if (!operador.getLogin().equals(operadorSelecionado.getLogin())) {
+			if (!operador.getLogin().equals(operadoreselecionado.getLogin())) {
 
 				validarNomesRepetidos(operador);
 			}
@@ -109,7 +109,7 @@ public class OperadorController {
 		operador.setSenha(GeradorDeMd5.converter(operador.getSenha()));
 		hibernateUtil.salvarOuAtualizar(operador);
 		result.include("sucesso", "Operador salvo com sucesso");
-		result.forwardTo(this).listarOperadors(new Operador(), null);
+		result.forwardTo(this).listarOperadores(new Operador(), null);
 	}
 
 	private void validarNomesRepetidos(Operador operador) {
@@ -123,17 +123,17 @@ public class OperadorController {
 		validator.onErrorForwardTo(this).criarEditarOperador();
 	}
 
-	@Funcionalidade(nome = "Operadors", modulo = "Controle de acesso")
-	public void listarOperadors(Operador operador, Integer pagina) {
+	@Funcionalidade(nome = "Operadores", modulo = "Controle de acesso")
+	public void listarOperadores(Operador operador, Integer pagina) {
 
 		operador = (Operador) UtilController.preencherFiltros(operador, "operador", sessaoGeral);
 		if (Util.vazio(operador)) {
 			operador = new Operador();
 		}
 
-		List<Operador> operadors = hibernateUtil.buscar(operador, pagina);
+		List<Operador> operadores = hibernateUtil.buscar(operador, pagina);
 
-		result.include("operadors", operadors);
+		result.include("operadores", operadores);
 
 	}
 }
