@@ -1,11 +1,31 @@
 package renan.modelo;
 
-public class Militar {
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+
+import renan.hibernate.Entidade;
+
+@MappedSuperclass
+public abstract class Militar implements Entidade {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer id;
 
 	private String nome;
 	private String postoGraduacao;
 	private Integer identidade;
 	private String subUnidade;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	public String getNome() {
 		return nome;
