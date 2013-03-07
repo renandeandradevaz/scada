@@ -14,6 +14,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import renan.hibernate.HibernateUtil;
+import renan.modelo.Cliente;
 import renan.modelo.FuncionalidadeGrupoOperador;
 import renan.modelo.GrupoOperador;
 import renan.modelo.Operador;
@@ -65,6 +66,10 @@ public class HibernateUtilTest {
 			operador2.setGrupoOperador(grupoOperador);
 			operador2.setLogin("operador2." + i);
 			hibernateUtil.salvarOuAtualizar(operador2);
+
+			Cliente cliente = new Cliente();
+			cliente.setNome("Teste");
+			hibernateUtil.salvarOuAtualizar(cliente);
 		}
 	}
 
