@@ -1,6 +1,7 @@
 package renan.modelo;
 
-import java.util.GregorianCalendar;
+import java.math.BigDecimal;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -14,8 +15,8 @@ public class TipoArmamento implements Entidade {
 	@GeneratedValue
 	private Integer id;
 
-    private String descricao;
-    private GregorianCalendar calibre;
+	private String descricao;
+	private BigDecimal calibre;
 
 	public TipoArmamento() {
 	}
@@ -32,20 +33,20 @@ public class TipoArmamento implements Entidade {
 		this.id = id;
 	}
 
+	public String getDescricao() {
+		return descricao;
+	}
 
-    public String getDescricao() {
-        return descricao;
-    }
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
 
-    public void setDescricao(String descricao){
-        this.descricao = descricao;
-    }
+	public BigDecimal getCalibre() {
+		return calibre;
+	}
 
-    public GregorianCalendar getCalibre() {
-        return calibre;
-    }
+	public void setCalibre(BigDecimal calibre) {
+		this.calibre = calibre;
+	}
 
-    public void setCalibre(GregorianCalendar calibre){
-        this.calibre = calibre;
-    }
 }

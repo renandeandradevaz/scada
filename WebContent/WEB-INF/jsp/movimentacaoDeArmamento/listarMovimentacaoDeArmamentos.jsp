@@ -1,0 +1,56 @@
+<%@ include file="/base.jsp" %> 
+
+<ul id="movimentacaoDeArmamento" class="dropdown-menu">
+	<li><a href="javascript:gerarLinkCompleto('<c:url value="/movimentacaoDeArmamento/editarMovimentacaoDeArmamento"/>')">Editar</a></li>
+	<li><a href="javascript:deletar('<c:url value="/movimentacaoDeArmamento/excluirMovimentacaoDeArmamento"/>')">Excluir</a></li>
+</ul>
+
+<a class="btn" href="<c:url value="/movimentacaoDeArmamento/criarMovimentacaoDeArmamento"/>" > Criar movimentacaoDeArmamento </a>
+
+<br><br>
+
+<form class="well form-inline" action="<c:url value="/movimentacaoDeArmamento/listarMovimentacaoDeArmamentos"/>" method="post" >
+    <input type="text" class="input-small" name="movimentacaoDeArmamento.tipoMovimentacao" value="${sessaoGeral.valor.get('movimentacaoDeArmamento').tipoMovimentacao}" placeholder="TipoMovimentacao">
+    <input type="text" class="input-small data" name="movimentacaoDeArmamento.dataHora" value="<fmt:formatDate value="${sessaoGeral.valor.get('movimentacaoDeArmamento').dataHora.time}" />" placeholder="DataHora">
+    <input type="text" class="input-small" name="movimentacaoDeArmamento.destino" value="${sessaoGeral.valor.get('movimentacaoDeArmamento').destino}" placeholder="Destino">
+    <input type="text" class="input-small" name="movimentacaoDeArmamento.observacoes" value="${sessaoGeral.valor.get('movimentacaoDeArmamento').observacoes}" placeholder="Observacoes">
+    <input type="checkbox" name="movimentacaoDeArmamento.validado" value="${sessaoGeral.valor.get('movimentacaoDeArmamento').validado}" >
+
+	<button type="submit" class="btn btn-info">Pesquisar</button>
+</form>
+
+<h3> MovimentacaoDeArmamentos </h3>
+
+<c:choose>
+	<c:when test="${!empty movimentacaoDeArmamentos}">
+		
+		<c:set var="link" value="movimentacaoDeArmamento/listarMovimentacaoDeArmamentos" scope="request" />
+		<%@ include file="/paginacao.jsp" %> 
+		
+		<table class="table table-striped table-bordered tablesorter">
+			<thead>
+		    	<tr>
+                    <th> TipoMovimentacao </th>
+                    <th> DataHora </th>
+                    <th> Destino </th>
+                    <th> Observacoes </th>
+                    <th> Validado </th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${movimentacaoDeArmamentos}" var="item">
+					<tr id="movimentacaoDeArmamento_${item.id}">
+                        <td> ${item.tipoMovimentacao} </td>
+                        <td> <fmt:formatDate value="${item.dataHora.time}" /> </td>
+                        <td> ${item.destino} </td>
+                        <td> ${item.observacoes} </td>
+                        <td class="tradutorSimNao" > ${item.validado} </td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</c:when>
+	<c:otherwise>
+		<br>  <br>  <h4> Nenhum registro foi encontrado </h4>
+	</c:otherwise>
+</c:choose>

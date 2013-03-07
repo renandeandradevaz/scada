@@ -12,7 +12,7 @@
     <div class="control-group">
       <label class="control-label">Calibre</label>
       <div class="controls">
-        <input type="text" class="input-xlarge data" name="tipoArmamento.calibre" value="<fmt:formatDate value="${tipoArmamento.calibre.time}"/>">
+        <input type="text" class="input-xlarge numero-decimal" name="tipoArmamento.calibre" value="<fmt:formatNumber value="${tipoArmamento.calibre}"/>">
       </div>
     </div>
 

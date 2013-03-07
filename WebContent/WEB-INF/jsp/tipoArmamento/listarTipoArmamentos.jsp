@@ -11,7 +11,7 @@
 
 <form class="well form-inline" action="<c:url value="/tipoArmamento/listarTipoArmamentos"/>" method="post" >
     <input type="text" class="input-small" name="tipoArmamento.descricao" value="${sessaoGeral.valor.get('tipoArmamento').descricao}" placeholder="Descricao">
-    <input type="text" class="input-small data" name="tipoArmamento.calibre" value="<fmt:formatDate value="${sessaoGeral.valor.get('tipoArmamento').calibre.time}" />" placeholder="Calibre">
+    <input type="text" class="input-small numero-decimal" name="tipoArmamento.calibre" value="<fmt:formatNumber value="${sessaoGeral.valor.get('tipoArmamento').calibre}" />" placeholder="Calibre">
 
 	<button type="submit" class="btn btn-info">Pesquisar</button>
 </form>
@@ -35,7 +35,7 @@
 				<c:forEach items="${tipoArmamentos}" var="item">
 					<tr id="tipoArmamento_${item.id}">
                         <td> ${item.descricao} </td>
-                        <td> <fmt:formatDate value="${item.calibre.time}" /> </td>
+                        <td> <fmt:formatNumber value="${item.calibre}" /> </td>
 					</tr>
 				</c:forEach>
 			</tbody>

@@ -1,8 +1,10 @@
 package renan.modelo;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 import renan.hibernate.Entidade;
 
@@ -13,8 +15,11 @@ public class Armamento implements Entidade {
 	@GeneratedValue
 	private Integer id;
 
-    private String numeracao;
-    private String status;
+	private String numeracao;
+	private String status;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	private TipoArmamento tipoArmamento;
 
 	public Armamento() {
 	}
@@ -31,20 +36,19 @@ public class Armamento implements Entidade {
 		this.id = id;
 	}
 
+	public String getNumeracao() {
+		return numeracao;
+	}
 
-    public String getNumeracao() {
-        return numeracao;
-    }
+	public void setNumeracao(String numeracao) {
+		this.numeracao = numeracao;
+	}
 
-    public void setNumeracao(String numeracao){
-        this.numeracao = numeracao;
-    }
+	public String getStatus() {
+		return status;
+	}
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status){
-        this.status = status;
-    }
+	public void setStatus(String status) {
+		this.status = status;
+	}
 }
