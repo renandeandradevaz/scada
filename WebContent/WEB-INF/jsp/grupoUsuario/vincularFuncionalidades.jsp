@@ -1,8 +1,8 @@
 <%@ include file="/base.jsp" %> 
 
-<form class="form-horizontal" action="<c:url value="/grupoUsuario/salvarVinculosFuncionalidades"/>" method="post">
+<form class="form-horizontal" action="<c:url value="/grupoOperador/salvarVinculosFuncionalidades"/>" method="post">
   <fieldset>
-    <legend>Vincular funcionalidades ao grupo de usuário</legend>
+    <legend>Vincular funcionalidades ao grupo de operador</legend>
     	<table class="table table-striped" style="width: 500px; border-bottom: 2px; border-bottom-style: solid;">
 		  <tbody>
 		  	<c:forEach items="${funcionalidades}" var="item">

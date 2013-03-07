@@ -52,8 +52,8 @@
 				        </li>
 				        <li><a href="<c:url value="/home/sobre"/>" class="last"><span>Sobre</span></a>	        
 				    </ul>
-				    <ul class="menu-usuario" >
-				    	<li><span> Logado como: ${sessaoUsuario.usuario.login} &nbsp; </span> </li>
+				    <ul class="menu-operador" >
+				    	<li><span> Logado como: ${sessaoOperador.operador.login} &nbsp; </span> </li>
 				    </ul>
 				</div>
 			</div>
@@ -75,8 +75,8 @@
 		</div>		
 		
 		<!--
-		 Input hidden para guardar as informações das funcionalidades que o usuário logado pode acessar.
-		Será usado para montar o submenu somente com as opções que o usuário pode enxergar
+		 Input hidden para guardar as informações das funcionalidades que o operador logado pode acessar.
+		Será usado para montar o submenu somente com as opções que o operador pode enxergar
 		 -->
 		<input id="codigosFuncionalidadesPermitidas" type="hidden" value="${sessaoFuncionalidades.codigosFuncionalidadesSeparadosPorVirgula}" >
 

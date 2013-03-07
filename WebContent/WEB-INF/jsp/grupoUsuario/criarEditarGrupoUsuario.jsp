@@ -1,15 +1,15 @@
 <%@ include file="/base.jsp" %> 
 
-<form class="form-horizontal" action="<c:url value="/grupoUsuario/salvarGrupoUsuario"/>" method="post">
+<form class="form-horizontal" action="<c:url value="/grupoOperador/salvarGrupoOperador"/>" method="post">
   <fieldset>
-    <legend>Criar grupo de usuários</legend>
+    <legend>Criar grupo de operadors</legend>
     <div class="control-group warning">
       <label class="control-label">Nome</label>
       <div class="controls">
-        <input type="text" class="input-xlarge required" name="grupoUsuario.nome" value="${grupoUsuario.nome}">
+        <input type="text" class="input-xlarge required" name="grupoOperador.nome" value="${grupoOperador.nome}">
       </div>
     </div>
     <button type="submit" class="btn btn-primary">Salvar</button>
-    <a class="btn btn-danger" href="<c:url value="/grupoUsuario/listarGruposUsuario"/>" > Cancelar </a>
+    <a class="btn btn-danger" href="<c:url value="/grupoOperador/listarGruposOperador"/>" > Cancelar </a>
   </fieldset>
 </form>

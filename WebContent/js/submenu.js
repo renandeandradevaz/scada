@@ -10,7 +10,7 @@ function gerarLinkCompleto(link){
 }
 
 /*
- * Pega do input hidden que está na base.jsp as permissões que o usuário logado tem e esconde do submenu as que ele não pode ver.
+ * Pega do input hidden que está na base.jsp as permissões que o operador logado tem e esconde do submenu as que ele não pode ver.
  */
 jQuery(document).ready(function( $ ){
 	

@@ -1,22 +1,22 @@
 <%@ include file="/base.jsp" %> 
 
-<ul id="usuario" class="dropdown-menu">
-	<li><a href="javascript:gerarLinkCompleto('<c:url value="/usuario/editarUsuario"/>')">Editar</a></li>
-	<li><a href="javascript:deletar('<c:url value="/usuario/excluirUsuario"/>')">Excluir</a></li>
+<ul id="operador" class="dropdown-menu">
+	<li><a href="javascript:gerarLinkCompleto('<c:url value="/operador/editarOperador"/>')">Editar</a></li>
+	<li><a href="javascript:deletar('<c:url value="/operador/excluirOperador"/>')">Excluir</a></li>
 </ul>
 
-<a class="btn" href="<c:url value="/usuario/criarUsuario"/>" > Criar usuário </a>
+<a class="btn" href="<c:url value="/operador/criarOperador"/>" > Criar operador </a>
 
 <br><br>
 
-<form class="well form-inline" action="<c:url value="/usuario/listarUsuarios"/>" method="post" >
-	<input type="text" class="input-small" name="usuario.login" value="${sessaoGeral.valor.get('usuario').login}" placeholder="Login">
+<form class="well form-inline" action="<c:url value="/operador/listarOperadors"/>" method="post" >
+	<input type="text" class="input-small" name="operador.login" value="${sessaoGeral.valor.get('operador').login}" placeholder="Login">
 	<button type="submit" class="btn btn-info">Pesquisar</button>
 </form>
 
-<h3> Usuários </h3>
+<h3> Operadors </h3>
 
-<c:set var="link" value="usuario/listarUsuarios" scope="request" />
+<c:set var="link" value="operador/listarOperadors" scope="request" />
 <%@ include file="/paginacao.jsp" %> 
 
 <table class="table table-striped table-bordered tablesorter">
@@ -24,15 +24,15 @@
     <tr>
       <th>Id</th>
       <th>Login</th>
-      <th>Grupo de usuários</th>
+      <th>Grupo de operadors</th>
     </tr>
   </thead>
   <tbody>
-  	<c:forEach items="${usuarios}" var="item">
-		<tr id="usuario_${item.id}">
+  	<c:forEach items="${operadors}" var="item">
+		<tr id="operador_${item.id}">
 		  <td> ${item.id} </td>
 		  <td> ${item.login} </td>
-		  <td> ${item.grupoUsuario.nome} </td>
+		  <td> ${item.grupoOperador.nome} </td>
 		</tr>
   	</c:forEach>  	
   </tbody>

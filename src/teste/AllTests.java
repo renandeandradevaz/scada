@@ -5,7 +5,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ GrupoUsuarioControllerTest.class, HibernateUtilTest.class })
+@SuiteClasses({ GrupoOperadorControllerTest.class, HibernateUtilTest.class })
 public class AllTests {
 
 }

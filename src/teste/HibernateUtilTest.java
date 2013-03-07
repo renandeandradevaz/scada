@@ -14,9 +14,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import renan.hibernate.HibernateUtil;
-import renan.modelo.FuncionalidadeGrupoUsuario;
-import renan.modelo.GrupoUsuario;
-import renan.modelo.Usuario;
+import renan.modelo.FuncionalidadeGrupoOperador;
+import renan.modelo.GrupoOperador;
+import renan.modelo.Operador;
 
 public class HibernateUtilTest {
 
@@ -42,77 +42,77 @@ public class HibernateUtilTest {
 
 	private void limparBanco() {
 
-		hibernateUtil.deletar(hibernateUtil.buscar(new FuncionalidadeGrupoUsuario()));
-		hibernateUtil.deletar(hibernateUtil.buscar(new Usuario()));
-		hibernateUtil.deletar(hibernateUtil.buscar(new GrupoUsuario()));
+		hibernateUtil.deletar(hibernateUtil.buscar(new FuncionalidadeGrupoOperador()));
+		hibernateUtil.deletar(hibernateUtil.buscar(new Operador()));
+		hibernateUtil.deletar(hibernateUtil.buscar(new GrupoOperador()));
 	}
 
 	private void popularBanco() {
 
 		for (int i = 0; i < 7; i++) {
 
-			GrupoUsuario grupoUsuario = new GrupoUsuario();
-			grupoUsuario.setNome("grupo " + i);
+			GrupoOperador grupoOperador = new GrupoOperador();
+			grupoOperador.setNome("grupo " + i);
 
-			hibernateUtil.salvarOuAtualizar(grupoUsuario);
+			hibernateUtil.salvarOuAtualizar(grupoOperador);
 
-			Usuario usuario1 = new Usuario();
-			usuario1.setGrupoUsuario(grupoUsuario);
-			usuario1.setLogin("usuario1." + i);
-			hibernateUtil.salvarOuAtualizar(usuario1);
+			Operador operador1 = new Operador();
+			operador1.setGrupoOperador(grupoOperador);
+			operador1.setLogin("operador1." + i);
+			hibernateUtil.salvarOuAtualizar(operador1);
 
-			Usuario usuario2 = new Usuario();
-			usuario2.setGrupoUsuario(grupoUsuario);
-			usuario2.setLogin("usuario2." + i);
-			hibernateUtil.salvarOuAtualizar(usuario2);
+			Operador operador2 = new Operador();
+			operador2.setGrupoOperador(grupoOperador);
+			operador2.setLogin("operador2." + i);
+			hibernateUtil.salvarOuAtualizar(operador2);
 		}
 	}
 
 	@Test
 	public void testaSalvar() {
 
-		assertEquals(new Integer(7), hibernateUtil.contar(new GrupoUsuario()));
-		GrupoUsuario grupoUsuario = new GrupoUsuario();
-		hibernateUtil.salvarOuAtualizar(grupoUsuario);
-		assertEquals(new Integer(8), hibernateUtil.contar(new GrupoUsuario()));
+		assertEquals(new Integer(7), hibernateUtil.contar(new GrupoOperador()));
+		GrupoOperador grupoOperador = new GrupoOperador();
+		hibernateUtil.salvarOuAtualizar(grupoOperador);
+		assertEquals(new Integer(8), hibernateUtil.contar(new GrupoOperador()));
 
-		assertEquals(new Integer(14), hibernateUtil.contar(new Usuario()));
-		Usuario usuario = new Usuario();
-		usuario.setGrupoUsuario(grupoUsuario);
-		hibernateUtil.salvarOuAtualizar(usuario);
-		assertEquals(new Integer(15), hibernateUtil.contar(new Usuario()));
+		assertEquals(new Integer(14), hibernateUtil.contar(new Operador()));
+		Operador operador = new Operador();
+		operador.setGrupoOperador(grupoOperador);
+		hibernateUtil.salvarOuAtualizar(operador);
+		assertEquals(new Integer(15), hibernateUtil.contar(new Operador()));
 
 	}
 
 	@Test
 	public void testaExcluir() {
 
-		assertEquals(new Integer(14), hibernateUtil.contar(new Usuario()));
-		Usuario usuario = new Usuario();
-		usuario.setLogin("usuario1.0");
-		hibernateUtil.deletar(hibernateUtil.selecionar(usuario));
-		assertEquals(new Integer(13), hibernateUtil.contar(new Usuario()));
+		assertEquals(new Integer(14), hibernateUtil.contar(new Operador()));
+		Operador operador = new Operador();
+		operador.setLogin("operador1.0");
+		hibernateUtil.deletar(hibernateUtil.selecionar(operador));
+		assertEquals(new Integer(13), hibernateUtil.contar(new Operador()));
 
 	}
 
 	@Test
 	public void pesquisaComFiltros() {
 
-		Usuario usuario = new Usuario();
-		usuario.setLogin("usuario1.");
-		assertEquals(7, hibernateUtil.buscar(usuario).size());
+		Operador operador = new Operador();
+		operador.setLogin("operador1.");
+		assertEquals(7, hibernateUtil.buscar(operador).size());
 
-		GrupoUsuario grupoUsuario = new GrupoUsuario();
-		grupoUsuario.setNome("Grupo 2");
-		usuario = new Usuario();
-		usuario.setGrupoUsuario(grupoUsuario);
-		assertEquals(2, hibernateUtil.buscar(usuario).size());
+		GrupoOperador grupoOperador = new GrupoOperador();
+		grupoOperador.setNome("Grupo 2");
+		operador = new Operador();
+		operador.setGrupoOperador(grupoOperador);
+		assertEquals(2, hibernateUtil.buscar(operador).size());
 
-		grupoUsuario = new GrupoUsuario();
-		grupoUsuario.setNome("Grupo 2");
-		usuario = new Usuario();
-		usuario.setGrupoUsuario(new GrupoUsuario(hibernateUtil.selecionar(grupoUsuario).getId()));
-		assertEquals(2, hibernateUtil.buscar(usuario).size());
+		grupoOperador = new GrupoOperador();
+		grupoOperador.setNome("Grupo 2");
+		operador = new Operador();
+		operador.setGrupoOperador(new GrupoOperador(hibernateUtil.selecionar(grupoOperador).getId()));
+		assertEquals(2, hibernateUtil.buscar(operador).size());
 
 	}
 
@@ -123,9 +123,9 @@ public class HibernateUtilTest {
 		popularBanco();
 		popularBanco();
 
-		List<Usuario> usuarios = hibernateUtil.buscar(new Usuario(), 3);
-		assertEquals(10, usuarios.size());
-		assertEquals("usuario2.3", usuarios.get(0).getLogin());
+		List<Operador> operadors = hibernateUtil.buscar(new Operador(), 3);
+		assertEquals(10, operadors.size());
+		assertEquals("operador2.3", operadors.get(0).getLogin());
 	}
 
 	@Test
@@ -135,16 +135,16 @@ public class HibernateUtilTest {
 		popularBanco();
 		popularBanco();
 
-		List<Usuario> usuarios = hibernateUtil.buscar(new Usuario(), 2, Order.asc("login"));
-		assertEquals("usuario1.2", usuarios.get(0).getLogin());
-		assertEquals("usuario1.2", usuarios.get(1).getLogin());
-		assertEquals("usuario1.3", usuarios.get(2).getLogin());
-		assertEquals("usuario1.3", usuarios.get(3).getLogin());
-		assertEquals("usuario1.3", usuarios.get(4).getLogin());
-		assertEquals("usuario1.3", usuarios.get(5).getLogin());
-		assertEquals("usuario1.4", usuarios.get(6).getLogin());
-		assertEquals("usuario1.4", usuarios.get(7).getLogin());
-		assertEquals("usuario1.4", usuarios.get(8).getLogin());
+		List<Operador> operadors = hibernateUtil.buscar(new Operador(), 2, Order.asc("login"));
+		assertEquals("operador1.2", operadors.get(0).getLogin());
+		assertEquals("operador1.2", operadors.get(1).getLogin());
+		assertEquals("operador1.3", operadors.get(2).getLogin());
+		assertEquals("operador1.3", operadors.get(3).getLogin());
+		assertEquals("operador1.3", operadors.get(4).getLogin());
+		assertEquals("operador1.3", operadors.get(5).getLogin());
+		assertEquals("operador1.4", operadors.get(6).getLogin());
+		assertEquals("operador1.4", operadors.get(7).getLogin());
+		assertEquals("operador1.4", operadors.get(8).getLogin());
 
 	}
 
@@ -152,16 +152,16 @@ public class HibernateUtilTest {
 	public void testaRestricoes() {
 
 		List<SimpleExpression> restricoes = new ArrayList<SimpleExpression>();
-		restricoes.add(Restrictions.eq("login", "usuario1.4"));
-		List<Usuario> usuarios = hibernateUtil.buscar(new Usuario(), restricoes);
-		assertEquals(1, usuarios.size());
+		restricoes.add(Restrictions.eq("login", "operador1.4"));
+		List<Operador> operadors = hibernateUtil.buscar(new Operador(), restricoes);
+		assertEquals(1, operadors.size());
 	}
 
 	@Test
 	public void testaMatchMode() {
 
-		Usuario usuario = new Usuario();
-		usuario.setLogin(".0");
-		assertEquals(new Integer(2), hibernateUtil.contar(usuario, MatchMode.END));
+		Operador operador = new Operador();
+		operador.setLogin(".0");
+		assertEquals(new Integer(2), hibernateUtil.contar(operador, MatchMode.END));
 	}
 }

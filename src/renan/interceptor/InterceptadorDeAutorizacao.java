@@ -5,10 +5,10 @@ import java.util.Arrays;
 
 import renan.anotacoes.Funcionalidade;
 import renan.anotacoes.Public;
-import renan.controller.GrupoUsuarioController;
+import renan.controller.GrupoOperadorController;
 import renan.controller.LoginController;
 import renan.sessao.SessaoFuncionalidades;
-import renan.sessao.SessaoUsuario;
+import renan.sessao.SessaoOperador;
 import renan.util.Util;
 import br.com.caelum.vraptor.InterceptionException;
 import br.com.caelum.vraptor.Intercepts;
@@ -21,12 +21,12 @@ import br.com.caelum.vraptor.validator.ValidationMessage;
 @Intercepts
 public class InterceptadorDeAutorizacao implements Interceptor {
 
-	private final SessaoUsuario sessaoUsuario;
+	private final SessaoOperador sessaoOperador;
 	private SessaoFuncionalidades sessaoFuncionalidades;
 	private Result result;
 
-	public InterceptadorDeAutorizacao(SessaoUsuario sessaoUsuario, Result result, SessaoFuncionalidades sessaoFuncionalidades) {
-		this.sessaoUsuario = sessaoUsuario;
+	public InterceptadorDeAutorizacao(SessaoOperador sessaoOperador, Result result, SessaoFuncionalidades sessaoFuncionalidades) {
+		this.sessaoOperador = sessaoOperador;
 		this.result = result;
 		this.sessaoFuncionalidades = sessaoFuncionalidades;
 	}
@@ -35,9 +35,9 @@ public class InterceptadorDeAutorizacao implements Interceptor {
 
 		boolean contemAnotacaoPublic = !method.containsAnnotation(Public.class);
 
-		if (Util.preenchido(sessaoUsuario.getUsuario())) {
+		if (Util.preenchido(sessaoOperador.getOperador())) {
 
-			if (sessaoUsuario.getUsuario().getLogin().equals("administrador")) {
+			if (sessaoOperador.getOperador().getLogin().equals("administrador")) {
 
 				return false;
 			}
@@ -48,12 +48,12 @@ public class InterceptadorDeAutorizacao implements Interceptor {
 
 	public void intercept(InterceptorStack stack, ResourceMethod method, Object resourceInstance) throws InterceptionException {
 
-		if (Util.vazio(sessaoUsuario.getUsuario())) {
+		if (Util.vazio(sessaoOperador.getOperador())) {
 
-			result.include("errors", Arrays.asList(new ValidationMessage("O usuário não está logado no sistema", "Erro")));
+			result.include("errors", Arrays.asList(new ValidationMessage("O operador não está logado no sistema", "Erro")));
 			result.redirectTo(LoginController.class).telaLogin();
 		}
-		if (Util.preenchido(sessaoUsuario.getUsuario())) {
+		if (Util.preenchido(sessaoOperador.getOperador())) {
 
 			Boolean possuiPermissao = null;
 
@@ -91,7 +91,7 @@ public class InterceptadorDeAutorizacao implements Interceptor {
 
 		String nomeClasse = metodo.getDeclaringClass().getSimpleName();
 
-		String codigo = GrupoUsuarioController.montarCodigoFuncionalidade(nomeClasse, nomeMetodo);
+		String codigo = GrupoOperadorController.montarCodigoFuncionalidade(nomeClasse, nomeMetodo);
 
 		if (!sessaoFuncionalidades.getCodigosFuncionalidades().contains(codigo)) {
 

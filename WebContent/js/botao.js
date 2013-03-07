@@ -1,4 +1,4 @@
-/* Js que servirá para esconder os botões que o usuário não tem permissão de ver. */
+/* Js que servirá para esconder os botões que o operador não tem permissão de ver. */
 
 jQuery(document).ready(function( jQuery ){
 	

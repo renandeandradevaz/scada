@@ -11,11 +11,11 @@ import org.hibernate.criterion.MatchMode;
 
 import renan.anotacoes.Public;
 import renan.hibernate.HibernateUtil;
-import renan.modelo.FuncionalidadeGrupoUsuario;
-import renan.modelo.GrupoUsuario;
-import renan.modelo.Usuario;
+import renan.modelo.FuncionalidadeGrupoOperador;
+import renan.modelo.GrupoOperador;
+import renan.modelo.Operador;
 import renan.sessao.SessaoFuncionalidades;
-import renan.sessao.SessaoUsuario;
+import renan.sessao.SessaoOperador;
 import renan.util.GeradorDeMd5;
 import renan.util.Util;
 import br.com.caelum.vraptor.Path;
@@ -30,14 +30,14 @@ public class LoginController {
 	private static final String SENHA_ADMINISTRADOR = "1234";
 
 	private final Result result;
-	private SessaoUsuario sessaoUsuario;
+	private SessaoOperador sessaoOperador;
 	private SessaoFuncionalidades sessaoFuncionalidades;
 	private Validator validator;
 	private HibernateUtil hibernateUtil;
 
-	public LoginController(Result result, SessaoUsuario sessaoUsuario, SessaoFuncionalidades sessaoFuncionalidades, Validator validator, HibernateUtil hibernateUtil) {
+	public LoginController(Result result, SessaoOperador sessaoOperador, SessaoFuncionalidades sessaoFuncionalidades, Validator validator, HibernateUtil hibernateUtil) {
 		this.result = result;
-		this.sessaoUsuario = sessaoUsuario;
+		this.sessaoOperador = sessaoOperador;
 		this.validator = validator;
 		this.sessaoFuncionalidades = sessaoFuncionalidades;
 		this.hibernateUtil = hibernateUtil;
@@ -50,52 +50,52 @@ public class LoginController {
 	}
 
 	@Public
-	public void efetuarLogin(Usuario usuario) {
+	public void efetuarLogin(Operador operador) {
 
-		verificaExistenciaAdministrador(usuario);
-		tentarEfetuarLogin(usuario);
-		colocarUsuarioNaSessao(usuario);
-		colocarFuncionalidadesNaSessao(usuario);
+		verificaExistenciaAdministrador(operador);
+		tentarEfetuarLogin(operador);
+		colocarOperadorNaSessao(operador);
+		colocarFuncionalidadesNaSessao(operador);
 		result.redirectTo(HomeController.class).home();
 	}
 
-	private void verificaExistenciaAdministrador(Usuario usuario) {
+	private void verificaExistenciaAdministrador(Operador operador) {
 
-		if (usuario.getLogin().equals("administrador") && usuario.getSenha().equals(SENHA_ADMINISTRADOR)) {
+		if (operador.getLogin().equals("administrador") && operador.getSenha().equals(SENHA_ADMINISTRADOR)) {
 
-			Usuario usuarioFiltro = new Usuario();
-			usuarioFiltro.setLogin("administrador");
+			Operador operadorFiltro = new Operador();
+			operadorFiltro.setLogin("administrador");
 
-			Usuario usuarioBanco = hibernateUtil.selecionar(usuarioFiltro, MatchMode.EXACT);
+			Operador operadorBanco = hibernateUtil.selecionar(operadorFiltro, MatchMode.EXACT);
 
-			if (Util.vazio(usuarioBanco)) {
+			if (Util.vazio(operadorBanco)) {
 
-				GrupoUsuario grupoUsuario = new GrupoUsuario();
-				grupoUsuario.setNome("Administradores");
-				hibernateUtil.salvarOuAtualizar(grupoUsuario);
+				GrupoOperador grupoOperador = new GrupoOperador();
+				grupoOperador.setNome("Administradores");
+				hibernateUtil.salvarOuAtualizar(grupoOperador);
 
-				usuario.setGrupoUsuario(grupoUsuario);
-				usuario.setSenha(GeradorDeMd5.converter(SENHA_ADMINISTRADOR));
-				hibernateUtil.salvarOuAtualizar(usuario);
+				operador.setGrupoOperador(grupoOperador);
+				operador.setSenha(GeradorDeMd5.converter(SENHA_ADMINISTRADOR));
+				hibernateUtil.salvarOuAtualizar(operador);
 			}
 		}
 	}
 
-	private void tentarEfetuarLogin(Usuario usuario) {
+	private void tentarEfetuarLogin(Operador operador) {
 
-		usuario.setSenha(GeradorDeMd5.converter(usuario.getSenha()));
+		operador.setSenha(GeradorDeMd5.converter(operador.getSenha()));
 
-		Usuario usuarioBanco = null;
+		Operador operadorBanco = null;
 
-		if (Util.preenchido(usuario.getLogin())) {
+		if (Util.preenchido(operador.getLogin())) {
 
-			Usuario usuarioFiltro = new Usuario();
-			usuarioFiltro.setLogin(usuario.getLogin());
+			Operador operadorFiltro = new Operador();
+			operadorFiltro.setLogin(operador.getLogin());
 
-			usuarioBanco = hibernateUtil.selecionar(usuarioFiltro, MatchMode.EXACT);
+			operadorBanco = hibernateUtil.selecionar(operadorFiltro, MatchMode.EXACT);
 		}
 
-		if (Util.vazio(usuarioBanco) || !usuarioBanco.getSenha().equals(usuario.getSenha())) {
+		if (Util.vazio(operadorBanco) || !operadorBanco.getSenha().equals(operador.getSenha())) {
 
 			validator.add(new ValidationMessage("Login ou senha incorretos", "Erro"));
 		}
@@ -103,25 +103,25 @@ public class LoginController {
 		validator.onErrorRedirectTo(this).telaLogin();
 	}
 
-	private void colocarUsuarioNaSessao(Usuario usuario) {
+	private void colocarOperadorNaSessao(Operador operador) {
 
-		this.sessaoUsuario.login(usuario);
+		this.sessaoOperador.login(operador);
 	}
 
-	private void colocarFuncionalidadesNaSessao(Usuario usuario) {
+	private void colocarFuncionalidadesNaSessao(Operador operador) {
 
-		usuario = hibernateUtil.selecionar(usuario);
+		operador = hibernateUtil.selecionar(operador);
 
 		sessaoFuncionalidades.setCodigosFuncionalidades(null);
 		sessaoFuncionalidades.setModulos(null);
 
-		HashMap<String, FuncionalidadeGrupoUsuario> funcionalidadesHash = GrupoUsuarioController.obterHashFuncionalidades();
+		HashMap<String, FuncionalidadeGrupoOperador> funcionalidadesHash = GrupoOperadorController.obterHashFuncionalidades();
 
-		if (usuario.getLogin().equals("administrador")) {
+		if (operador.getLogin().equals("administrador")) {
 
-			Collection<FuncionalidadeGrupoUsuario> funcionalidadesLista = funcionalidadesHash.values();
+			Collection<FuncionalidadeGrupoOperador> funcionalidadesLista = funcionalidadesHash.values();
 
-			for (FuncionalidadeGrupoUsuario funcionalidade : funcionalidadesLista) {
+			for (FuncionalidadeGrupoOperador funcionalidade : funcionalidadesLista) {
 
 				preencherSessaoFuncionalidades(funcionalidade);
 			}
@@ -129,7 +129,7 @@ public class LoginController {
 
 		else {
 
-			for (FuncionalidadeGrupoUsuario funcionalidade : usuario.getGrupoUsuario().getFuncionalidades()) {
+			for (FuncionalidadeGrupoOperador funcionalidade : operador.getGrupoOperador().getFuncionalidades()) {
 
 				funcionalidade = funcionalidadesHash.get(funcionalidade.getCodigo());
 
@@ -145,11 +145,11 @@ public class LoginController {
 
 		if (Util.preenchido(sessaoFuncionalidades.getModulos())) {
 
-			for (Entry<String, List<FuncionalidadeGrupoUsuario>> entry : sessaoFuncionalidades.getModulos().entrySet()) {
+			for (Entry<String, List<FuncionalidadeGrupoOperador>> entry : sessaoFuncionalidades.getModulos().entrySet()) {
 
-				Collections.sort(entry.getValue(), new Comparator<FuncionalidadeGrupoUsuario>() {
+				Collections.sort(entry.getValue(), new Comparator<FuncionalidadeGrupoOperador>() {
 
-					public int compare(FuncionalidadeGrupoUsuario fg1, FuncionalidadeGrupoUsuario fg2) {
+					public int compare(FuncionalidadeGrupoOperador fg1, FuncionalidadeGrupoOperador fg2) {
 
 						return fg1.getNomeFuncionalidade().toUpperCase().compareTo(fg2.getNomeFuncionalidade().toUpperCase());
 					}
@@ -160,7 +160,7 @@ public class LoginController {
 
 	}
 
-	private void preencherSessaoFuncionalidades(FuncionalidadeGrupoUsuario funcionalidade) {
+	private void preencherSessaoFuncionalidades(FuncionalidadeGrupoOperador funcionalidade) {
 
 		sessaoFuncionalidades.adicionarCodigoFuncionalidade(funcionalidade.getCodigo());
 		sessaoFuncionalidades.adicionarFuncionalidadeAoModulo(funcionalidade.getModulo(), funcionalidade);
@@ -174,7 +174,7 @@ public class LoginController {
 	@Public
 	public void logout() {
 
-		sessaoUsuario.logout();
+		sessaoOperador.logout();
 
 		result.redirectTo(this).telaLogin();
 	}

@@ -9,7 +9,7 @@ import javax.persistence.Transient;
 import renan.hibernate.Entidade;
 
 @Entity
-public class FuncionalidadeGrupoUsuario implements Entidade {
+public class FuncionalidadeGrupoOperador implements Entidade {
 
 	@Id
 	@GeneratedValue
@@ -18,7 +18,7 @@ public class FuncionalidadeGrupoUsuario implements Entidade {
 	private String codigo;
 
 	@ManyToOne
-	private GrupoUsuario grupoUsuario;
+	private GrupoOperador grupoOperador;
 
 	@Transient
 	private String nomeFuncionalidade;
@@ -42,12 +42,12 @@ public class FuncionalidadeGrupoUsuario implements Entidade {
 		this.codigo = codigo;
 	}
 
-	public GrupoUsuario getGrupoUsuario() {
-		return grupoUsuario;
+	public GrupoOperador getGrupoOperador() {
+		return grupoOperador;
 	}
 
-	public void setGrupoUsuario(GrupoUsuario grupoUsuario) {
-		this.grupoUsuario = grupoUsuario;
+	public void setGrupoOperador(GrupoOperador grupoOperador) {
+		this.grupoOperador = grupoOperador;
 	}
 
 	public String getNomeFuncionalidade() {

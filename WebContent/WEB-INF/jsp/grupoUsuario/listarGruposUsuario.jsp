@@ -1,23 +1,23 @@
 <%@ include file="/base.jsp" %> 
 
-<ul id="grupoUsuario" class="dropdown-menu">
-	<li><a href="javascript:gerarLinkCompleto('<c:url value="/grupoUsuario/vincularFuncionalidades"/>')">Vincular funcionalidades</a></li>
-	<li><a href="javascript:gerarLinkCompleto('<c:url value="/grupoUsuario/editarGrupoUsuario"/>')">Editar</a></li>
-	<li><a href="javascript:deletar('<c:url value="/grupoUsuario/excluirGrupoUsuario"/>')">Excluir</a></li>
+<ul id="grupoOperador" class="dropdown-menu">
+	<li><a href="javascript:gerarLinkCompleto('<c:url value="/grupoOperador/vincularFuncionalidades"/>')">Vincular funcionalidades</a></li>
+	<li><a href="javascript:gerarLinkCompleto('<c:url value="/grupoOperador/editarGrupoOperador"/>')">Editar</a></li>
+	<li><a href="javascript:deletar('<c:url value="/grupoOperador/excluirGrupoOperador"/>')">Excluir</a></li>
 </ul>
 
-<a class="btn" href="<c:url value="/grupoUsuario/criarGrupoUsuario"/>" > Criar grupo de usuário </a>
+<a class="btn" href="<c:url value="/grupoOperador/criarGrupoOperador"/>" > Criar grupo de operador </a>
 
 <br><br>
 
-<form class="well form-inline" action="<c:url value="/grupoUsuario/listarGruposUsuario"/>" method="post" >
-	<input type="text" class="input-small" name="grupoUsuario.nome" value="${sessaoGeral.valor.get('grupoUsuario').nome}" placeholder="Nome">
+<form class="well form-inline" action="<c:url value="/grupoOperador/listarGruposOperador"/>" method="post" >
+	<input type="text" class="input-small" name="grupoOperador.nome" value="${sessaoGeral.valor.get('grupoOperador').nome}" placeholder="Nome">
 	<button type="submit" class="btn btn-info">Pesquisar</button>
 </form>
 
-<h3> Grupos de usuários </h3>
+<h3> Grupos de operadors </h3>
 
-<c:set var="link" value="grupoUsuario/listarGruposUsuario" scope="request" />
+<c:set var="link" value="grupoOperador/listarGruposOperador" scope="request" />
 <%@ include file="/paginacao.jsp" %> 
 
 <table class="table table-striped table-bordered tablesorter">
@@ -28,8 +28,8 @@
     </tr>
   </thead>
   <tbody>
-  	<c:forEach items="${gruposUsuario}" var="item">
-		<tr id="grupoUsuario_${item.id}">
+  	<c:forEach items="${gruposOperador}" var="item">
+		<tr id="grupoOperador_${item.id}">
 		  <td> ${item.id} </td>
 		  <td> ${item.nome} </td>
 		</tr>

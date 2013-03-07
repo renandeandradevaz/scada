@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 import renan.hibernate.Entidade;
 
 @Entity
-public class Usuario implements Entidade {
+public class Operador implements Entidade {
 
 	@Id
 	@GeneratedValue
@@ -21,12 +21,12 @@ public class Usuario implements Entidade {
 
 	@NotNull
 	@ManyToOne(fetch = FetchType.LAZY)
-	private GrupoUsuario grupoUsuario;
+	private GrupoOperador grupoOperador;
 
-	public Usuario() {
+	public Operador() {
 	}
 
-	public Usuario(Integer id) {
+	public Operador(Integer id) {
 		this.id = id;
 	}
 
@@ -54,12 +54,12 @@ public class Usuario implements Entidade {
 		this.senha = senha;
 	}
 
-	public GrupoUsuario getGrupoUsuario() {
-		return grupoUsuario;
+	public GrupoOperador getGrupoOperador() {
+		return grupoOperador;
 	}
 
-	public void setGrupoUsuario(GrupoUsuario grupoUsuario) {
-		this.grupoUsuario = grupoUsuario;
+	public void setGrupoOperador(GrupoOperador grupoOperador) {
+		this.grupoOperador = grupoOperador;
 	}
 
 }

@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.TreeMap;
 
 import renan.anotacoes.Funcionalidade;
-import renan.modelo.FuncionalidadeGrupoUsuario;
+import renan.modelo.FuncionalidadeGrupoOperador;
 import renan.util.Util;
 import renan.util.UtilReflection;
 import br.com.caelum.vraptor.ioc.Component;
@@ -18,7 +18,7 @@ public class SessaoFuncionalidades {
 
 	private List<String> codigosFuncionalidades;
 	private String codigosFuncionalidadesSeparadosPorVirgula;
-	private TreeMap<String, List<FuncionalidadeGrupoUsuario>> modulos;
+	private TreeMap<String, List<FuncionalidadeGrupoOperador>> modulos;
 
 	public void adicionarCodigoFuncionalidade(String codigo) {
 
@@ -72,12 +72,12 @@ public class SessaoFuncionalidades {
 		}
 	}
 
-	public void adicionarFuncionalidadeAoModulo(String modulo, FuncionalidadeGrupoUsuario funcionalidade) {
+	public void adicionarFuncionalidadeAoModulo(String modulo, FuncionalidadeGrupoOperador funcionalidade) {
 
 		if (Util.preenchido(modulo)) {
 
 			if (Util.vazio(modulos)) {
-				modulos = new TreeMap<String, List<FuncionalidadeGrupoUsuario>>();
+				modulos = new TreeMap<String, List<FuncionalidadeGrupoOperador>>();
 			}
 
 			String nomeFuncionalidade = funcionalidade.getNomeFuncionalidade().replace("Acessar ", "");
@@ -86,7 +86,7 @@ public class SessaoFuncionalidades {
 
 			if (!modulos.containsKey(modulo)) {
 
-				List<FuncionalidadeGrupoUsuario> funcionalidades = new ArrayList<FuncionalidadeGrupoUsuario>();
+				List<FuncionalidadeGrupoOperador> funcionalidades = new ArrayList<FuncionalidadeGrupoOperador>();
 				funcionalidades.add(funcionalidade);
 
 				modulos.put(modulo, funcionalidades);
@@ -115,11 +115,11 @@ public class SessaoFuncionalidades {
 		this.codigosFuncionalidadesSeparadosPorVirgula = codigosFuncionalidadesSeparadosPorVirgula;
 	}
 
-	public TreeMap<String, List<FuncionalidadeGrupoUsuario>> getModulos() {
+	public TreeMap<String, List<FuncionalidadeGrupoOperador>> getModulos() {
 		return modulos;
 	}
 
-	public void setModulos(TreeMap<String, List<FuncionalidadeGrupoUsuario>> modulos) {
+	public void setModulos(TreeMap<String, List<FuncionalidadeGrupoOperador>> modulos) {
 		this.modulos = modulos;
 	}
 

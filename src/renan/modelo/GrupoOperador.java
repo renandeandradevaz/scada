@@ -10,7 +10,7 @@ import javax.persistence.OneToMany;
 import renan.hibernate.Entidade;
 
 @Entity
-public class GrupoUsuario implements Entidade {
+public class GrupoOperador implements Entidade {
 
 	@Id
 	@GeneratedValue
@@ -18,17 +18,17 @@ public class GrupoUsuario implements Entidade {
 
 	private String nome;
 
-	@OneToMany(mappedBy = "grupoUsuario")
-	private List<Usuario> usuarios;
+	@OneToMany(mappedBy = "grupoOperador")
+	private List<Operador> operadors;
 
-	@OneToMany(mappedBy = "grupoUsuario")
-	private List<FuncionalidadeGrupoUsuario> funcionalidades;
+	@OneToMany(mappedBy = "grupoOperador")
+	private List<FuncionalidadeGrupoOperador> funcionalidades;
 
-	public GrupoUsuario() {
+	public GrupoOperador() {
 
 	}
 
-	public GrupoUsuario(Integer id) {
+	public GrupoOperador(Integer id) {
 		this.id = id;
 	}
 
@@ -48,19 +48,19 @@ public class GrupoUsuario implements Entidade {
 		this.nome = nome;
 	}
 
-	public List<Usuario> getUsuarios() {
-		return usuarios;
+	public List<Operador> getOperadors() {
+		return operadors;
 	}
 
-	public void setUsuarios(List<Usuario> usuarios) {
-		this.usuarios = usuarios;
+	public void setOperadors(List<Operador> operadors) {
+		this.operadors = operadors;
 	}
 
-	public List<FuncionalidadeGrupoUsuario> getFuncionalidades() {
+	public List<FuncionalidadeGrupoOperador> getFuncionalidades() {
 		return funcionalidades;
 	}
 
-	public void setFuncionalidades(List<FuncionalidadeGrupoUsuario> funcionalidades) {
+	public void setFuncionalidades(List<FuncionalidadeGrupoOperador> funcionalidades) {
 		this.funcionalidades = funcionalidades;
 	}
 

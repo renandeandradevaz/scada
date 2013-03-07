@@ -55,13 +55,13 @@
 	
 	      <form class="form-signin" action="<c:url value="/login/efetuarLogin"/>" method="post" >
 	        <h3 class="form-signin-heading"> Login </h3>
-	        <input type="text" class="input-block-level" placeholder="Usuário" name="usuario.login" >
-	        <input type="password" class="input-block-level" placeholder="Senha" name="usuario.senha" >
+	        <input type="text" class="input-block-level" placeholder="Operador" name="operador.login" >
+	        <input type="password" class="input-block-level" placeholder="Senha" name="operador.senha" >
 	        <button class="btn btn-large btn-primary" type="submit">Entrar</button>
 	        
 	        <br><br>
 	        
-			<h4>Usuário: administrador</h4>
+			<h4>Operador: administrador</h4>
 			<h4>Senha: 1234</h4>
 	      </form>
 	      

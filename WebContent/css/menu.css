@@ -32,7 +32,7 @@ div#menu ul {
     float: left;
 }
 
-div#menu ul.menu-usuario {
+div#menu ul.menu-operador {
     float: right;
     padding-top: 10px;
     color: white;

@@ -15,9 +15,9 @@
       <property name="hibernate.hbm2ddl.auto">update</property>
       <property name="hibernate.generate_statistics">false</property>
       
-      <mapping class="renan.modelo.Usuario" />
-      <mapping class="renan.modelo.GrupoUsuario" />
-      <mapping class="renan.modelo.FuncionalidadeGrupoUsuario" />
+      <mapping class="renan.modelo.Operador" />
+      <mapping class="renan.modelo.GrupoOperador" />
+      <mapping class="renan.modelo.FuncionalidadeGrupoOperador" />
       
 </session-factory>
 </hibernate-configuration>
