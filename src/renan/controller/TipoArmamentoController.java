@@ -44,16 +44,16 @@ public class TipoArmamentoController {
 		result.forwardTo(this).criarEditarTipoArmamento();
 	}
 
-	@Funcionalidade(nome = "Criar e editar tipoArmamentos")
+	@Funcionalidade(nome = "Criar e editar tipos de armamentos")
 	public void criarEditarTipoArmamento() {
 	}
 
 	@Path("/tipoArmamento/excluirTipoArmamento/{tipoArmamento.id}")
-	@Funcionalidade(nome = "Excluir tipoArmamento")
+	@Funcionalidade(nome = "Excluir tipos de armamentos")
 	public void excluirTipoArmamento(TipoArmamento tipoArmamento) {
 
 		hibernateUtil.deletar(tipoArmamento);
-		result.include("sucesso", "TipoArmamento excluído(a) com sucesso");
+		result.include("sucesso", "Tipo de armamento excluído(a) com sucesso");
 		result.forwardTo(this).listarTipoArmamentos(null, null);
 	}
 
@@ -66,11 +66,11 @@ public class TipoArmamentoController {
 		}
 
 		hibernateUtil.salvarOuAtualizar(tipoArmamento);
-		result.include("sucesso", "TipoArmamento salvo(a) com sucesso");
+		result.include("sucesso", "Tipo de armamento salvo(a) com sucesso");
 		result.forwardTo(this).listarTipoArmamentos(new TipoArmamento(), null);
 	}
 
-	@Funcionalidade(nome = "TipoArmamentos", modulo = "New")
+	@Funcionalidade(nome = "Tipos de armamento", modulo = "New")
 	public void listarTipoArmamentos(TipoArmamento tipoArmamento, Integer pagina) {
 
 		tipoArmamento = (TipoArmamento) UtilController.preencherFiltros(tipoArmamento, "tipoArmamento", sessaoGeral);

@@ -5,7 +5,7 @@
 	<li><a href="javascript:deletar('<c:url value="/tipoArmamento/excluirTipoArmamento"/>')">Excluir</a></li>
 </ul>
 
-<a class="btn" href="<c:url value="/tipoArmamento/criarTipoArmamento"/>" > Criar tipoArmamento </a>
+<a class="btn" href="<c:url value="/tipoArmamento/criarTipoArmamento"/>" > Criar tipo de armamento </a>
 
 <br><br>
 
@@ -16,7 +16,7 @@
 	<button type="submit" class="btn btn-info">Pesquisar</button>
 </form>
 
-<h3> TipoArmamentos </h3>
+<h3> Tipos de armamentos </h3>
 
 <c:choose>
 	<c:when test="${!empty tipoArmamentos}">

@@ -2,9 +2,9 @@
 
 <form class="form-horizontal" action="<c:url value="/tipoArmamento/salvarTipoArmamento"/>" method="post">
   <fieldset>
-    <legend>Criar tipoArmamento</legend>
+    <legend>Criar tipo de armamento</legend>
     <div class="control-group">
-      <label class="control-label">Descricao</label>
+      <label class="control-label">Descrição</label>
       <div class="controls">
         <input type="text" class="input-xlarge" name="tipoArmamento.descricao" value="${tipoArmamento.descricao}">
       </div>
