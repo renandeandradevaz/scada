@@ -2,7 +2,7 @@
 
 <form class="form-horizontal" action="<c:url value="/operador/salvarOperador"/>" method="post">
   <fieldset>
-    <legend>Criar operador</legend>
+    <legend>Criar/editar operador</legend>
     <div class="control-group warning">
       <label class="control-label">Nome</label>
       <div class="controls">

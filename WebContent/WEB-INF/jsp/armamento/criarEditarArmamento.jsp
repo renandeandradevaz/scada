@@ -2,7 +2,7 @@
 
 <form class="form-horizontal" action="<c:url value="/armamento/salvarArmamento"/>" method="post">
   <fieldset>
-    <legend>Criar armamento</legend>
+    <legend>Criar/editar armamento</legend>
     <div class="control-group warning">
       <label class="control-label">Numeracao</label>
       <div class="controls">

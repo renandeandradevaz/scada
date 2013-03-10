@@ -2,7 +2,7 @@
 
 <form class="form-horizontal" action="<c:url value="/movimentacaoDeArmamento/salvarMovimentacaoDeArmamento"/>" method="post">
   <fieldset>
-    <legend>Criar movimentacaoDeArmamento</legend>
+    <legend>Criar/editar movimentacaoDeArmamento</legend>
     <div class="control-group">
       <label class="control-label">TipoMovimentacao</label>
       <div class="controls">
