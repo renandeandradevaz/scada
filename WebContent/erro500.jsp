@@ -19,8 +19,7 @@
 </style>
 
 
-<h3 style="color: red"> &nbsp;  VIXI... </h3>
-<img src="<c:url value="/imagens/meme.jpg"/>">
+<h3 style="color: red"> &nbsp;  Ocorreu um erro no servidor </h3>
 
 
 <br><br><br><br><br><br><br><br>
