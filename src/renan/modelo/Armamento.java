@@ -51,4 +51,12 @@ public class Armamento implements Entidade {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
+	public TipoArmamento getTipoArmamento() {
+		return tipoArmamento;
+	}
+
+	public void setTipoArmamento(TipoArmamento tipoArmamento) {
+		this.tipoArmamento = tipoArmamento;
+	}
 }

@@ -12,6 +12,7 @@
 <form class="well form-inline" action="<c:url value="/armamento/listarArmamentos"/>" method="post" >
     <input type="text" class="input-small" name="armamento.numeracao" value="${sessaoGeral.valor.get('armamento').numeracao}" placeholder="Numeracao">
     <input type="text" class="input-small" name="armamento.status" value="${sessaoGeral.valor.get('armamento').status}" placeholder="Status">
+    <input type="text" class="input-small" name="armamento.tipoArmamento.descricao" value="${sessaoGeral.valor.get('armamento').tipoArmamento.descricao}" placeholder="Tipo de armamento" style="width: 130px;"> 
 
 	<button type="submit" class="btn btn-info">Pesquisar</button>
 </form>
@@ -29,6 +30,7 @@
 		    	<tr>
                     <th> Numeracao </th>
                     <th> Status </th>
+                    <th> Tipo de armamento </th>
 				</tr>
 			</thead>
 			<tbody>
@@ -36,6 +38,7 @@
 					<tr id="armamento_${item.id}">
                         <td> ${item.numeracao} </td>
                         <td> ${item.status} </td>
+                        <td> ${item.tipoArmamento.descricao} </td>
 					</tr>
 				</c:forEach>
 			</tbody>

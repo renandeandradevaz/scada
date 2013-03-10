@@ -70,7 +70,7 @@ public class TipoArmamentoController {
 		result.forwardTo(this).listarTipoArmamentos(new TipoArmamento(), null);
 	}
 
-	@Funcionalidade(nome = "Tipos de armamento", modulo = "New")
+	@Funcionalidade(nome = "Tipos de armamento", modulo = "Material bélico")
 	public void listarTipoArmamentos(TipoArmamento tipoArmamento, Integer pagina) {
 
 		tipoArmamento = (TipoArmamento) UtilController.preencherFiltros(tipoArmamento, "tipoArmamento", sessaoGeral);

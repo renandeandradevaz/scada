@@ -3,16 +3,16 @@
 <form class="form-horizontal" action="<c:url value="/tipoArmamento/salvarTipoArmamento"/>" method="post">
   <fieldset>
     <legend>Criar tipo de armamento</legend>
-    <div class="control-group">
+    <div class="control-group warning">
       <label class="control-label">Descrição</label>
       <div class="controls">
-        <input type="text" class="input-xlarge" name="tipoArmamento.descricao" value="${tipoArmamento.descricao}">
+        <input type="text" class="input-xlarge required" name="tipoArmamento.descricao" value="${tipoArmamento.descricao}">
       </div>
     </div>
-    <div class="control-group">
+    <div class="control-group warning">
       <label class="control-label">Calibre</label>
       <div class="controls">
-        <input type="text" class="input-xlarge numero-decimal" name="tipoArmamento.calibre" value="<fmt:formatNumber value="${tipoArmamento.calibre}"/>">
+        <input type="text" class="input-xlarge numero-decimal required" name="tipoArmamento.calibre" value="<fmt:formatNumber value="${tipoArmamento.calibre}"/>">
       </div>
     </div>
 

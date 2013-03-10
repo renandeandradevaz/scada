@@ -3,8 +3,9 @@ package renan.controller;
 import java.util.List;
 
 import renan.anotacoes.Funcionalidade;
-import renan.modelo.Armamento;
 import renan.hibernate.HibernateUtil;
+import renan.modelo.Armamento;
+import renan.modelo.TipoArmamento;
 import renan.sessao.SessaoGeral;
 import renan.util.Util;
 import renan.util.UtilController;
@@ -46,6 +47,9 @@ public class ArmamentoController {
 
 	@Funcionalidade(nome = "Criar e editar armamentos")
 	public void criarEditarArmamento() {
+
+		List<TipoArmamento> tiposDeArmamento = hibernateUtil.buscar(new TipoArmamento());
+		result.include("tiposDeArmamento", tiposDeArmamento);
 	}
 
 	@Path("/armamento/excluirArmamento/{armamento.id}")
@@ -70,7 +74,7 @@ public class ArmamentoController {
 		result.forwardTo(this).listarArmamentos(new Armamento(), null);
 	}
 
-	@Funcionalidade(nome = "Armamentos", modulo = "New")
+	@Funcionalidade(nome = "Armamentos", modulo = "Material bélico")
 	public void listarArmamentos(Armamento armamento, Integer pagina) {
 
 		armamento = (Armamento) UtilController.preencherFiltros(armamento, "armamento", sessaoGeral);

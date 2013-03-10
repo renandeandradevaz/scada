@@ -70,7 +70,7 @@ public class MovimentacaoDeArmamentoController {
 		result.forwardTo(this).listarMovimentacaoDeArmamentos(new MovimentacaoDeArmamento(), null);
 	}
 
-	@Funcionalidade(nome = "MovimentacaoDeArmamentos", modulo = "New")
+	@Funcionalidade(nome = "MovimentacaoDeArmamentos", modulo = "Em construção")
 	public void listarMovimentacaoDeArmamentos(MovimentacaoDeArmamento movimentacaoDeArmamento, Integer pagina) {
 
 		movimentacaoDeArmamento = (MovimentacaoDeArmamento) UtilController.preencherFiltros(movimentacaoDeArmamento, "movimentacaoDeArmamento", sessaoGeral);
