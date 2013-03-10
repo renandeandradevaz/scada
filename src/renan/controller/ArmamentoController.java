@@ -71,7 +71,7 @@ public class ArmamentoController {
 
 		hibernateUtil.salvarOuAtualizar(armamento);
 		result.include("sucesso", "Armamento salvo(a) com sucesso");
-		result.forwardTo(this).listarArmamentos(new Armamento(), null);
+		result.redirectTo(this).listarArmamentos(new Armamento(), null);
 	}
 
 	@Funcionalidade(nome = "Armamentos", modulo = "Material bélico")

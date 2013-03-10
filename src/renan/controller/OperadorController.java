@@ -109,7 +109,7 @@ public class OperadorController {
 		operador.setSenha(GeradorDeMd5.converter(operador.getSenha()));
 		hibernateUtil.salvarOuAtualizar(operador);
 		result.include("sucesso", "Operador salvo com sucesso");
-		result.forwardTo(this).listarOperadores(new Operador(), null);
+		result.redirectTo(this).listarOperadores(new Operador(), null);
 	}
 
 	private void validarNomesRepetidos(Operador operador) {

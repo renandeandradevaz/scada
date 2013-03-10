@@ -114,7 +114,7 @@ public class GrupoOperadorController {
 
 		hibernateUtil.salvarOuAtualizar(grupoOperador);
 		result.include("sucesso", "Grupo de operador salvo com sucesso");
-		result.forwardTo(this).listarGruposOperador(new GrupoOperador(), null);
+		result.redirectTo(this).listarGruposOperador(new GrupoOperador(), null);
 	}
 
 	private void validarNomesRepetidos(GrupoOperador grupoOperador) {

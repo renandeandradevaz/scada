@@ -67,7 +67,7 @@ public class MovimentacaoDeArmamentoController {
 
 		hibernateUtil.salvarOuAtualizar(movimentacaoDeArmamento);
 		result.include("sucesso", "MovimentacaoDeArmamento salvo(a) com sucesso");
-		result.forwardTo(this).listarMovimentacaoDeArmamentos(new MovimentacaoDeArmamento(), null);
+		result.redirectTo(this).listarMovimentacaoDeArmamentos(new MovimentacaoDeArmamento(), null);
 	}
 
 	@Funcionalidade(nome = "MovimentacaoDeArmamentos", modulo = "Em construção")

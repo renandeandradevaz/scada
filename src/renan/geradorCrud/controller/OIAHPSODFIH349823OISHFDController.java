@@ -67,7 +67,7 @@ public class OIAHPSODFIH349823OISHFDController {
 
 		hibernateUtil.salvarOuAtualizar(mohoidfgoih98745oihdog);
 		result.include("sucesso", "OIAHPSODFIH349823OISHFD salvo(a) com sucesso");
-		result.forwardTo(this).listarOIAHPSODFIH349823OISHFDs(new OIAHPSODFIH349823OISHFD(), null);
+		result.redirectTo(this).listarOIAHPSODFIH349823OISHFDs(new OIAHPSODFIH349823OISHFD(), null);
 	}
 
 	@Funcionalidade(nome = "OIAHPSODFIH349823OISHFDs", modulo = "New")
