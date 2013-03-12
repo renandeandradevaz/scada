@@ -39,13 +39,13 @@ jQuery(document).ready(function() {
 	
 	jQuery("#esconder-menu").click(function() {
 		
-		jQuery("#fixed-top").hide("slow");
+		jQuery("#fixed-top").fadeOut("slow");
 		jQuery("#mostrar-menu").show();
 	});
 	
 	jQuery("#mostrar-menu").click(function() {
 		
-		jQuery("#fixed-top").show("slow");
+		jQuery("#fixed-top").fadeIn("slow");
 		jQuery("#mostrar-menu").hide();
 	});
 	
