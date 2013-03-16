@@ -10,10 +10,14 @@
       </div>
     </div>
     <div class="control-group warning">
-      <label class="control-label">Status</label>
-      <div class="controls">
-        <input type="text" class="input-xlarge required" name="armamento.status" value="${armamento.status}">
-      </div>
+        <label class="control-label">Status</label>
+        <div class="controls">
+          <select name="armamento.status" >
+			<c:forEach items="${statusArmamento}" var="item">
+				<option <c:if test="${armamento.status == item}"> selected="selected" </c:if> value="${item}"> ${item} </option>
+			</c:forEach>
+		  </select>
+        </div>
     </div>
     <div class="control-group warning">
         <label class="control-label">Tipo de armamento</label>

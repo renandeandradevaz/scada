@@ -50,6 +50,9 @@ public class ArmamentoController {
 
 		List<TipoArmamento> tiposDeArmamento = hibernateUtil.buscar(new TipoArmamento());
 		result.include("tiposDeArmamento", tiposDeArmamento);
+		
+		List<String> status = Armamento.listarStatus();
+		result.include("statusArmamento", status);
 	}
 
 	@Path("/armamento/excluirArmamento/{armamento.id}")

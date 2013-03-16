@@ -1,5 +1,8 @@
 package renan.modelo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -20,6 +23,19 @@ public class Armamento implements Entidade {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	private TipoArmamento tipoArmamento;
+	
+	public static final String ARMAMENTO_DISPONIVEL = "Disponível";
+	public static final String ARMAMENTO_INDISPONIVEL = "Indisponível";
+	
+	public static List<String> listarStatus(){
+		
+		List<String> status = new ArrayList<String>();
+		
+		status.add(ARMAMENTO_DISPONIVEL);
+		status.add(ARMAMENTO_INDISPONIVEL);
+		
+		return status;
+	}
 
 	public Armamento() {
 	}
