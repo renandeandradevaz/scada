@@ -7,7 +7,7 @@
     <div class="control-group warning">
 		<label class="control-label">Cliente: </label>
 		<div class="controls">
-		  <input type="text" class="input-xxlarge required" id="cliente" name="nomeCliente"  >
+		  <input type="text" class="input-xxlarge required" id="cliente" name="nomeCliente" autofocus="autofocus"  >
 		</div>
         
         <div id="armamentos" style="display: none">
@@ -55,7 +55,7 @@
     	  jQuery("#armamentos").fadeIn();
     	  jQuery("#botoes").fadeIn();
     	  
-    	  jQuery("#armamentos").append("<BR> <BR> <label class='control-label'> </label> <input id='armamento_0' type='text' class='input-xlarge' name='armamentosSelecionados' >");
+    	  jQuery("#armamentos").append("<BR> <BR> <label class='control-label'> </label> <input id='armamento_0' type='text' class='input-xlarge' name='armamentosSelecionados' autofocus='autofocus' >");
     	  
     	  montarAutoCompleteArmamento(0);
     	 }
@@ -90,7 +90,7 @@
 	    	  
 	    	  var quantidadesInputs = jQuery("#armamentos input").size();
 	    	  
-	    	  jQuery("#armamentos").append("<BR> <BR> <label class='control-label'> </label> <input type='text' class='input-xlarge' name='armamentosSelecionados' >");
+	    	  jQuery("#armamentos").append("<BR> <BR> <label class='control-label'> </label> <input type='text' class='input-xlarge' name='armamentosSelecionados' autofocus='autofocus' >");
 	    	  
 	    	  jQuery("#armamentos input:last").attr("id", "armamento_" + quantidadesInputs);
 	    	  
