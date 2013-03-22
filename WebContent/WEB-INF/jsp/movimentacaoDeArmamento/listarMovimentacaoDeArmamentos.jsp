@@ -1,11 +1,6 @@
 <%@ include file="/base.jsp" %> 
 
-<ul id="movimentacaoDeArmamento" class="dropdown-menu">
-	<li><a href="javascript:gerarLinkCompleto('<c:url value="/movimentacaoDeArmamento/editarMovimentacaoDeArmamento"/>')">Editar</a></li>
-	<li><a href="javascript:deletar('<c:url value="/movimentacaoDeArmamento/excluirMovimentacaoDeArmamento"/>')">Excluir</a></li>
-</ul>
-
-<a class="btn" href="<c:url value="/movimentacaoDeArmamento/criarMovimentacaoDeArmamento"/>" > Criar movimentacaoDeArmamento </a>
+<a class="btn" href="<c:url value="/movimentacaoDeArmamento/acautelarArmamentos"/>" > Acautelar armamentos </a>
 
 <br><br>
 

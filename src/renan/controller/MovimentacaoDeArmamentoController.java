@@ -3,14 +3,15 @@ package renan.controller;
 import java.util.List;
 
 import renan.anotacoes.Funcionalidade;
-import renan.modelo.MovimentacaoDeArmamento;
 import renan.hibernate.HibernateUtil;
+import renan.modelo.Cliente;
+import renan.modelo.MovimentacaoDeArmamento;
 import renan.sessao.SessaoGeral;
 import renan.util.Util;
 import renan.util.UtilController;
-import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
+import br.com.caelum.vraptor.view.Results;
 
 @Resource
 public class MovimentacaoDeArmamentoController {
@@ -26,51 +27,24 @@ public class MovimentacaoDeArmamentoController {
 		this.hibernateUtil.setResult(result);
 	}
 
-	@Funcionalidade(filhaDe = "criarEditarMovimentacaoDeArmamento")
-	public void criarMovimentacaoDeArmamento() {
+	@Funcionalidade(nome = "Acautelar armamentos")
+	public void acautelarArmamentos() {
 
-		sessaoGeral.adicionar("idMovimentacaoDeArmamento", null);
-		result.forwardTo(this).criarEditarMovimentacaoDeArmamento();
 	}
 
-	@Path("/movimentacaoDeArmamento/editarMovimentacaoDeArmamento/{movimentacaoDeArmamento.id}")
-	@Funcionalidade(filhaDe = "criarEditarMovimentacaoDeArmamento")
-	public void editarMovimentacaoDeArmamento(MovimentacaoDeArmamento movimentacaoDeArmamento) {
+	@Funcionalidade(filhaDe = "acautelarArmamentos")
+	public void autoCompleteClientes(String nomeCliente) {
 
-		movimentacaoDeArmamento = hibernateUtil.selecionar(movimentacaoDeArmamento);
+		Cliente cliente = new Cliente();
+		cliente.setNome(nomeCliente);
 
-		sessaoGeral.adicionar("idMovimentacaoDeArmamento", movimentacaoDeArmamento.getId());
-		result.include(movimentacaoDeArmamento);
-		result.forwardTo(this).criarEditarMovimentacaoDeArmamento();
+		List<Cliente> clientes = hibernateUtil.buscar(cliente, 1);
+
+		result.use(Results.json()).from(clientes).serialize();
+
 	}
 
-	@Funcionalidade(nome = "Criar e editar movimentacaoDeArmamentos")
-	public void criarEditarMovimentacaoDeArmamento() {
-	}
-
-	@Path("/movimentacaoDeArmamento/excluirMovimentacaoDeArmamento/{movimentacaoDeArmamento.id}")
-	@Funcionalidade(nome = "Excluir movimentacaoDeArmamento")
-	public void excluirMovimentacaoDeArmamento(MovimentacaoDeArmamento movimentacaoDeArmamento) {
-
-		hibernateUtil.deletar(movimentacaoDeArmamento);
-		result.include("sucesso", "MovimentacaoDeArmamento excluído(a) com sucesso");
-		result.forwardTo(this).listarMovimentacaoDeArmamentos(null, null);
-	}
-
-	@Funcionalidade(filhaDe = "criarEditarMovimentacaoDeArmamento")
-	public void salvarMovimentacaoDeArmamento(MovimentacaoDeArmamento movimentacaoDeArmamento) {
-
-		if (Util.preenchido(sessaoGeral.getValor("idMovimentacaoDeArmamento"))) {
-
-			movimentacaoDeArmamento.setId((Integer) sessaoGeral.getValor("idMovimentacaoDeArmamento"));
-		}
-
-		hibernateUtil.salvarOuAtualizar(movimentacaoDeArmamento);
-		result.include("sucesso", "MovimentacaoDeArmamento salvo(a) com sucesso");
-		result.redirectTo(this).listarMovimentacaoDeArmamentos(new MovimentacaoDeArmamento(), null);
-	}
-
-	@Funcionalidade(nome = "MovimentacaoDeArmamentos", modulo = "Em construção")
+	@Funcionalidade(nome = "Movimentações", modulo = "Em construção")
 	public void listarMovimentacaoDeArmamentos(MovimentacaoDeArmamento movimentacaoDeArmamento, Integer pagina) {
 
 		movimentacaoDeArmamento = (MovimentacaoDeArmamento) UtilController.preencherFiltros(movimentacaoDeArmamento, "movimentacaoDeArmamento", sessaoGeral);
