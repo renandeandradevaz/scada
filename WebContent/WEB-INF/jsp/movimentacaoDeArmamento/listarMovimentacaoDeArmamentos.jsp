@@ -26,6 +26,9 @@
 			<thead>
 		    	<tr>
                     <th> TipoMovimentacao </th>
+                    <th> Armamento </th>
+                    <th> Operador </th>
+                    <th> Cliente </th>
                     <th> DataHora </th>
                     <th> Destino </th>
                     <th> Observacoes </th>
@@ -36,7 +39,10 @@
 				<c:forEach items="${movimentacaoDeArmamentos}" var="item">
 					<tr id="movimentacaoDeArmamento_${item.id}">
                         <td> ${item.tipoMovimentacao} </td>
-                        <td> <fmt:formatDate value="${item.dataHora.time}" /> </td>
+                        <td> ${item.armamento.numeracao} </td>
+                        <td> ${item.operador.login} </td>
+                        <td> ${item.cliente.nome} </td>
+                        <td> <fmt:formatDate value="${item.dataHora.time}" type="BOTH" /> </td>
                         <td> ${item.destino} </td>
                         <td> ${item.observacoes} </td>
                         <td class="tradutorSimNao" > ${item.validado} </td>
