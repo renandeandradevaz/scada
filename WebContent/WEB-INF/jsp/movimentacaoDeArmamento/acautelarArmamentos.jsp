@@ -5,10 +5,21 @@
   <fieldset>
     <legend>Acautelar armamentos</legend>
     <div class="control-group warning">
-      <label class="control-label">Cliente: </label>
-      <div class="controls">
-        <input type="text" class="input-xlarge required" id="cliente" >
-      </div>
+		<label class="control-label">Cliente: </label>
+		<div class="controls">
+		  <input type="text" class="input-xxlarge required" id="cliente"  >
+		</div>
+        
+        <div id="armamentos" style="display: none">
+        	<br>
+			<label class="control-label">Armamentos: </label>
+		</div>
+		
+		<div id="botoes" style="display: none">
+			<br>
+			<button type="submit" class="btn btn-primary"> Salvar </button>
+			<a class="btn btn-danger" href="<c:url value="/armamento/listarArmamentos"/>" > Cancelar </a>
+		</div>
     </div>
   </fieldset>
 </form>
@@ -36,8 +47,57 @@
           }
         });
       },
-      minLength: 3
+      minLength: 3,
+      select: function() {
+    	  
+    	 if(jQuery("#armamentos input").size() == 0){
+    		 
+    	  jQuery("#armamentos").fadeIn();
+    	  jQuery("#botoes").fadeIn();
+    	  
+    	  jQuery("#armamentos").append("<BR> <BR> <label class='control-label'> </label> <input id='armamento_0' type='text' class='input-xlarge' name='armamentosSelecionados' >");
+    	  
+    	  montarAutoCompleteArmamento(0);
+    	 }
+      }
     });
   });
+  
+  function montarAutoCompleteArmamento(indice){
+	  
+	  jQuery( "#armamento_" + indice ).autocomplete({
+	      source: function( request, response ) {
+	        jQuery.ajax({
+	          url: "<c:url value="/movimentacaoDeArmamento/autoCompleteArmamentos"/>",
+	          dataType: "json",
+	          data: {
+	        	  numeracaoArmamento: request.term
+	          },
+	          success: function( data ) {
+	        	  
+	            response( jQuery.map( data.list, function( item ) {
+	            	
+	              return {
+	                label: item.numeracao,
+	                value: item.numeracao
+	              }
+	            }));
+	          }
+	        });
+	      },
+	      minLength: 3,
+	      select: function() {
+	    	  
+	    	  var quantidadesInputs = jQuery("#armamentos input").size();
+	    	  
+	    	  jQuery("#armamentos").append("<BR> <BR> <label class='control-label'> </label> <input type='text' class='input-xlarge' name='armamentosSelecionados' >");
+	    	  
+	    	  jQuery("#armamentos input:last").attr("id", "armamento_" + quantidadesInputs);
+	    	  
+	    	  montarAutoCompleteArmamento(quantidadesInputs);	    	  
+	      }
+	    });
+  }
+  
   </script>
 

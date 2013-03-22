@@ -4,6 +4,7 @@ import java.util.List;
 
 import renan.anotacoes.Funcionalidade;
 import renan.hibernate.HibernateUtil;
+import renan.modelo.Armamento;
 import renan.modelo.Cliente;
 import renan.modelo.MovimentacaoDeArmamento;
 import renan.sessao.SessaoGeral;
@@ -41,6 +42,18 @@ public class MovimentacaoDeArmamentoController {
 		List<Cliente> clientes = hibernateUtil.buscar(cliente, 1);
 
 		result.use(Results.json()).from(clientes).serialize();
+
+	}
+
+	@Funcionalidade(filhaDe = "acautelarArmamentos")
+	public void autoCompleteArmamentos(String numeracaoArmamento) {
+
+		Armamento armamento = new Armamento();
+		armamento.setNumeracao(numeracaoArmamento);
+
+		List<Armamento> armamentos = hibernateUtil.buscar(armamento, 1);
+
+		result.use(Results.json()).from(armamentos).serialize();
 
 	}
 
