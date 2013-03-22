@@ -13,6 +13,9 @@ import renan.hibernate.Entidade;
 @Entity
 public class MovimentacaoDeArmamento implements Entidade {
 
+	public static final String TIPO_MOVIMENTACAO_ACAUTELAMENTO = "Acautelamento";
+	public static final String TIPO_MOVIMENTACAO_DEVOLUCAO_ACAUTELAMENTO = "Devolução de acautelamento";
+
 	@Id
 	@GeneratedValue
 	private Integer id;

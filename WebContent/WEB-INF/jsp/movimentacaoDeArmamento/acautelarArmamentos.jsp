@@ -1,13 +1,13 @@
 <%@ include file="/base.jsp" %> 
 
 
-<form class="form-horizontal" action="<c:url value="/armamento/salvarArmamento"/>" method="post">
+<form class="form-horizontal" action="<c:url value="/movimentacaoDeArmamento/salvarAcautelamentos"/>" method="post">
   <fieldset>
     <legend>Acautelar armamentos</legend>
     <div class="control-group warning">
 		<label class="control-label">Cliente: </label>
 		<div class="controls">
-		  <input type="text" class="input-xxlarge required" id="cliente"  >
+		  <input type="text" class="input-xxlarge required" id="cliente" name="nomeCliente"  >
 		</div>
         
         <div id="armamentos" style="display: none">
@@ -18,7 +18,7 @@
 		<div id="botoes" style="display: none">
 			<br>
 			<button type="submit" class="btn btn-primary"> Salvar </button>
-			<a class="btn btn-danger" href="<c:url value="/armamento/listarArmamentos"/>" > Cancelar </a>
+			<a class="btn btn-danger" href="<c:url value="/movimentacaoDeArmamento/listarMovimentacaoDeArmamentos"/>" > Cancelar </a>
 		</div>
     </div>
   </fieldset>
