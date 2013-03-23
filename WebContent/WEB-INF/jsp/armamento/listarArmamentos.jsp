@@ -11,8 +11,14 @@
 
 <form class="well form-inline" action="<c:url value="/armamento/listarArmamentos"/>" method="post" >
     <input type="text" class="input-small" name="armamento.numeracao" value="${sessaoGeral.valor.get('armamento').numeracao}" placeholder="Numeracao">
-    <input type="text" class="input-small" name="armamento.status" value="${sessaoGeral.valor.get('armamento').status}" placeholder="Status">
     <input type="text" class="input-small" name="armamento.tipoArmamento.descricao" value="${sessaoGeral.valor.get('armamento').tipoArmamento.descricao}" placeholder="Tipo de armamento" style="width: 130px;"> 
+    <select name="armamento.status" >
+		<option value="" style='display:none;' > Status </option>
+		<option value="" > Todos </option>
+		<c:forEach items="${statusArmamento}" var="item">
+			<option <c:if test="${sessaoGeral.valor.get('armamento').status == item}"> selected="selected" </c:if> value="${item}"> ${item} </option>
+		</c:forEach>
+	  </select>
 
 	<button type="submit" class="btn btn-info">Pesquisar</button>
 </form>

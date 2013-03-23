@@ -1,6 +1,10 @@
 package renan.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.SimpleExpression;
 
 import renan.anotacoes.Funcionalidade;
 import renan.hibernate.HibernateUtil;
@@ -50,7 +54,12 @@ public class ArmamentoController {
 
 		List<TipoArmamento> tiposDeArmamento = hibernateUtil.buscar(new TipoArmamento());
 		result.include("tiposDeArmamento", tiposDeArmamento);
-		
+
+		listarStatusArmamento();
+	}
+
+	private void listarStatusArmamento() {
+
 		List<String> status = Armamento.listarStatus();
 		result.include("statusArmamento", status);
 	}
@@ -85,8 +94,16 @@ public class ArmamentoController {
 			armamento = new Armamento();
 		}
 
-		List<Armamento> armamentos = hibernateUtil.buscar(armamento, pagina);
+		List<SimpleExpression> restricoes = new ArrayList<SimpleExpression>();
+
+		if (Util.preenchido(armamento.getStatus())) {
+
+			restricoes.add(Restrictions.eq("status", armamento.getStatus()));
+		}
+
+		List<Armamento> armamentos = hibernateUtil.buscar(armamento, pagina, restricoes);
 		result.include("armamentos", armamentos);
 
+		listarStatusArmamento();
 	}
 }
