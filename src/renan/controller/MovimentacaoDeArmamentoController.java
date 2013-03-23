@@ -13,11 +13,14 @@ import renan.modelo.Cliente;
 import renan.modelo.MovimentacaoDeArmamento;
 import renan.modelo.Operador;
 import renan.sessao.SessaoGeral;
+import renan.sessao.SessaoMovimentacao;
 import renan.sessao.SessaoOperador;
 import renan.util.Util;
 import renan.util.UtilController;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
+import br.com.caelum.vraptor.Validator;
+import br.com.caelum.vraptor.validator.ValidationMessage;
 import br.com.caelum.vraptor.view.Results;
 
 @Resource
@@ -26,19 +29,24 @@ public class MovimentacaoDeArmamentoController {
 	private final Result result;
 	private SessaoGeral sessaoGeral;
 	private SessaoOperador sessaoOperador;
+	private SessaoMovimentacao sessaoMovimentacao;
 	private HibernateUtil hibernateUtil;
+	private Validator validator;
 
-	public MovimentacaoDeArmamentoController(Result result, SessaoGeral sessaoGeral, SessaoOperador sessaoOperador, HibernateUtil hibernateUtil) {
+	public MovimentacaoDeArmamentoController(Result result, SessaoGeral sessaoGeral, SessaoOperador sessaoOperador, HibernateUtil hibernateUtil, Validator validator, SessaoMovimentacao sessaoMovimentacao) {
 		this.result = result;
 		this.sessaoGeral = sessaoGeral;
 		this.sessaoOperador = sessaoOperador;
+		this.sessaoMovimentacao = sessaoMovimentacao;
 		this.hibernateUtil = hibernateUtil;
 		this.hibernateUtil.setResult(result);
+		this.validator = validator;
 	}
 
 	@Funcionalidade(nome = "Acautelar armamentos")
 	public void acautelarArmamentos() {
 
+		this.sessaoMovimentacao = null;
 	}
 
 	@Funcionalidade(filhaDe = "acautelarArmamentos")
@@ -66,9 +74,22 @@ public class MovimentacaoDeArmamentoController {
 	}
 
 	@Funcionalidade(filhaDe = "acautelarArmamentos")
-	public void salvarAcautelamentos(String nomeCliente, List<String> armamentosSelecionados) {
+	public void salvarAcautelamentos(SessaoMovimentacao sessaoMovimentacao, List<String> armamentosSelecionados) {
 
-		// Fazer validações com nome do cliente utilizando o match mode exact
+		this.sessaoMovimentacao = sessaoMovimentacao;
+		this.sessaoMovimentacao.setArmamentosSelecionados(armamentosSelecionados);
+
+		String nomeCliente = this.sessaoMovimentacao.getNomeCliente();
+
+		Cliente clienteFiltro = new Cliente();
+		clienteFiltro.setNome(nomeCliente);
+
+		if (hibernateUtil.contar(clienteFiltro, MatchMode.EXACT) != 1) {
+
+			validator.add(new ValidationMessage("Não existe nenhum cliente com o nome informado. Por favor, informe o nome completo do cliente", "Erro"));
+
+			validator.onErrorForwardTo(this).acautelarArmamentos();
+		}
 
 		List<String> armamentosNaoRepetidos = new ArrayList<String>();
 
