@@ -10,7 +10,6 @@ public class Operador extends Militar {
 
 	private String login;
 	private String senha;
-	// teste hauhauah
 
 	@NotNull
 	@ManyToOne(fetch = FetchType.LAZY)
