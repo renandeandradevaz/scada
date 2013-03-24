@@ -13,8 +13,6 @@ import renan.hibernate.Entidade;
 
 @Entity
 public class Armamento implements Entidade {
-	
-	//Isto é um comentário
 
 	@Id
 	@GeneratedValue
