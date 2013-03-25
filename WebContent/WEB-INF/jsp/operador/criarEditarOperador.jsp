@@ -10,14 +10,25 @@
       </div>
     </div>
     
-    //Seria legal criar um combo box para posto/graduação mas eu não consegui.
-    
-    <div class="control-group">
-      <label class="control-label">Posto/Graduação</label>
-      <div class="controls">
-        <input type="text" class="input-xlarge required"  name="operador.postoGraduacao" value="${operador.postoGraduacao}" >
-      </div>
-    </div>    
+	<div class="control-group warning">
+        <label class="control-label">Posto/Graduação</label>
+        <div class="controls">
+          <select>
+          		<option> Coronel </option>
+          		<option> Tenente-Coronel </option>
+          		<option> Major </option>
+          		<option> Capitão </option>
+				<option> 1º Tenente</option>
+				<option> 2º Tenente</option>
+				<option> Subtenente </option>
+				<option> 1º Sargento </option>
+				<option> 2º Sargento </option>
+				<option> 3º Sargento </option>
+				<option> Cabo </option>
+				<option> Soldado </option>
+		  </select>
+       </div>
+     </div>
     
     <div class="control-group">
       <label class="control-label">Identidade</label>
