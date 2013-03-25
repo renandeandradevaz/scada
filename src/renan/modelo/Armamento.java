@@ -20,6 +20,7 @@ public class Armamento implements Entidade {
 
 	private String numeracao;
 	private String status;
+	private String subUnidade;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	private TipoArmamento tipoArmamento;
@@ -74,5 +75,13 @@ public class Armamento implements Entidade {
 
 	public void setTipoArmamento(TipoArmamento tipoArmamento) {
 		this.tipoArmamento = tipoArmamento;
+	}
+
+	public String getSubUnidade() {
+		return subUnidade;
+	}
+
+	public void setSubUnidade(String subUnidade) {
+		this.subUnidade = subUnidade;
 	}
 }

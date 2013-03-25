@@ -37,6 +37,7 @@
                     <th> Numeracao </th>
                     <th> Status </th>
                     <th> Tipo de armamento </th>
+                    <th> Subunidade </th>
 				</tr>
 			</thead>
 			<tbody>
@@ -45,6 +46,7 @@
                         <td> ${item.numeracao} </td>
                         <td> ${item.status} </td>
                         <td> ${item.tipoArmamento.descricao} </td>
+                        <td> ${item.subUnidade} </td>
 					</tr>
 				</c:forEach>
 			</tbody>

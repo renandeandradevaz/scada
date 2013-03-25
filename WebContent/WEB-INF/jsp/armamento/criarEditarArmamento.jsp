@@ -29,6 +29,14 @@
 		  </select>
         </div>
     </div>
+    
+    
+    <div class="control-group warning">
+      <label class="control-label">Subunidade</label>
+      <div class="controls">
+        <input type="text" class="input-xlarge required" name="armamento.subUnidade" value="${armamento.subUnidade}">
+      </div>
+    </div>
 
     <button type="submit" class="btn btn-primary">Salvar</button>
     <a class="btn btn-danger" href="<c:url value="/armamento/listarArmamentos"/>" > Cancelar </a>
