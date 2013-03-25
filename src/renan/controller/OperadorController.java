@@ -108,6 +108,7 @@ public class OperadorController {
 			operador.setId((Integer) sessaoGeral.getValor("idOperador"));
 		}
 
+	
 		operador.setSenha(GeradorDeMd5.converter(operador.getSenha()));
 		hibernateUtil.salvarOuAtualizar(operador);
 		result.include("sucesso", "Operador salvo com sucesso");
