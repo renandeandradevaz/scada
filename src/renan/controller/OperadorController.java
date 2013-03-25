@@ -92,6 +92,7 @@ public class OperadorController {
 		if (Util.vazio(sessaoGeral.getValor("idOperador"))) {
 
 			validarNomesRepetidos(operador);
+			validarIdentidadesRepetidas(operador);
 		}
 
 		else {
@@ -101,6 +102,7 @@ public class OperadorController {
 			if (!operador.getLogin().equals(operadoreselecionado.getLogin())) {
 
 				validarNomesRepetidos(operador);
+				validarIdentidadesRepetidas(operador);
 			}
 
 			operador.setId((Integer) sessaoGeral.getValor("idOperador"));
@@ -123,6 +125,19 @@ public class OperadorController {
 		validator.onErrorForwardTo(this).criarEditarOperador();
 	}
 
+	
+	private void validarIdentidadesRepetidas(Operador operador) {
+
+		Operador operadorFiltro = new Operador();
+		operadorFiltro.setIdentidade(operador.getIdentidade());
+
+		if (Util.preenchido(hibernateUtil.buscar(operadorFiltro, MatchMode.EXACT))) {
+			validator.add(new ValidationMessage("Já existe um operador com esta identidade", "Erro"));
+		}
+		validator.onErrorForwardTo(this).criarEditarOperador();
+	}
+	
+	
 	@Funcionalidade(nome = "Operadores", modulo = "Controle de acesso")
 	public void listarOperadores(Operador operador, Integer pagina) {
 
