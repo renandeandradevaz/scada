@@ -9,6 +9,30 @@
         <input type="text" class="input-xlarge required" name="operador.login" value="${operador.login}">
       </div>
     </div>
+    
+    //Seria legal criar um combo box para posto/graduação mas eu não consegui.
+    
+    <div class="control-group">
+      <label class="control-label">Posto/Graduação</label>
+      <div class="controls">
+        <input type="text" class="input-xlarge required"  name="operador.postoGraduacao" value="${operador.postoGraduacao}" >
+      </div>
+    </div>    
+    
+    <div class="control-group">
+      <label class="control-label">Identidade</label>
+      <div class="controls">
+        <input type="text" class="input-xlarge required"  name="operador.identidade" value="${operador.identidade}" >
+      </div>
+    </div>
+    
+    <div class="control-group">
+      <label class="control-label">Subunidade</label>
+      <div class="controls">
+        <input type="text" class="input-xlarge required"  name="operador.subUnidade" value="${operador.subUnidade}" >
+      </div>
+    </div>
+    
     <div class="control-group">
       <label class="control-label">Senha</label>
       <div class="controls">

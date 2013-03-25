@@ -24,6 +24,9 @@
     <tr>
       <th>Id</th>
       <th>Login</th>
+      <th>Post/Grad</th>
+      <th>Identidade</th>
+      <th>Subunidade</th>
       <th>Grupo de operadores</th>
     </tr>
   </thead>
@@ -32,6 +35,9 @@
 		<tr id="operador_${item.id}">
 		  <td> ${item.id} </td>
 		  <td> ${item.login} </td>
+		  <td> ${item.postoGraduacao} </td>
+		  <td> ${item.identidade} </td>
+		  <td> ${item.subUnidade} </td>
 		  <td> ${item.grupoOperador.nome} </td>
 		</tr>
   	</c:forEach>  	
