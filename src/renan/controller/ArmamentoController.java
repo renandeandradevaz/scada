@@ -3,6 +3,7 @@ package renan.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.criterion.SimpleExpression;
 
@@ -16,16 +17,20 @@ import renan.util.UtilController;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
+import br.com.caelum.vraptor.Validator;
+import br.com.caelum.vraptor.validator.ValidationMessage;
 
 @Resource
 public class ArmamentoController {
 
 	private final Result result;
+	private Validator validator;
 	private SessaoGeral sessaoGeral;
 	private HibernateUtil hibernateUtil;
 
-	public ArmamentoController(Result result, SessaoGeral sessaoGeral, HibernateUtil hibernateUtil) {
+	public ArmamentoController(Result result, Validator validator, SessaoGeral sessaoGeral, HibernateUtil hibernateUtil) {
 		this.result = result;
+		this.validator = validator;
 		this.sessaoGeral = sessaoGeral;
 		this.hibernateUtil = hibernateUtil;
 		this.hibernateUtil.setResult(result);
@@ -81,10 +86,42 @@ public class ArmamentoController {
 			armamento.setId((Integer) sessaoGeral.getValor("idArmamento"));
 		}
 
+		
+		if (Util.vazio(sessaoGeral.getValor("numeracao"))) {
+
+			validarNumeracaoRepetida(armamento);
+		}
+
+		else {
+
+			Armamento armamentoSelecionado = hibernateUtil.selecionar(new Armamento((Integer) sessaoGeral.getValor("numeracao")));
+						
+			if (!armamento.getNumeracao().equals(armamentoSelecionado.getNumeracao())); {
+
+				validarNumeracaoRepetida(armamento);
+			}
+
+			armamento.setNumeracao((String) sessaoGeral.getValor("numeracao"));
+		}
+		
+		
 		hibernateUtil.salvarOuAtualizar(armamento);
-		result.include("sucesso", "Armamento salvo(a) com sucesso");
+		result.include("sucesso", "Armamento salvo com sucesso");
 		result.redirectTo(this).listarArmamentos(new Armamento(), null);
 	}
+	
+	private void validarNumeracaoRepetida(Armamento armamento) {
+
+		Armamento armamentoFiltro = new Armamento();
+		
+		armamentoFiltro.setNumeracao(armamento.getNumeracao());
+		
+		if (Util.preenchido(hibernateUtil.buscar(armamentoFiltro, MatchMode.EXACT))) {
+			validator.add(new ValidationMessage("Já existe um armamento com este número", "Erro"));
+		}
+		validator.onErrorForwardTo(this).criarEditarArmamento();
+	}
+	
 
 	@Funcionalidade(nome = "Armamentos", modulo = "Material bélico")
 	public void listarArmamentos(Armamento armamento, Integer pagina) {
