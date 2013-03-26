@@ -306,7 +306,7 @@ public class GerarCrud {
 
 			if (tipo.toLowerCase().equals("boolean")) {
 
-				td = "\n                        <td class=\"tradutorSimNao\" > \\${item." + nomeAtributo + "} </td>";
+				td = "\n                        <td> <tags:simNao valor=\"\\${item." + nomeAtributo + "}\" /> </td>";
 			}
 
 			stringBufferTdValor.append(td);

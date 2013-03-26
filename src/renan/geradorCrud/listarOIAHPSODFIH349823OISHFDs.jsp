@@ -1,4 +1,5 @@
 <%@ include file="/base.jsp" %> 
+<%@ taglib uri="/tags/tags" prefix="tags"%>
 
 <ul id="mohoidfgoih98745oihdog" class="dropdown-menu">
 	<li><a href="javascript:gerarLinkCompleto('<c:url value="/mohoidfgoih98745oihdog/editarOIAHPSODFIH349823OISHFD"/>')">Editar</a></li>
