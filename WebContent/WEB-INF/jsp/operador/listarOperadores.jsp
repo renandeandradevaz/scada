@@ -11,6 +11,9 @@
 
 <form class="well form-inline" action="<c:url value="/operador/listarOperadores"/>" method="post" >
 	<input type="text" class="input-small" name="operador.login" value="${sessaoGeral.valor.get('operador').login}" placeholder="Login">
+	<input type="text" class="input-small" name="operador.identidade" value="${sessaoGeral.valor.get('operador').identidade}" placeholder="Identidade">
+	<input type="text" class="input-small" name="operador.subUnidade" value="${sessaoGeral.valor.get('operador').subUnidade}" placeholder="Subunidade">
+	<input type="text" class="input-medium" name="operador.grupoOperador.nome" value="${sessaoGeral.valor.get('operador').grupoOperador.nome}" placeholder="Grupo de Operadores">
 	<button type="submit" class="btn btn-info">Pesquisar</button>
 </form>
 

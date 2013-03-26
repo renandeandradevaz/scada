@@ -10,25 +10,18 @@
       </div>
     </div>
     
-	<div class="control-group warning">
+	<div class="control-group">
         <label class="control-label">Posto/Graduação</label>
         <div class="controls">
-          <select>
-          		<option> Coronel </option>
-          		<option> Tenente-Coronel </option>
-          		<option> Major </option>
-          		<option> Capitão </option>
-				<option> 1º Tenente</option>
-				<option> 2º Tenente</option>
-				<option> Subtenente </option>
-				<option> 1º Sargento </option>
-				<option> 2º Sargento </option>
-				<option> 3º Sargento </option>
-				<option> Cabo </option>
-				<option> Soldado </option>
+          <select name="operador.postoGraduacao" >
+			<c:forEach items="${graduacoes}" var="item">
+				<option <c:if test="${operador.postoGraduacao == item}"> selected="selected" </c:if> value="${item}"> ${item} </option>
+			</c:forEach>
 		  </select>
-       </div>
-     </div>
+        </div>
+    </div>
+	
+	
     
     <div class="control-group">
       <label class="control-label">Identidade</label>

@@ -66,6 +66,9 @@ public class OperadorController {
 
 		List<GrupoOperador> gruposOperador = hibernateUtil.buscar(new GrupoOperador());
 		result.include("gruposOperador", gruposOperador);
+		
+		List<String> graduacoes = Operador.listarGraduacoes();
+		result.include("graduacoes", graduacoes);
 	}
 
 	@Path("/operador/excluirOperador/{operador.id}")

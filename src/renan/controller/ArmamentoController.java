@@ -115,6 +115,7 @@ public class ArmamentoController {
 		Armamento armamentoFiltro = new Armamento();
 		
 		armamentoFiltro.setNumeracao(armamento.getNumeracao());
+		armamentoFiltro.setTipoArmamento(armamento.getTipoArmamento());
 		
 		if (Util.preenchido(hibernateUtil.buscar(armamentoFiltro, MatchMode.EXACT))) {
 			validator.add(new ValidationMessage("Já existe um armamento com este número", "Erro"));
