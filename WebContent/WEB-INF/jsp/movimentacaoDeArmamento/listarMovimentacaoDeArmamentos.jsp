@@ -1,4 +1,5 @@
 <%@ include file="/base.jsp" %> 
+<%@ taglib uri="/tags/tags" prefix="tags"%>
 
 <a class="btn" href="<c:url value="/movimentacaoDeArmamento/acautelarArmamentos"/>" > Acautelar armamentos </a>
 
@@ -45,7 +46,7 @@
                         <td> <fmt:formatDate value="${item.dataHora.time}" type="BOTH" /> </td>
                         <td> ${item.destino} </td>
                         <td> ${item.observacoes} </td>
-                        <td class="tradutorSimNao" > ${item.validado} </td>
+                        <td> <tags:simNao valor="${item.validado}" /> </td>
 					</tr>
 				</c:forEach>
 			</tbody>
