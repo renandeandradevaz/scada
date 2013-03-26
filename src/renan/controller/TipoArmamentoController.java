@@ -2,7 +2,10 @@ package renan.controller;
 
 import java.util.List;
 
+import org.hibernate.criterion.MatchMode;
+
 import renan.anotacoes.Funcionalidade;
+import renan.modelo.Operador;
 import renan.modelo.TipoArmamento;
 import renan.hibernate.HibernateUtil;
 import renan.sessao.SessaoGeral;
@@ -11,6 +14,8 @@ import renan.util.UtilController;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
+import br.com.caelum.vraptor.Validator;
+import br.com.caelum.vraptor.validator.ValidationMessage;
 
 @Resource
 public class TipoArmamentoController {
@@ -82,4 +87,7 @@ public class TipoArmamentoController {
 		result.include("tipoArmamentos", tipoArmamentos);
 
 	}
+	
+	
+	
 }
