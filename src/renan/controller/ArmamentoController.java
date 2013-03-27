@@ -86,43 +86,44 @@ public class ArmamentoController {
 			armamento.setId((Integer) sessaoGeral.getValor("idArmamento"));
 		}
 
-		
-		if (Util.vazio(sessaoGeral.getValor("numeracao"))) {
+		this.validarArmamento(armamento);
 
-			validarNumeracaoRepetida(armamento);
-		}
-
-		else {
-
-			Armamento armamentoSelecionado = hibernateUtil.selecionar(new Armamento((Integer) sessaoGeral.getValor("numeracao")));
-						
-			if (!armamento.getNumeracao().equals(armamentoSelecionado.getNumeracao())); {
-
-				validarNumeracaoRepetida(armamento);
-			}
-
-			armamento.setNumeracao((String) sessaoGeral.getValor("numeracao"));
-		}
-		
-		
 		hibernateUtil.salvarOuAtualizar(armamento);
 		result.include("sucesso", "Armamento salvo com sucesso");
 		result.redirectTo(this).listarArmamentos(new Armamento(), null);
 	}
-	
-	private void validarNumeracaoRepetida(Armamento armamento) {
+
+	private void validarArmamento(Armamento armamento) {
 
 		Armamento armamentoFiltro = new Armamento();
-		
+
 		armamentoFiltro.setNumeracao(armamento.getNumeracao());
 		armamentoFiltro.setTipoArmamento(armamento.getTipoArmamento());
-		
-		if (Util.preenchido(hibernateUtil.buscar(armamentoFiltro, MatchMode.EXACT))) {
-			validator.add(new ValidationMessage("Já existe um armamento com este número", "Erro"));
+
+		List<Armamento> armamentos = hibernateUtil.buscar(armamentoFiltro, MatchMode.EXACT);
+
+		if (Util.preenchido(armamentos)) {
+
+			if (Util.vazio(armamento.getId())) {
+
+				validarArmamento();
+			}
+
+			else {
+
+				if (!armamento.getId().equals(armamentos.get(0).getId())) {
+
+					validarArmamento();
+				}
+			}
 		}
+	}
+
+	private void validarArmamento() {
+
+		validator.add(new ValidationMessage("Já existe um armamento com esta numeração e este tipo de armamento", "Erro"));
 		validator.onErrorForwardTo(this).criarEditarArmamento();
 	}
-	
 
 	@Funcionalidade(nome = "Armamentos", modulo = "Material bélico")
 	public void listarArmamentos(Armamento armamento, Integer pagina) {

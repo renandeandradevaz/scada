@@ -80,7 +80,7 @@
 		 -->
 		<input id="codigosFuncionalidadesPermitidas" type="hidden" value="${sessaoFuncionalidades.codigosFuncionalidadesSeparadosPorVirgula}" >
 
-		<a  href="http://apycom.com/"></a>
+		<a style="display: none;" href="http://apycom.com/"></a>
 		
 		<div id="divconteudo" style="margin-left: 30px; margin-right: 30px; margin-bottom: 100px; margin-top: 75px;" >
 		
