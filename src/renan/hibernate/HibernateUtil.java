@@ -307,7 +307,13 @@ public class HibernateUtil {
 		if (Util.preenchido(result)) {
 			result.include("quantidadeRegistros", quantidadeRegistros);
 			result.include("primeiroRegistroPagina", primeiroRegistroPagina + 1);
-			result.include("ultimoRegistroPagina", primeiroRegistroPagina + quantidadeDeRegistrosPorPagina);
+			
+			Integer ultimoRegistroPagina = primeiroRegistroPagina + quantidadeDeRegistrosPorPagina;
+			if(ultimoRegistroPagina > quantidadeRegistros){
+				ultimoRegistroPagina = quantidadeRegistros.intValue();
+			}
+			result.include("ultimoRegistroPagina", ultimoRegistroPagina);
+			
 			result.include("pagina", pagina + 1);
 			result.include("quantidadePaginas", quantidadeRegistros / quantidadeDeRegistrosPorPagina + 1);
 		}
