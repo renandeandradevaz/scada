@@ -45,7 +45,7 @@
 					<tr id="armamento_${item.id}">
                         <td> ${item.numeracao} </td>
                         <td> ${item.status} </td>
-                        <td> ${item.tipoArmamento.descricao} </td>
+                        <td> ${item.tipoArmamento.descricao} - <fmt:formatNumber value="${item.tipoArmamento.calibre}" /> </td>
                         <td> ${item.subUnidade} </td>
 					</tr>
 				</c:forEach>
