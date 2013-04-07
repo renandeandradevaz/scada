@@ -121,7 +121,7 @@ public class ArmamentoController {
 
 	private void validarArmamento() {
 
-		validator.add(new ValidationMessage("Já existe um armamento com esta numeração e este tipo de armamento", "Erro"));
+		validator.add(new ValidationMessage("Já existe um armamento deste tipo com esta numeração", "Erro"));
 		validator.onErrorForwardTo(this).criarEditarArmamento();
 	}
 
