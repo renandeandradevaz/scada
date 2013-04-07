@@ -67,6 +67,10 @@ public class OperadorController {
 		List<GrupoOperador> gruposOperador = hibernateUtil.buscar(new GrupoOperador());
 		result.include("gruposOperador", gruposOperador);
 		
+		listarGraduacoes();
+	}
+
+	private void listarGraduacoes() {
 		List<String> graduacoes = Operador.listarGraduacoes();
 		result.include("graduacoes", graduacoes);
 	}
@@ -153,6 +157,8 @@ public class OperadorController {
 		List<Operador> operadores = hibernateUtil.buscar(operador, pagina);
 
 		result.include("operadores", operadores);
+		
+		listarGraduacoes();
 
 	}
 }

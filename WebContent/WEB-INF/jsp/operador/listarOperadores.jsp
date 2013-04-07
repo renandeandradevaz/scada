@@ -14,6 +14,13 @@
 	<input type="text" class="input-small" name="operador.identidade" value="${sessaoGeral.valor.get('operador').identidade}" placeholder="Identidade">
 	<input type="text" class="input-small" name="operador.subUnidade" value="${sessaoGeral.valor.get('operador').subUnidade}" placeholder="Subunidade">
 	<input type="text" class="input-medium" name="operador.grupoOperador.nome" value="${sessaoGeral.valor.get('operador').grupoOperador.nome}" placeholder="Grupo de Operadores">
+	<select name="operador.postoGraduacao" >
+		<option value="" style='display:none;' >Posto/Graduacao</option>
+		<c:forEach items="${graduacoes}" var="item">
+			<option <c:if test="${sessaoGeral.valor.get('operador').postoGraduacao == item}"> selected="selected" </c:if> value="${item}"> ${item} </option>
+		</c:forEach>
+	</select>
+	
 	<button type="submit" class="btn btn-info">Pesquisar</button>
 </form>
 
