@@ -25,15 +25,21 @@ public class Armamento implements Entidade {
 	@ManyToOne(fetch = FetchType.LAZY)
 	private TipoArmamento tipoArmamento;
 	
-	public static final String ARMAMENTO_DISPONIVEL = "Disponível";
-	public static final String ARMAMENTO_INDISPONIVEL = "Indisponível";
+	public static final String ARMAMENTO_DISPONIVEL_ACAUTELADO = "Disponível Acautelado";
+	public static final String ARMAMENTO_DISPONIVEL_NÃO_ACAUTELADO = "Disponível Não Acautelado";
+	
+	public static final String ARMAMENTO_INDISPONIVEL_ACAUTELADO = "Indisponível Acautelado";
+	public static final String ARMAMENTO_INDISPONIVEL_NÃO_ACAUTELADO = "Indisponível Não Acautelado";
 	
 	public static List<String> listarStatus(){
 		
 		List<String> status = new ArrayList<String>();
 		
-		status.add(ARMAMENTO_DISPONIVEL);
-		status.add(ARMAMENTO_INDISPONIVEL);
+		status.add(ARMAMENTO_DISPONIVEL_ACAUTELADO);
+		status.add(ARMAMENTO_DISPONIVEL_NÃO_ACAUTELADO);
+		
+		status.add(ARMAMENTO_INDISPONIVEL_ACAUTELADO);
+		status.add(ARMAMENTO_INDISPONIVEL_NÃO_ACAUTELADO);
 		
 		return status;
 	}
