@@ -1,10 +1,12 @@
 package renan.modelo;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import renan.hibernate.Entidade;
 
@@ -17,8 +19,12 @@ public class TipoArmamento implements Entidade {
 
 	private String descricao;
 	private BigDecimal calibre;
+	
+	@OneToMany(mappedBy = "tipoArmamento")
+	private List<Armamento> armamentos;
 
 	public TipoArmamento() {
+		
 	}
 
 	public TipoArmamento(Integer id) {
@@ -47,6 +53,14 @@ public class TipoArmamento implements Entidade {
 
 	public void setCalibre(BigDecimal calibre) {
 		this.calibre = calibre;
+	}
+	
+	public List<Armamento> getArmamentos() {
+		return armamentos;
+	}
+	
+	public void setOperadores(List<Armamento> armamentos) {
+		this.armamentos = armamentos;
 	}
 
 }

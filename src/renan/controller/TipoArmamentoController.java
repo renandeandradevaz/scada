@@ -21,11 +21,13 @@ import br.com.caelum.vraptor.validator.ValidationMessage;
 public class TipoArmamentoController {
 
 	private final Result result;
+	private Validator validator;
 	private SessaoGeral sessaoGeral;
 	private HibernateUtil hibernateUtil;
 
-	public TipoArmamentoController(Result result, SessaoGeral sessaoGeral, HibernateUtil hibernateUtil) {
+	public TipoArmamentoController(Result result, Validator validator, SessaoGeral sessaoGeral, HibernateUtil hibernateUtil) {
 		this.result = result;
+		this.validator = validator;
 		this.sessaoGeral = sessaoGeral;
 		this.hibernateUtil = hibernateUtil;
 		this.hibernateUtil.setResult(result);
@@ -51,11 +53,21 @@ public class TipoArmamentoController {
 
 	@Funcionalidade(nome = "Criar e editar tipos de armamentos")
 	public void criarEditarTipoArmamento() {
+		
 	}
 
 	@Path("/tipoArmamento/excluirTipoArmamento/{tipoArmamento.id}")
 	@Funcionalidade(nome = "Excluir tipos de armamentos")
 	public void excluirTipoArmamento(TipoArmamento tipoArmamento) {
+		
+		TipoArmamento tipoArmamentoSelecionado = hibernateUtil.selecionar(tipoArmamento);
+		
+		if (tipoArmamentoSelecionado.getArmamentos().size() > 0) {
+			
+			validator.add(new ValidationMessage("Existem armamentos vinculados a este tipo. Se quiser remover este tipo de armamento, por favor, exclua os armamentos deste tipo ou vincule-os a outro tipo de armamento.", "Erro"));
+			
+			validator.onErrorForwardTo(this).listarTipoArmamentos(null, null);
+		}
 
 		hibernateUtil.deletar(tipoArmamento);
 		result.include("sucesso", "Tipo de armamento excluído(a) com sucesso");
