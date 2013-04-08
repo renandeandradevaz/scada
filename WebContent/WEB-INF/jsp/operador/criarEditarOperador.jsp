@@ -3,14 +3,8 @@
 <form class="form-horizontal" action="<c:url value="/operador/salvarOperador"/>" method="post">
   <fieldset>
     <legend>Criar/editar operador</legend>
-    <div class="control-group warning">
-      <label class="control-label">Nome</label>
-      <div class="controls">
-        <input type="text" class="input-xlarge required" name="operador.login" value="${operador.login}">
-      </div>
-    </div>
     
-	<div class="control-group">
+    <div class="control-group">
         <label class="control-label">Posto/Graduação</label>
         <div class="controls">
           <select name="operador.postoGraduacao" >
@@ -20,9 +14,14 @@
 		  </select>
         </div>
     </div>
-	
-	
-    
+        
+    <div class="control-group warning">
+      <label class="control-label">Nome</label>
+      <div class="controls">
+        <input type="text" class="input-xlarge required" name="operador.nome" value="${operador.nome}">
+      </div>
+    </div>
+        
     <div class="control-group">
       <label class="control-label">Identidade</label>
       <div class="controls">
@@ -38,12 +37,6 @@
     </div>
     
     <div class="control-group">
-      <label class="control-label">Senha</label>
-      <div class="controls">
-        <input type="password" class="input-xlarge required"  name="operador.senha" value="" >
-      </div>
-    </div>    
-    <div class="control-group">
         <label class="control-label">Grupo de operador</label>
         <div class="controls">
           <select name="operador.grupoOperador.id" >
@@ -53,6 +46,21 @@
 		  </select>
         </div>
     </div>
+    
+    <div class="control-group warning">
+      <label class="control-label">Login</label>
+      <div class="controls">
+        <input type="text" class="input-xlarge required" name="operador.login" value="${operador.login}">
+      </div>
+    </div>
+    
+    <div class="control-group">
+      <label class="control-label">Senha</label>
+      <div class="controls">
+        <input type="password" class="input-xlarge required"  name="operador.senha" value="" >
+      </div>
+    </div>
+            
     <button type="submit" class="btn btn-primary">Salvar</button>
     <a class="btn btn-danger" href="<c:url value="/operador/listarOperadores"/>" > Cancelar </a>
   </fieldset>
