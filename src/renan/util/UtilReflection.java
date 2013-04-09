@@ -54,7 +54,23 @@ public class UtilReflection {
 
 	public static void nullifyStrings(Object o) {
 
-		for (Field f : o.getClass().getDeclaredFields()) {
+		Class<?> superClass = o.getClass().getSuperclass();
+
+		if (superClass != null) {
+
+			Field[] declaredFields = superClass.getDeclaredFields();
+
+			settaNull(o, declaredFields);
+
+		}
+
+		settaNull(o, o.getClass().getDeclaredFields());
+
+	}
+
+	private static void settaNull(Object o, Field[] declaredFields) {
+
+		for (Field f : declaredFields) {
 
 			f.setAccessible(true);
 

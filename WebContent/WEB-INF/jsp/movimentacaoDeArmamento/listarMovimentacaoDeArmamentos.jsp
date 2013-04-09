@@ -13,10 +13,9 @@
 			<option <c:if test="${sessaoGeral.valor.get('movimentacaoDeArmamento').tipoMovimentacao == item}"> selected="selected" </c:if> value="${item}"> ${item} </option>
 		</c:forEach>
 	</select>
-    <input type="text" class="input-small data" name="movimentacaoDeArmamento.dataHora" value="<fmt:formatDate value="${sessaoGeral.valor.get('movimentacaoDeArmamento').dataHora.time}" />" placeholder="DataHora">
-    <input type="text" class="input-small" name="movimentacaoDeArmamento.destino" value="${sessaoGeral.valor.get('movimentacaoDeArmamento').destino}" placeholder="Destino">
-    <input type="text" class="input-small" name="movimentacaoDeArmamento.observacoes" value="${sessaoGeral.valor.get('movimentacaoDeArmamento').observacoes}" placeholder="Observacoes">
-    <input type="checkbox" name="movimentacaoDeArmamento.validado" value="${sessaoGeral.valor.get('movimentacaoDeArmamento').validado}" >
+    <input type="text" class="input-small" name="movimentacaoDeArmamento.armamento.numeracao" value="${sessaoGeral.valor.get('movimentacaoDeArmamento').armamento.numeracao}" placeholder="Armamento">
+    <input type="text" class="input-small" name="movimentacaoDeArmamento.operador.nome" value="${sessaoGeral.valor.get('movimentacaoDeArmamento').operador.nome}" placeholder="Operador">
+    
 
 	<button type="submit" class="btn btn-info">Pesquisar</button>
 </form>
@@ -47,7 +46,7 @@
 					<tr id="movimentacaoDeArmamento_${item.id}">
                         <td> ${item.tipoMovimentacao} </td>
                         <td> ${item.armamento.numeracao} </td>
-                        <td> ${item.operador.login} </td>
+                        <td> ${item.operador.nome} </td>
                         <td> ${item.cliente.nome} </td>
                         <td> <fmt:formatDate value="${item.dataHora.time}" type="BOTH" /> </td>
                         <td> ${item.destino} </td>
