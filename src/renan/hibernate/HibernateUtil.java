@@ -8,14 +8,15 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Example;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.criterion.Criterion;
 
 import renan.util.Util;
+import renan.util.UtilReflection;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.ioc.Component;
 import br.com.caelum.vraptor.ioc.RequestScoped;
@@ -55,7 +56,7 @@ public class HibernateUtil {
 			session.close();
 		}
 
-		//gerarEstatisticas();
+		// gerarEstatisticas();
 	}
 
 	public void salvarOuAtualizar(Entidade entidade) {
@@ -307,13 +308,13 @@ public class HibernateUtil {
 		if (Util.preenchido(result)) {
 			result.include("quantidadeRegistros", quantidadeRegistros);
 			result.include("primeiroRegistroPagina", primeiroRegistroPagina + 1);
-			
+
 			Integer ultimoRegistroPagina = primeiroRegistroPagina + quantidadeDeRegistrosPorPagina;
-			if(ultimoRegistroPagina > quantidadeRegistros){
+			if (ultimoRegistroPagina > quantidadeRegistros) {
 				ultimoRegistroPagina = quantidadeRegistros.intValue();
 			}
 			result.include("ultimoRegistroPagina", ultimoRegistroPagina);
-			
+
 			result.include("pagina", pagina + 1);
 			result.include("quantidadePaginas", quantidadeRegistros / quantidadeDeRegistrosPorPagina + 1);
 		}
@@ -374,6 +375,8 @@ public class HibernateUtil {
 			matchMode = MatchMode.ANYWHERE;
 		}
 
+		UtilReflection.nullifyStrings(filtro);
+
 		criteria.add(Example.create(filtro).enableLike(matchMode).ignoreCase());
 		if (filtro.getId() != null && filtro.getId() != 0) {
 
@@ -406,6 +409,9 @@ public class HibernateUtil {
 
 							criteria.add(Restrictions.eq(nomeEntidadeAssociadaDiminutivo + ".id", entidadeAssociada.getId()));
 						}
+
+						UtilReflection.nullifyStrings(entidadeAssociada);
+
 						criteria.createCriteria(nomeEntidadeAssociadaDiminutivo).add(Example.create(entidadeAssociada).enableLike(MatchMode.ANYWHERE).ignoreCase());
 
 					}

@@ -2,6 +2,7 @@ package renan.util;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -51,4 +52,26 @@ public class UtilReflection {
 		return this.getClass().getName().split("\\.")[0];
 	}
 
+	public static void nullifyStrings(Object o) {
+
+		for (Field f : o.getClass().getDeclaredFields()) {
+
+			f.setAccessible(true);
+
+			try {
+				if (f.getType().equals(String.class)) {
+
+					String value = (String) f.get(o);
+
+					if (value != null && value.trim().isEmpty()) {
+
+						f.set(o, null);
+					}
+				}
+			} catch (Exception e) {
+
+				throw new RuntimeException(e);
+			}
+		}
+	}
 }
