@@ -13,7 +13,7 @@ import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.criterion.SimpleExpression;
+import org.hibernate.criterion.Criterion;
 
 import renan.util.Util;
 import br.com.caelum.vraptor.Result;
@@ -192,7 +192,7 @@ public class HibernateUtil {
 		return buscar(filtro, pagina, null, null, null);
 	}
 
-	public <E extends Entidade> List<E> buscar(Entidade filtro, List<SimpleExpression> restricoes) {
+	public <E extends Entidade> List<E> buscar(Entidade filtro, List<Criterion> restricoes) {
 
 		return buscar(filtro, restricoes, null, null);
 	}
@@ -207,7 +207,7 @@ public class HibernateUtil {
 		return buscar(filtro, null, null, matchMode);
 	}
 
-	public <E extends Entidade> List<E> buscar(Entidade filtro, Integer pagina, List<SimpleExpression> restricoes) {
+	public <E extends Entidade> List<E> buscar(Entidade filtro, Integer pagina, List<Criterion> restricoes) {
 
 		return buscar(filtro, pagina, restricoes, null, null);
 	}
@@ -222,12 +222,12 @@ public class HibernateUtil {
 		return buscar(filtro, pagina, null, null, matchMode);
 	}
 
-	public <E extends Entidade> List<E> buscar(Entidade filtro, List<SimpleExpression> restricoes, Order ordenacao) {
+	public <E extends Entidade> List<E> buscar(Entidade filtro, List<Criterion> restricoes, Order ordenacao) {
 
 		return buscar(filtro, restricoes, ordenacao, null);
 	}
 
-	public <E extends Entidade> List<E> buscar(Entidade filtro, List<SimpleExpression> restricoes, MatchMode matchMode) {
+	public <E extends Entidade> List<E> buscar(Entidade filtro, List<Criterion> restricoes, MatchMode matchMode) {
 
 		return buscar(filtro, restricoes, null, matchMode);
 	}
@@ -237,7 +237,7 @@ public class HibernateUtil {
 		return buscar(filtro, null, ordenacao, matchMode);
 	}
 
-	public <E extends Entidade> List<E> buscar(Entidade filtro, Integer pagina, List<SimpleExpression> restricoes, Order ordenacao) {
+	public <E extends Entidade> List<E> buscar(Entidade filtro, Integer pagina, List<Criterion> restricoes, Order ordenacao) {
 
 		return buscar(filtro, pagina, restricoes, ordenacao, null);
 	}
@@ -247,7 +247,7 @@ public class HibernateUtil {
 		return contar(filtro, null, null);
 	}
 
-	public Integer contar(Entidade filtro, List<SimpleExpression> restricoes) {
+	public Integer contar(Entidade filtro, List<Criterion> restricoes) {
 
 		return contar(filtro, restricoes, null);
 	}
@@ -257,7 +257,7 @@ public class HibernateUtil {
 		return contar(filtro, null, matchMode);
 	}
 
-	public Integer contar(Entidade filtro, List<SimpleExpression> restricoes, MatchMode matchMode) {
+	public Integer contar(Entidade filtro, List<Criterion> restricoes, MatchMode matchMode) {
 
 		Criteria criteria = gerarFiltros(filtro, matchMode);
 		adicionarOrdenacaoERestricoes(restricoes, null, criteria, false);
@@ -268,7 +268,7 @@ public class HibernateUtil {
 	}
 
 	@SuppressWarnings("unchecked")
-	public <E extends Entidade> List<E> buscar(Entidade filtro, List<SimpleExpression> restricoes, Order ordenacao, MatchMode matchMode) {
+	public <E extends Entidade> List<E> buscar(Entidade filtro, List<Criterion> restricoes, Order ordenacao, MatchMode matchMode) {
 
 		Criteria criteria = gerarFiltros(filtro, matchMode);
 
@@ -278,7 +278,7 @@ public class HibernateUtil {
 	}
 
 	@SuppressWarnings("unchecked")
-	public <E extends Entidade> List<E> buscar(Entidade filtro, Integer pagina, List<SimpleExpression> restricoes, Order ordenacao, MatchMode matchMode) {
+	public <E extends Entidade> List<E> buscar(Entidade filtro, Integer pagina, List<Criterion> restricoes, Order ordenacao, MatchMode matchMode) {
 
 		Criteria criteria = adicionarPaginacao(filtro, pagina, matchMode, restricoes, ordenacao);
 
@@ -287,7 +287,7 @@ public class HibernateUtil {
 		return criteria.list();
 	}
 
-	private Criteria adicionarPaginacao(Entidade filtro, Integer pagina, MatchMode matchMode, List<SimpleExpression> restricoes, Order ordenacao) {
+	private Criteria adicionarPaginacao(Entidade filtro, Integer pagina, MatchMode matchMode, List<Criterion> restricoes, Order ordenacao) {
 
 		Criteria criteria = gerarFiltros(filtro, matchMode);
 		adicionarOrdenacaoERestricoes(restricoes, ordenacao, criteria, false);
@@ -321,7 +321,7 @@ public class HibernateUtil {
 		return criteria;
 	}
 
-	private void adicionarOrdenacaoERestricoes(List<SimpleExpression> restricoes, Order ordenacao, Criteria criteria, Boolean ordenacaoDecrescente) {
+	private void adicionarOrdenacaoERestricoes(List<Criterion> restricoes, Order ordenacao, Criteria criteria, Boolean ordenacaoDecrescente) {
 
 		if (Util.preenchido(ordenacao)) {
 
@@ -339,7 +339,7 @@ public class HibernateUtil {
 
 		if (Util.preenchido(restricoes)) {
 
-			for (SimpleExpression restricao : restricoes) {
+			for (Criterion restricao : restricoes) {
 
 				criteria.add(restricao);
 			}

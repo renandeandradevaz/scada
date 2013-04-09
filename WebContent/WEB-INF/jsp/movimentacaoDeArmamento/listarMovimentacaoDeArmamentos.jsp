@@ -6,7 +6,13 @@
 <br><br>
 
 <form class="well form-inline" action="<c:url value="/movimentacaoDeArmamento/listarMovimentacaoDeArmamentos"/>" method="post" >
-    <input type="text" class="input-small" name="movimentacaoDeArmamento.tipoMovimentacao" value="${sessaoGeral.valor.get('movimentacaoDeArmamento').tipoMovimentacao}" placeholder="TipoMovimentacao">
+	<select name="movimentacaoDeArmamento.tipoMovimentacao" >
+		<option value="" style='display:none;' > Tipo de movimentação </option>
+		<option value="" > Todos </option>
+		<c:forEach items="${tiposMovimentacoes}" var="item">
+			<option <c:if test="${sessaoGeral.valor.get('movimentacaoDeArmamento').tipoMovimentacao == item}"> selected="selected" </c:if> value="${item}"> ${item} </option>
+		</c:forEach>
+	</select>
     <input type="text" class="input-small data" name="movimentacaoDeArmamento.dataHora" value="<fmt:formatDate value="${sessaoGeral.valor.get('movimentacaoDeArmamento').dataHora.time}" />" placeholder="DataHora">
     <input type="text" class="input-small" name="movimentacaoDeArmamento.destino" value="${sessaoGeral.valor.get('movimentacaoDeArmamento').destino}" placeholder="Destino">
     <input type="text" class="input-small" name="movimentacaoDeArmamento.observacoes" value="${sessaoGeral.valor.get('movimentacaoDeArmamento').observacoes}" placeholder="Observacoes">
@@ -15,7 +21,7 @@
 	<button type="submit" class="btn btn-info">Pesquisar</button>
 </form>
 
-<h3> MovimentacaoDeArmamentos </h3>
+<h3> Movimentações de armamentos </h3>
 
 <c:choose>
 	<c:when test="${!empty movimentacaoDeArmamentos}">
@@ -26,13 +32,13 @@
 		<table class="table table-striped table-bordered tablesorter">
 			<thead>
 		    	<tr>
-                    <th> TipoMovimentacao </th>
+                    <th> Tipo de movimentação </th>
                     <th> Armamento </th>
                     <th> Operador </th>
                     <th> Cliente </th>
-                    <th> DataHora </th>
+                    <th> Data/Hora </th>
                     <th> Destino </th>
-                    <th> Observacoes </th>
+                    <th> Observações </th>
                     <th> Validado </th>
 				</tr>
 			</thead>

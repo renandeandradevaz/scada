@@ -18,7 +18,7 @@
 		<c:forEach items="${statusArmamento}" var="item">
 			<option <c:if test="${sessaoGeral.valor.get('armamento').status == item}"> selected="selected" </c:if> value="${item}"> ${item} </option>
 		</c:forEach>
-	  </select>
+	</select>
 
 	<button type="submit" class="btn btn-info">Pesquisar</button>
 </form>

@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.criterion.SimpleExpression;
 
 import renan.anotacoes.Funcionalidade;
 import renan.hibernate.HibernateUtil;
@@ -73,8 +73,8 @@ public class MovimentacaoDeArmamentoController {
 		status.add(Armamento.ARMAMENTO_DISPONIVEL_NÃO_ACAUTELADO);
 		status.add(Armamento.ARMAMENTO_INDISPONIVEL_NÃO_ACAUTELADO);
 
-		List<SimpleExpression> restricoes = new ArrayList<SimpleExpression>();
-		restricoes.add((SimpleExpression) Restrictions.in("status", status));
+		List<Criterion> restricoes = new ArrayList<Criterion>();
+		restricoes.add(Restrictions.in("status", status));
 
 		List<Armamento> armamentos = hibernateUtil.buscar(armamento, 1, restricoes);
 
@@ -129,9 +129,12 @@ public class MovimentacaoDeArmamentoController {
 
 				catch (Exception e) {
 
-					validator.add(new ValidationMessage("Armamento " + numeracaoArmamento + " não encontrado. Por favor, informe o código correto do armamento", "Erro"));
+					validarArmamento(numeracaoArmamento);
+				}
 
-					validator.onErrorForwardTo(this).acautelarArmamentos();
+				if (Util.vazio(armamento)) {
+
+					validarArmamento(numeracaoArmamento);
 				}
 
 				if (armamento.getStatus().equals(Armamento.ARMAMENTO_DISPONIVEL_NÃO_ACAUTELADO)) {
@@ -165,6 +168,12 @@ public class MovimentacaoDeArmamentoController {
 		result.redirectTo(this).listarMovimentacaoDeArmamentos(new MovimentacaoDeArmamento(), null);
 	}
 
+	private void validarArmamento(String numeracaoArmamento) {
+		validator.add(new ValidationMessage("Armamento " + numeracaoArmamento + " não encontrado. Por favor, informe o código correto do armamento", "Erro"));
+
+		validator.onErrorForwardTo(this).acautelarArmamentos();
+	}
+
 	private void validarCliente(String nomeCliente) {
 		Cliente clienteFiltro = new Cliente();
 		clienteFiltro.setNome(nomeCliente);
@@ -187,6 +196,9 @@ public class MovimentacaoDeArmamentoController {
 
 		List<MovimentacaoDeArmamento> movimentacaoDeArmamentos = hibernateUtil.buscar(movimentacaoDeArmamento, pagina);
 		result.include("movimentacaoDeArmamentos", movimentacaoDeArmamentos);
+
+		List<String> tiposMovimentacoes = MovimentacaoDeArmamento.listarTiposDeMovimentacoes();
+		result.include("tiposMovimentacoes", tiposMovimentacoes);
 
 	}
 }

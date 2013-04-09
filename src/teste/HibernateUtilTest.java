@@ -8,7 +8,7 @@ import java.util.List;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.criterion.SimpleExpression;
+import org.hibernate.criterion.Criterion;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -156,7 +156,7 @@ public class HibernateUtilTest {
 	@Test
 	public void testaRestricoes() {
 
-		List<SimpleExpression> restricoes = new ArrayList<SimpleExpression>();
+		List<Criterion> restricoes = new ArrayList<Criterion>();
 		restricoes.add(Restrictions.eq("login", "operador1.4"));
 		List<Operador> operadores = hibernateUtil.buscar(new Operador(), restricoes);
 		assertEquals(1, operadores.size());

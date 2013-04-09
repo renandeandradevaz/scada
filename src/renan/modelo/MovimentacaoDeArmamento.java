@@ -1,6 +1,8 @@
 package renan.modelo;
 
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -34,6 +36,16 @@ public class MovimentacaoDeArmamento implements Entidade {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Armamento armamento;
+
+	public static List<String> listarTiposDeMovimentacoes() {
+
+		List<String> tiposMovimentacoes = new ArrayList<String>();
+
+		tiposMovimentacoes.add(TIPO_MOVIMENTACAO_ACAUTELAMENTO);
+		tiposMovimentacoes.add(TIPO_MOVIMENTACAO_DEVOLUCAO_ACAUTELAMENTO);
+
+		return tiposMovimentacoes;
+	}
 
 	public MovimentacaoDeArmamento() {
 	}

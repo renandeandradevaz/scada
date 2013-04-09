@@ -3,9 +3,9 @@ package renan.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.criterion.SimpleExpression;
 
 import renan.anotacoes.Funcionalidade;
 import renan.hibernate.HibernateUtil;
@@ -133,7 +133,7 @@ public class ArmamentoController {
 			armamento = new Armamento();
 		}
 
-		List<SimpleExpression> restricoes = new ArrayList<SimpleExpression>();
+		List<Criterion> restricoes = new ArrayList<Criterion>();
 
 		if (Util.preenchido(armamento.getStatus())) {
 
