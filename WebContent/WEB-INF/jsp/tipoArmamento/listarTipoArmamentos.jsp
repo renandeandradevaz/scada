@@ -10,7 +10,7 @@
 <br><br>
 
 <form class="well form-inline" action="<c:url value="/tipoArmamento/listarTipoArmamentos"/>" method="post" >
-    <input type="text" class="input-small" name="tipoArmamento.descricao" value="${sessaoGeral.valor.get('tipoArmamento').descricao}" placeholder="Descricao">
+    <input type="text" class="input-small" name="tipoArmamento.descricao" value="${sessaoGeral.valor.get('tipoArmamento').descricao}" placeholder="Descrição">
     <input type="text" class="input-small numero-decimal" name="tipoArmamento.calibre" value="<fmt:formatNumber value="${sessaoGeral.valor.get('tipoArmamento').calibre}" />" placeholder="Calibre">
 
 	<button type="submit" class="btn btn-info">Pesquisar</button>
@@ -27,7 +27,7 @@
 		<table class="table table-striped table-bordered tablesorter">
 			<thead>
 		    	<tr>
-                    <th> Descricao </th>
+                    <th> Descrição </th>
                     <th> Calibre </th>
 				</tr>
 			</thead>

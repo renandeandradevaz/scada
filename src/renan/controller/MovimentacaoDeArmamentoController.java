@@ -5,6 +5,8 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.SimpleExpression;
 
 import renan.anotacoes.Funcionalidade;
 import renan.hibernate.HibernateUtil;
@@ -67,7 +69,14 @@ public class MovimentacaoDeArmamentoController {
 		Armamento armamento = new Armamento();
 		armamento.setNumeracao(numeracaoArmamento);
 
-		List<Armamento> armamentos = hibernateUtil.buscar(armamento, 1);
+		List<String> status = new ArrayList<String>();
+		status.add(Armamento.ARMAMENTO_DISPONIVEL_NÃO_ACAUTELADO);
+		status.add(Armamento.ARMAMENTO_INDISPONIVEL_NÃO_ACAUTELADO);
+
+		List<SimpleExpression> restricoes = new ArrayList<SimpleExpression>();
+		restricoes.add((SimpleExpression) Restrictions.in("status", status));
+
+		List<Armamento> armamentos = hibernateUtil.buscar(armamento, 1, restricoes);
 
 		result.use(Results.json()).from(armamentos).serialize();
 
@@ -81,15 +90,7 @@ public class MovimentacaoDeArmamentoController {
 
 		String nomeCliente = this.sessaoMovimentacao.getNomeCliente();
 
-		Cliente clienteFiltro = new Cliente();
-		clienteFiltro.setNome(nomeCliente);
-
-		if (hibernateUtil.contar(clienteFiltro, MatchMode.EXACT) != 1) {
-
-			validator.add(new ValidationMessage("Não existe nenhum cliente com o nome informado. Por favor, informe o nome completo do cliente", "Erro"));
-
-			validator.onErrorForwardTo(this).acautelarArmamentos();
-		}
+		validarCliente(nomeCliente);
 
 		List<String> armamentosNaoRepetidos = new ArrayList<String>();
 
@@ -109,19 +110,37 @@ public class MovimentacaoDeArmamentoController {
 
 		if (Util.vazio(armamentosNaoRepetidos)) {
 
-			// Fazer validações se a lista estiver vazia
+			validator.add(new ValidationMessage("Não foi selecionado nenhum armamento", "Erro"));
+
+			validator.onErrorForwardTo(this).acautelarArmamentos();
 		}
 
 		else {
 
 			for (String numeracaoArmamento : armamentosNaoRepetidos) {
 
-				// Fazer validaçoes com o codigo do armamento utilizando o match
-				// mode exact
-
 				Armamento armamento = new Armamento();
 				armamento.setNumeracao(numeracaoArmamento);
-				armamento = hibernateUtil.selecionar(armamento, MatchMode.EXACT);
+
+				try {
+
+					armamento = hibernateUtil.selecionar(armamento, MatchMode.EXACT);
+				}
+
+				catch (Exception e) {
+
+					validator.add(new ValidationMessage("Armamento " + numeracaoArmamento + " não encontrado. Por favor, informe o código correto do armamento", "Erro"));
+
+					validator.onErrorForwardTo(this).acautelarArmamentos();
+				}
+
+				if (armamento.getStatus().equals(Armamento.ARMAMENTO_DISPONIVEL_NÃO_ACAUTELADO)) {
+
+					armamento.setStatus(Armamento.ARMAMENTO_DISPONIVEL_ACAUTELADO);
+				} else {
+
+					armamento.setStatus(Armamento.ARMAMENTO_INDISPONIVEL_ACAUTELADO);
+				}
 
 				Cliente cliente = new Cliente();
 				cliente.setNome(nomeCliente);
@@ -139,10 +158,23 @@ public class MovimentacaoDeArmamentoController {
 				movimentacaoDeArmamento.setTipoMovimentacao(MovimentacaoDeArmamento.TIPO_MOVIMENTACAO_ACAUTELAMENTO);
 
 				hibernateUtil.salvarOuAtualizar(movimentacaoDeArmamento);
+				hibernateUtil.salvarOuAtualizar(armamento);
 			}
 		}
 
 		result.redirectTo(this).listarMovimentacaoDeArmamentos(new MovimentacaoDeArmamento(), null);
+	}
+
+	private void validarCliente(String nomeCliente) {
+		Cliente clienteFiltro = new Cliente();
+		clienteFiltro.setNome(nomeCliente);
+
+		if (hibernateUtil.contar(clienteFiltro, MatchMode.EXACT) != 1) {
+
+			validator.add(new ValidationMessage("Não existe nenhum cliente com o nome informado. Por favor, informe o nome completo do cliente", "Erro"));
+
+			validator.onErrorForwardTo(this).acautelarArmamentos();
+		}
 	}
 
 	@Funcionalidade(nome = "Movimentações", modulo = "Em construção")

@@ -10,7 +10,7 @@
 <br><br>
 
 <form class="well form-inline" action="<c:url value="/armamento/listarArmamentos"/>" method="post" >
-    <input type="text" class="input-small" name="armamento.numeracao" value="${sessaoGeral.valor.get('armamento').numeracao}" placeholder="Numeracao">
+    <input type="text" class="input-small" name="armamento.numeracao" value="${sessaoGeral.valor.get('armamento').numeracao}" placeholder="Numeração">
     <input type="text" class="input-small" name="armamento.tipoArmamento.descricao" value="${sessaoGeral.valor.get('armamento').tipoArmamento.descricao}" placeholder="Tipo de armamento" style="width: 130px;"> 
     <select name="armamento.status" >
 		<option value="" style='display:none;' > Status </option>
@@ -34,7 +34,7 @@
 		<table class="table table-striped table-bordered tablesorter">
 			<thead>
 		    	<tr>
-                    <th> Numeracao </th>
+                    <th> Numeração </th>
                     <th> Status </th>
                     <th> Tipo de armamento </th>
                     <th> Subunidade </th>

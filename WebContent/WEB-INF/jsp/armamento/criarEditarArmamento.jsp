@@ -4,7 +4,7 @@
   <fieldset>
     <legend>Criar/editar armamento</legend>
     <div class="control-group warning">
-      <label class="control-label">Numeracao</label>
+      <label class="control-label">Numeração</label>
       <div class="controls">
         <input type="text" class="input-xlarge required" name="armamento.numeracao" value="${armamento.numeracao}">
       </div>
