@@ -4,7 +4,7 @@
 <!DOCTYPE HTML>
 <html lang="pt-br">
 	<head>
-		<title> null@null </title>
+		<title> SCADA - Sistema de controle de acautelamentos e disponibilidade de armamentos </title>
 		<link type="text/css" href="<c:url value="/css/bootstrap.css"/>" rel="stylesheet" />
 		<link type="text/css" href="<c:url value="/css/bootstrap-alterado.css"/>" rel="stylesheet" />
 		<link type="text/css" href="<c:url value="/css/bootstrap-responsive.css"/>" rel="stylesheet" />

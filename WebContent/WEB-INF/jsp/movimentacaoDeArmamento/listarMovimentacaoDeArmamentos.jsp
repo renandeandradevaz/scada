@@ -15,7 +15,9 @@
 	</select>
     <input type="text" class="input-small" name="movimentacaoDeArmamento.armamento.numeracao" value="${sessaoGeral.valor.get('movimentacaoDeArmamento').armamento.numeracao}" placeholder="Armamento">
     <input type="text" class="input-small" name="movimentacaoDeArmamento.operador.nome" value="${sessaoGeral.valor.get('movimentacaoDeArmamento').operador.nome}" placeholder="Operador">
-    
+    <input type="text" class="input-small" name="movimentacaoDeArmamento.cliente.nome" value="${sessaoGeral.valor.get('movimentacaoDeArmamento').cliente.nome}" placeholder="Cliente">
+    <input type="text" class="input-small data" name="filtrosMovimentacaoDeArmamento.dataInicial" value="<fmt:formatDate value="${sessaoGeral.valor.get('filtrosMovimentacaoDeArmamento').dataInicial.time}" />" placeholder="Data inicial">
+    <input type="text" class="input-small data" name="filtrosMovimentacaoDeArmamento.dataFinal" value="<fmt:formatDate value="${sessaoGeral.valor.get('filtrosMovimentacaoDeArmamento').dataFinal.time}" />" placeholder="Data Final">
 
 	<button type="submit" class="btn btn-info">Pesquisar</button>
 </form>

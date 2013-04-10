@@ -1,6 +1,7 @@
 package renan.controller;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
 import renan.anotacoes.Funcionalidade;
+import renan.filtros.FiltrosMovimentacaoDeArmamento;
 import renan.hibernate.HibernateUtil;
 import renan.modelo.Armamento;
 import renan.modelo.Cliente;
@@ -165,7 +167,7 @@ public class MovimentacaoDeArmamentoController {
 			}
 		}
 
-		result.redirectTo(this).listarMovimentacaoDeArmamentos(new MovimentacaoDeArmamento(), null);
+		result.redirectTo(this).listarMovimentacaoDeArmamentos(new MovimentacaoDeArmamento(), new FiltrosMovimentacaoDeArmamento(), null);
 	}
 
 	private void validarArmamento(String numeracaoArmamento) {
@@ -187,14 +189,41 @@ public class MovimentacaoDeArmamentoController {
 	}
 
 	@Funcionalidade(nome = "Movimentações", modulo = "Em construção")
-	public void listarMovimentacaoDeArmamentos(MovimentacaoDeArmamento movimentacaoDeArmamento, Integer pagina) {
+	public void listarMovimentacaoDeArmamentos(MovimentacaoDeArmamento movimentacaoDeArmamento, FiltrosMovimentacaoDeArmamento filtrosMovimentacaoDeArmamento, Integer pagina) {
 
 		movimentacaoDeArmamento = (MovimentacaoDeArmamento) UtilController.preencherFiltros(movimentacaoDeArmamento, "movimentacaoDeArmamento", sessaoGeral);
+		filtrosMovimentacaoDeArmamento = (FiltrosMovimentacaoDeArmamento) UtilController.preencherFiltros(filtrosMovimentacaoDeArmamento, "filtrosMovimentacaoDeArmamento", sessaoGeral);
 		if (Util.vazio(movimentacaoDeArmamento)) {
 			movimentacaoDeArmamento = new MovimentacaoDeArmamento();
 		}
 
-		List<MovimentacaoDeArmamento> movimentacaoDeArmamentos = hibernateUtil.buscar(movimentacaoDeArmamento, pagina);
+		List<Criterion> restricoes = new ArrayList<Criterion>();
+
+		if (Util.preenchido(filtrosMovimentacaoDeArmamento)) {
+
+			GregorianCalendar dataInicial = null;
+			GregorianCalendar dataFinal = null;
+
+			if (Util.preenchido(filtrosMovimentacaoDeArmamento.getDataInicial())) {
+
+				dataInicial = Util.copiaGregorianCalendar(filtrosMovimentacaoDeArmamento.getDataInicial());
+			} else {
+				dataInicial = new GregorianCalendar(1990, 1, 1);
+			}
+
+			if (Util.preenchido(filtrosMovimentacaoDeArmamento.getDataFinal())) {
+
+				dataFinal = Util.copiaGregorianCalendar(filtrosMovimentacaoDeArmamento.getDataFinal());
+				dataFinal.add(Calendar.DAY_OF_MONTH, +1);
+			} else {
+				dataFinal = new GregorianCalendar(2099, 1, 1);
+			}
+
+			restricoes.add(Restrictions.between("dataHora", dataInicial, dataFinal));
+
+		}
+
+		List<MovimentacaoDeArmamento> movimentacaoDeArmamentos = hibernateUtil.buscar(movimentacaoDeArmamento, pagina, restricoes);
 		result.include("movimentacaoDeArmamentos", movimentacaoDeArmamentos);
 
 		List<String> tiposMovimentacoes = MovimentacaoDeArmamento.listarTiposDeMovimentacoes();

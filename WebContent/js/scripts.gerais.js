@@ -24,7 +24,9 @@ jQuery(document).ready(function() {
 		'Out','Nov','Dez'
 		],
 		nextText: 'Próximo',
-		prevText: 'Anterior'
+		prevText: 'Anterior',
+		changeMonth: true,
+		changeYear: true
 
 	});
 	
