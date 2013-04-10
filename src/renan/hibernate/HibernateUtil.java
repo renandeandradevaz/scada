@@ -198,6 +198,11 @@ public class HibernateUtil {
 		return buscar(filtro, restricoes, null, null);
 	}
 
+	public <E extends Entidade> List<E> buscar(Entidade filtro, List<Criterion> restricoes, String alias) {
+
+		return buscar(filtro, restricoes, null, null, alias);
+	}
+
 	public <E extends Entidade> List<E> buscar(Entidade filtro, Order ordenacao) {
 
 		return buscar(filtro, null, ordenacao, null);
@@ -268,10 +273,20 @@ public class HibernateUtil {
 		return quantidadeRegistros.intValue();
 	}
 
-	@SuppressWarnings("unchecked")
 	public <E extends Entidade> List<E> buscar(Entidade filtro, List<Criterion> restricoes, Order ordenacao, MatchMode matchMode) {
 
+		return buscar(filtro, restricoes, ordenacao, matchMode, null);
+	}
+
+	@SuppressWarnings("unchecked")
+	public <E extends Entidade> List<E> buscar(Entidade filtro, List<Criterion> restricoes, Order ordenacao, MatchMode matchMode, String alias) {
+
 		Criteria criteria = gerarFiltros(filtro, matchMode);
+
+		if (Util.preenchido(alias)) {
+
+			criteria.createAlias(alias, alias);
+		}
 
 		adicionarOrdenacaoERestricoes(restricoes, ordenacao, criteria, false);
 

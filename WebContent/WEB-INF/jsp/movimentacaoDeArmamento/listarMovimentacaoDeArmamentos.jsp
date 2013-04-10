@@ -2,6 +2,7 @@
 <%@ taglib uri="/tags/tags" prefix="tags"%>
 
 <a class="btn" href="<c:url value="/movimentacaoDeArmamento/acautelarArmamentos"/>" > Acautelar armamentos </a>
+<a class="btn" href="<c:url value="/movimentacaoDeArmamento/devolverArmamentos"/>" > Devolver armamentos </a>
 
 <br><br>
 

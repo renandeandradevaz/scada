@@ -167,6 +167,8 @@ public class MovimentacaoDeArmamentoController {
 			}
 		}
 
+		result.include("sucesso", "Acautelamentos realizados com sucesso");
+
 		result.redirectTo(this).listarMovimentacaoDeArmamentos(new MovimentacaoDeArmamento(), new FiltrosMovimentacaoDeArmamento(), null);
 	}
 
@@ -228,6 +230,62 @@ public class MovimentacaoDeArmamentoController {
 
 		List<String> tiposMovimentacoes = MovimentacaoDeArmamento.listarTiposDeMovimentacoes();
 		result.include("tiposMovimentacoes", tiposMovimentacoes);
+
+	}
+
+	@Funcionalidade(nome = "Devolver armamentos")
+	public void devolverArmamentos() {
+
+		List<String> status = new ArrayList<String>();
+		status.add(Armamento.ARMAMENTO_DISPONIVEL_ACAUTELADO);
+		status.add(Armamento.ARMAMENTO_INDISPONIVEL_ACAUTELADO);
+
+		List<Criterion> restricoes = new ArrayList<Criterion>();
+		restricoes.add(Restrictions.in("armamento.status", status));
+
+		List<Armamento> movimentacoes = hibernateUtil.buscar(new MovimentacaoDeArmamento(), restricoes, "armamento");
+
+		result.include("movimentacoes", movimentacoes);
+	}
+
+	@Funcionalidade(filhaDe = "devolverArmamentos")
+	public void salvarDevolucoes(List<Integer> idsAcautelamentos) {
+
+		if (Util.preenchido(idsAcautelamentos)) {
+
+			for (Integer idAcautelamento : idsAcautelamentos) {
+
+				MovimentacaoDeArmamento acautelamento = hibernateUtil.selecionar(new MovimentacaoDeArmamento(idAcautelamento));
+
+				Operador operador = new Operador();
+				operador.setLogin(sessaoOperador.getOperador().getLogin());
+				operador = hibernateUtil.selecionar(operador, MatchMode.EXACT);
+
+				Armamento armamento = acautelamento.getArmamento();
+
+				MovimentacaoDeArmamento devolucao = new MovimentacaoDeArmamento();
+				devolucao.setArmamento(armamento);
+				devolucao.setCliente(acautelamento.getCliente());
+				devolucao.setOperador(operador);
+				devolucao.setDataHora(new GregorianCalendar());
+				devolucao.setTipoMovimentacao(MovimentacaoDeArmamento.TIPO_MOVIMENTACAO_DEVOLUCAO_ACAUTELAMENTO);
+
+				if (armamento.getStatus().equals(Armamento.ARMAMENTO_DISPONIVEL_ACAUTELADO)) {
+
+					armamento.setStatus(Armamento.ARMAMENTO_DISPONIVEL_NÃO_ACAUTELADO);
+				} else {
+
+					armamento.setStatus(Armamento.ARMAMENTO_INDISPONIVEL_NÃO_ACAUTELADO);
+				}
+
+				hibernateUtil.salvarOuAtualizar(devolucao);
+				hibernateUtil.salvarOuAtualizar(armamento);
+
+			}
+			result.include("sucesso", "Armamentos devolvidos com sucesso");
+		}
+
+		result.redirectTo(this).listarMovimentacaoDeArmamentos(new MovimentacaoDeArmamento(), new FiltrosMovimentacaoDeArmamento(), null);
 
 	}
 }

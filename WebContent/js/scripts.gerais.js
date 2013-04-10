@@ -144,6 +144,25 @@ jQuery(document).ready(function() {
 		}
 	});
 	
+	jQuery("#marcarDesmarcar").click(function() {
+		
+		if(jQuery("#marcarDesmarcar").attr("checked") === undefined){
+
+			jQuery(".chekboxTabela").each( function() {
+				
+				jQuery(this).removeAttr("checked");
+			});
+		}
+		
+		else{
+			
+			jQuery(".chekboxTabela").each( function() {
+
+				jQuery(this).attr("checked", "checked");
+			});
+		}
+	});
+	
 });
 
 function deletar(link) {  
