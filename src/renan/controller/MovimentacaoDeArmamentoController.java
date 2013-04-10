@@ -161,6 +161,7 @@ public class MovimentacaoDeArmamentoController {
 				movimentacaoDeArmamento.setOperador(operador);
 				movimentacaoDeArmamento.setDataHora(new GregorianCalendar());
 				movimentacaoDeArmamento.setTipoMovimentacao(MovimentacaoDeArmamento.TIPO_MOVIMENTACAO_ACAUTELAMENTO);
+				movimentacaoDeArmamento.setDevolvido(false);
 
 				hibernateUtil.salvarOuAtualizar(movimentacaoDeArmamento);
 				hibernateUtil.salvarOuAtualizar(armamento);
@@ -200,6 +201,11 @@ public class MovimentacaoDeArmamentoController {
 		}
 
 		List<Criterion> restricoes = new ArrayList<Criterion>();
+
+		if (Util.preenchido(movimentacaoDeArmamento.getTipoMovimentacao())) {
+
+			restricoes.add(Restrictions.eq("tipoMovimentacao", movimentacaoDeArmamento.getTipoMovimentacao()));
+		}
 
 		if (Util.preenchido(filtrosMovimentacaoDeArmamento)) {
 
@@ -243,7 +249,10 @@ public class MovimentacaoDeArmamentoController {
 		List<Criterion> restricoes = new ArrayList<Criterion>();
 		restricoes.add(Restrictions.in("armamento.status", status));
 
-		List<Armamento> movimentacoes = hibernateUtil.buscar(new MovimentacaoDeArmamento(), restricoes, "armamento");
+		MovimentacaoDeArmamento movimentacaoDeArmamento = new MovimentacaoDeArmamento();
+		movimentacaoDeArmamento.setDevolvido(false);
+
+		List<Armamento> movimentacoes = hibernateUtil.buscar(movimentacaoDeArmamento, restricoes, "armamento");
 
 		result.include("movimentacoes", movimentacoes);
 	}
@@ -278,6 +287,9 @@ public class MovimentacaoDeArmamentoController {
 					armamento.setStatus(Armamento.ARMAMENTO_INDISPONIVEL_NÃO_ACAUTELADO);
 				}
 
+				acautelamento.setDevolvido(true);
+
+				hibernateUtil.salvarOuAtualizar(acautelamento);
 				hibernateUtil.salvarOuAtualizar(devolucao);
 				hibernateUtil.salvarOuAtualizar(armamento);
 

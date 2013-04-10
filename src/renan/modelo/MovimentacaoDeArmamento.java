@@ -27,6 +27,7 @@ public class MovimentacaoDeArmamento implements Entidade {
 	private String destino;
 	private String observacoes;
 	private Boolean validado;
+	private Boolean devolvido;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Operador operador;
@@ -124,6 +125,14 @@ public class MovimentacaoDeArmamento implements Entidade {
 
 	public void setArmamento(Armamento armamento) {
 		this.armamento = armamento;
+	}
+
+	public Boolean getDevolvido() {
+		return devolvido;
+	}
+
+	public void setDevolvido(Boolean devolvido) {
+		this.devolvido = devolvido;
 	}
 
 }

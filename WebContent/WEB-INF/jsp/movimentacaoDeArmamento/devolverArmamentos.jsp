@@ -30,13 +30,15 @@
 					</c:forEach>
 				</tbody>
 			</table>
+			
+		    <button type="submit" class="btn">Devolver</button>
+		    
 		</c:when>
 		<c:otherwise>
 			<br>  <br>  <h4> Nenhum registro foi encontrado </h4>
 		</c:otherwise>
 	</c:choose>
 
-    <button type="submit" class="btn">Devolver</button>
   </fieldset>
 </form>
 
