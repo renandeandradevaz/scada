@@ -36,6 +36,8 @@ jQuery(function () {
                 data: [${resultadoRelatorioDisponibilidade}]
             }]
         });	
+	
+		jQuery("tspan:last").hide();
     });
     
 </script>
@@ -44,4 +46,6 @@ jQuery(function () {
 <script type="text/javascript" src="<c:url value="/js/highcharts.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/js/exporting.js"/>"></script>
 
-<div id="container" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+<div id="container" style="min-width: 500px; height: 500px; margin: 0 auto"></div>
+
+
