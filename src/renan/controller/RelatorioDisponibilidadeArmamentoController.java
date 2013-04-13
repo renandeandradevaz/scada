@@ -30,7 +30,7 @@ public class RelatorioDisponibilidadeArmamentoController {
 	}
 
 	@Funcionalidade(filhaDe = "selecionarTipoArmamento")
-	public void gerarRelatorio(Integer tipoArmamentoSelecionado) {
+	public void gerarRelatorioDisponibilidadeArmamento(Integer tipoArmamentoSelecionado) {
 
 		TipoArmamento tipoArmamento = new TipoArmamento(tipoArmamentoSelecionado);
 

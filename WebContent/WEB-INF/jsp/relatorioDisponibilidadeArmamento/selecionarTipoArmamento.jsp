@@ -1,6 +1,6 @@
 <%@ include file="/base.jsp" %> 
 
-<form class="form-inline" action="<c:url value="/relatorioDisponibilidadeArmamento/gerarRelatorio"/>" method="post">
+<form class="form-inline" action="<c:url value="/relatorioDisponibilidadeArmamento/gerarRelatorioDisponibilidadeArmamento"/>" method="post">
   <fieldset>
     <legend>Selecione o tipo de armamento para gerar o relatório</legend>
     
