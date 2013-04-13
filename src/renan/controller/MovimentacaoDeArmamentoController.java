@@ -191,7 +191,7 @@ public class MovimentacaoDeArmamentoController {
 		}
 	}
 
-	@Funcionalidade(nome = "Movimentações", modulo = "Em construção")
+	@Funcionalidade(nome = "Movimentações", modulo = "Controle de armamento")
 	public void listarMovimentacaoDeArmamentos(MovimentacaoDeArmamento movimentacaoDeArmamento, FiltrosMovimentacaoDeArmamento filtrosMovimentacaoDeArmamento, Integer pagina) {
 
 		movimentacaoDeArmamento = (MovimentacaoDeArmamento) UtilController.preencherFiltros(movimentacaoDeArmamento, "movimentacaoDeArmamento", sessaoGeral);

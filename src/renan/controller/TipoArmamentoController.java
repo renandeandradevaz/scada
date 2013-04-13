@@ -2,12 +2,9 @@ package renan.controller;
 
 import java.util.List;
 
-import org.hibernate.criterion.MatchMode;
-
 import renan.anotacoes.Funcionalidade;
-import renan.modelo.Operador;
-import renan.modelo.TipoArmamento;
 import renan.hibernate.HibernateUtil;
+import renan.modelo.TipoArmamento;
 import renan.sessao.SessaoGeral;
 import renan.util.Util;
 import renan.util.UtilController;
