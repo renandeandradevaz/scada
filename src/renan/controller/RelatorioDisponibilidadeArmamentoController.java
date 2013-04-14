@@ -26,12 +26,18 @@ public class RelatorioDisponibilidadeArmamentoController {
 	@Funcionalidade(nome = "Disponibilidade", modulo = "Relatórios")
 	public void selecionarTipoArmamento() {
 
+		buscarTiposDeArmamento();
+	}
+
+	private void buscarTiposDeArmamento() {
 		result.include("tiposDeArmamento", hibernateUtil.buscar(new TipoArmamento()));
 	}
 
 	@Funcionalidade(filhaDe = "selecionarTipoArmamento")
 	public void gerarRelatorioDisponibilidadeArmamento(Integer tipoArmamentoSelecionado) {
 
+		buscarTiposDeArmamento();
+		
 		TipoArmamento tipoArmamento = new TipoArmamento(tipoArmamentoSelecionado);
 
 		Armamento armamento = new Armamento();

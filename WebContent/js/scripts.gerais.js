@@ -58,12 +58,14 @@ jQuery(document).ready(function() {
 		jQuery("form.well").hide();
 		jQuery("form.form-inline").hide();
 		jQuery("a.btn").hide();
+		jQuery("#divCabecalhoRelatorios").show();
 		window.print();
 		jQuery("#fixed-top").show();
 		jQuery(".paginacao").show();
 		jQuery("form.well").show();
 		jQuery("form.form-inline").show();
 		jQuery("a.btn").show();
+		jQuery("#divCabecalhoRelatorios").hide();
 	});
 
 	jQuery(".numero-decimal").keypress(function(e) {
