@@ -57,6 +57,7 @@ jQuery(function () {
         });	
 	
 		jQuery("tspan:last").hide();
+		jQuery("path:first").hide();
     });
     
 </script>
