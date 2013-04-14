@@ -27,7 +27,7 @@ import br.com.caelum.vraptor.validator.ValidationMessage;
 @Resource
 public class LoginController {
 
-	private static final String SENHA_ADMINISTRADOR = "1234";
+	private static final String SENHA_ADMINISTRADOR = "patobolamacaco123";
 
 	private final Result result;
 	private SessaoOperador sessaoOperador;
