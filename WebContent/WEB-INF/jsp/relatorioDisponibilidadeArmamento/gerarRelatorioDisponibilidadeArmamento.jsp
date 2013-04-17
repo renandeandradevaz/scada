@@ -17,7 +17,6 @@
   </fieldset>
 </form>
 
-
 <script type="text/javascript">
 jQuery(function () {
 	jQuery('#divrelatorio').highcharts({
@@ -57,15 +56,10 @@ jQuery(function () {
         });	
 	
 		jQuery("tspan:last").hide();
-		jQuery("path:first").hide();
     });
     
 </script>
 
-
 <script type="text/javascript" charset="utf-8" src="<c:url value="/js/highcharts.js"/>"></script>
-<script type="text/javascript" charset="utf-8" src="<c:url value="/js/exporting.js"/>"></script>
 
 <div id="divrelatorio" style="min-width: 500px; height: 500px; margin: 0 auto"></div>
-
-
