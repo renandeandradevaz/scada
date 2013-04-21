@@ -16,6 +16,7 @@
 
   </fieldset>
 </form>
+<br>
 
 <script type="text/javascript">
 jQuery(function () {
@@ -28,6 +29,7 @@ jQuery(function () {
             title: {
                 text: 'Disponibilidade de armamentos do tipo: ${tipoArmamentoSelecionado}' 
             },
+                       
             tooltip: {
             	formatter: function(){
             		
