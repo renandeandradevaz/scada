@@ -2,8 +2,11 @@ package renan.controller;
 
 import java.util.List;
 
+import org.hibernate.criterion.MatchMode;
+
 import renan.anotacoes.Funcionalidade;
 import renan.hibernate.HibernateUtil;
+import renan.modelo.Armamento;
 import renan.modelo.TipoArmamento;
 import renan.sessao.SessaoGeral;
 import renan.util.Util;
@@ -78,7 +81,8 @@ public class TipoArmamentoController {
 
 			tipoArmamento.setId((Integer) sessaoGeral.getValor("idTipoArmamento"));
 		}
-
+		
+		validarTipoArmamento(tipoArmamento);
 		hibernateUtil.salvarOuAtualizar(tipoArmamento);
 		result.include("sucesso", "Tipo de armamento salvo(a) com sucesso");
 		result.redirectTo(this).listarTipoArmamentos(new TipoArmamento(), null);
@@ -98,5 +102,39 @@ public class TipoArmamentoController {
 	}
 	
 	
+	private void validarTipoArmamento(TipoArmamento tipoArmamento) {
+
+		TipoArmamento tipoArmamentoFiltro = new TipoArmamento();
+
+		tipoArmamentoFiltro.setDescricao(tipoArmamento.getDescricao());
+		tipoArmamentoFiltro.setCalibre(tipoArmamento.getCalibre());
+
+		List<TipoArmamento> tiposArmamentos = hibernateUtil.buscar(tipoArmamentoFiltro, MatchMode.EXACT);
+
+		if (Util.preenchido(tiposArmamentos)) {
+
+			if (Util.vazio(tipoArmamento.getId())) {
+
+				validarTipoArmamento();
+			}
+
+			else {
+
+				if (!tipoArmamento.getId().equals(tiposArmamentos.get(0).getId())) {
+
+					validarTipoArmamento();
+				}
+			}
+		}
+	}
+
+	private void validarTipoArmamento() {
+
+		validator.add(new ValidationMessage("Já existe um tipo de armamento com esta descrição e calibre", "Erro"));
+		validator.onErrorForwardTo(this).criarEditarTipoArmamento();
+	}
+
+
 	
 }
+

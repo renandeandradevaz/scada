@@ -7,7 +7,7 @@
      <select name="tipoArmamentoSelecionado" >
      	<option value=""> Todos </option>
 		<c:forEach items="${tiposDeArmamento}" var="item">
-			<option value="${item.id}"> ${item.descricao} </option>
+			<option value="${item.id}"> ${item.descricao} - <fmt:formatNumber value="${item.calibre}" /></option>
 		</c:forEach>
 	</select>
 

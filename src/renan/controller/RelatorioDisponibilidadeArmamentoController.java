@@ -63,7 +63,7 @@ public class RelatorioDisponibilidadeArmamentoController {
 
 			tipoArmamento = hibernateUtil.selecionar(tipoArmamento);
 
-			result.include("tipoArmamentoSelecionado", tipoArmamento.getDescricao());
+			result.include("tipoArmamentoSelecionado", tipoArmamento.getDescricao() + " - " + tipoArmamento.getCalibre());
 		}
 
 		else {

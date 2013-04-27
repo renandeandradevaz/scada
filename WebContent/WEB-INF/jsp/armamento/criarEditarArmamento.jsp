@@ -24,7 +24,7 @@
         <div class="controls">
           <select name="armamento.tipoArmamento.id" >
 			<c:forEach items="${tiposDeArmamento}" var="item">
-				<option <c:if test="${armamento.tipoArmamento.id == item.id}"> selected="selected" </c:if> value="${item.id}"> ${item.descricao} </option>
+				<option <c:if test="${armamento.tipoArmamento.id == item.id}"> selected="selected" </c:if> value="${item.id}"> ${item.descricao} - <fmt:formatNumber value="${item.calibre}" /> </option>
 			</c:forEach>
 		  </select>
         </div>
