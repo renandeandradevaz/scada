@@ -45,10 +45,22 @@ function montarAutoCompleteArmamento(indice){
 <form class="form-horizontal" action="<c:url value="/movimentacaoDeArmamento/salvarAcautelamentos"/>" method="post">
   <fieldset>
     <legend>Acautelar armamentos</legend>
-    <div class="control-group warning">
-		<label class="control-label">Cliente: </label>
+    <div class="control-group">
+		<label class="control-label">Destino </label>
 		<div class="controls">
-		  <input type="text" class="input-xxlarge required" id="cliente" name="sessaoMovimentacao.nomeCliente" value="${sessaoMovimentacao.nomeCliente}"  autofocus="autofocus"  >
+		  <input type="text" class="input-xlarge" name="sessaoMovimentacao.destino" value="${sessaoMovimentacao.destino}" autofocus="autofocus"  >
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">Observações </label>
+		<div class="controls">
+			<textarea rows="3" style="width: 270px;" name="sessaoMovimentacao.observacoes" > ${sessaoMovimentacao.observacoes} </textarea>
+		</div>
+	</div>
+    <div class="control-group warning">
+		<label class="control-label">Cliente </label>
+		<div class="controls">
+		  <input type="text" class="input-xxlarge required" id="cliente" name="sessaoMovimentacao.nomeCliente" value="${sessaoMovimentacao.nomeCliente}"  >
 		</div>
 
         <c:set var="display" value="none" />

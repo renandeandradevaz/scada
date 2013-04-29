@@ -10,6 +10,8 @@ import br.com.caelum.vraptor.ioc.SessionScoped;
 public class SessaoMovimentacao {
 
 	private String nomeCliente;
+	private String destino;
+	private String observacoes;
 	private List<String> armamentosSelecionados;
 
 	public String getNomeCliente() {
@@ -26,6 +28,22 @@ public class SessaoMovimentacao {
 
 	public void setArmamentosSelecionados(List<String> armamentosSelecionados) {
 		this.armamentosSelecionados = armamentosSelecionados;
+	}
+
+	public String getDestino() {
+		return destino;
+	}
+
+	public void setDestino(String destino) {
+		this.destino = destino;
+	}
+
+	public String getObservacoes() {
+		return observacoes;
+	}
+
+	public void setObservacoes(String observacoes) {
+		this.observacoes = observacoes;
 	}
 
 }

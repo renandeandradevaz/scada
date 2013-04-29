@@ -162,6 +162,8 @@ public class MovimentacaoDeArmamentoController {
 				movimentacaoDeArmamento.setDataHora(new GregorianCalendar());
 				movimentacaoDeArmamento.setTipoMovimentacao(MovimentacaoDeArmamento.TIPO_MOVIMENTACAO_ACAUTELAMENTO);
 				movimentacaoDeArmamento.setDevolvido(false);
+				movimentacaoDeArmamento.setDestino(this.sessaoMovimentacao.getDestino());
+				movimentacaoDeArmamento.setObservacoes(this.sessaoMovimentacao.getObservacoes());
 
 				hibernateUtil.salvarOuAtualizar(movimentacaoDeArmamento);
 				hibernateUtil.salvarOuAtualizar(armamento);

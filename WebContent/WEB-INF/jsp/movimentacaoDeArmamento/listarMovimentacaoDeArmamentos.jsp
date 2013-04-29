@@ -41,7 +41,6 @@
                     <th> Data/Hora </th>
                     <th> Destino </th>
                     <th> Observações </th>
-                    <th> Validado </th>
 				</tr>
 			</thead>
 			<tbody>
@@ -54,7 +53,6 @@
                         <td> <fmt:formatDate value="${item.dataHora.time}" type="BOTH" /> </td>
                         <td> ${item.destino} </td>
                         <td> ${item.observacoes} </td>
-                        <td> <tags:simNao valor="${item.validado}" /> </td>
 					</tr>
 				</c:forEach>
 			</tbody>
