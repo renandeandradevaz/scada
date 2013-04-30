@@ -34,11 +34,10 @@ public class Armamento implements Entidade {
 		
 		List<String> status = new ArrayList<String>();
 		
-		status.add(ARMAMENTO_DISPONIVEL_ACAUTELADO);
 		status.add(ARMAMENTO_DISPONIVEL_NÃO_ACAUTELADO);
-		
-		status.add(ARMAMENTO_INDISPONIVEL_ACAUTELADO);
 		status.add(ARMAMENTO_INDISPONIVEL_NÃO_ACAUTELADO);
+		status.add(ARMAMENTO_DISPONIVEL_ACAUTELADO);
+		status.add(ARMAMENTO_INDISPONIVEL_ACAUTELADO);
 		
 		return status;
 	}

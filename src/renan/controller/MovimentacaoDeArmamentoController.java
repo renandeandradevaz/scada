@@ -11,6 +11,7 @@ import org.hibernate.criterion.Restrictions;
 
 import renan.anotacoes.Funcionalidade;
 import renan.filtros.FiltrosMovimentacaoDeArmamento;
+import renan.hibernate.AliasHibernateUtil;
 import renan.hibernate.HibernateUtil;
 import renan.modelo.Armamento;
 import renan.modelo.Cliente;
@@ -254,7 +255,10 @@ public class MovimentacaoDeArmamentoController {
 		MovimentacaoDeArmamento movimentacaoDeArmamento = new MovimentacaoDeArmamento();
 		movimentacaoDeArmamento.setDevolvido(false);
 
-		List<Armamento> movimentacoes = hibernateUtil.buscar(movimentacaoDeArmamento, restricoes, "armamento");
+		List<AliasHibernateUtil> alias = new ArrayList<AliasHibernateUtil>();
+		alias.add(new AliasHibernateUtil("armamento", "armamento"));
+
+		List<MovimentacaoDeArmamento> movimentacoes = hibernateUtil.buscar(movimentacaoDeArmamento, restricoes, alias);
 
 		result.include("movimentacoes", movimentacoes);
 	}
