@@ -4,7 +4,7 @@
 <style>
 	
 .prontoArmamento{
-	width: 1200px;
+	width: 100%;
 	margin: auto;
 }
 h4, h5{
@@ -15,7 +15,6 @@ p{
 	text-align: center;
 }
 table{
-	width: 1000px !important;
 	margin: auto;
 }
 table:hover {
