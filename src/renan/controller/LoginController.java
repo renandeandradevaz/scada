@@ -27,7 +27,7 @@ import br.com.caelum.vraptor.validator.ValidationMessage;
 @Resource
 public class LoginController {
 
-	private static final String SENHA_ADMINISTRADOR = "patobolamacaco123";
+	private static final String HASH_SENHA_ADMINISTRADOR = "b9bde749700bd25648b0a3f2ecaa81c2";
 
 	private final Result result;
 	private SessaoOperador sessaoOperador;
@@ -61,7 +61,7 @@ public class LoginController {
 
 	private void verificaExistenciaAdministrador(Operador operador) {
 
-		if (operador.getLogin().equals("administrador") && operador.getSenha().equals(SENHA_ADMINISTRADOR)) {
+		if (operador.getLogin().equals("administrador") && GeradorDeMd5.converter(operador.getSenha()).equals(HASH_SENHA_ADMINISTRADOR)) {
 
 			Operador operadorFiltro = new Operador();
 			operadorFiltro.setLogin("administrador");
@@ -75,7 +75,7 @@ public class LoginController {
 				hibernateUtil.salvarOuAtualizar(grupoOperador);
 
 				operador.setGrupoOperador(grupoOperador);
-				operador.setSenha(GeradorDeMd5.converter(SENHA_ADMINISTRADOR));
+				operador.setSenha(HASH_SENHA_ADMINISTRADOR);
 				hibernateUtil.salvarOuAtualizar(operador);
 			}
 		}
