@@ -86,3 +86,9 @@ table:hover{
 	
 	margin-right: 10px !important ;
 }
+
+@media print {
+	th,td{
+		background-color: white !important
+	}
+}
