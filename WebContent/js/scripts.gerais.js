@@ -59,6 +59,7 @@ jQuery(document).ready(function() {
 		jQuery("form.form-inline").hide();
 		jQuery("a.btn").hide();
 		jQuery("#divCabecalhoRelatorios").show();
+		jQuery(".visto").show();
 		window.print();
 		jQuery("#fixed-top").show();
 		jQuery(".paginacao").show();
@@ -66,6 +67,7 @@ jQuery(document).ready(function() {
 		jQuery("form.form-inline").show();
 		jQuery("a.btn").show();
 		jQuery("#divCabecalhoRelatorios").hide();
+		jQuery(".visto").hide();
 	});
 
 	jQuery(".numero-decimal").keypress(function(e) {

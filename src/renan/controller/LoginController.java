@@ -105,7 +105,7 @@ public class LoginController {
 
 	private void colocarOperadorNaSessao(Operador operador) {
 
-		this.sessaoOperador.login(operador);
+		this.sessaoOperador.login((Operador) this.hibernateUtil.selecionar(operador, MatchMode.EXACT));
 	}
 
 	private void colocarFuncionalidadesNaSessao(Operador operador) {

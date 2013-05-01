@@ -89,6 +89,7 @@ table:hover{
 
 @media print {
 	th,td{
-		background-color: white !important
+		background-color: white !important;
+		font-size: 10px;
 	}
 }

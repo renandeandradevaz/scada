@@ -9,9 +9,9 @@
 
 
 <div id="divCabecalhoRelatorios">
-	<h5>MINISTÉRIO DA DEFESA</h5>
-	<h5>EXÉRCITO BRASILEIRO</h5>
-	<h5>54º Regimento de Cavalaria Blindada</h5>
-	<h5><u>2º Esquadrão de Cavalaria Blindada</u></h5>
+	<h6>MINISTÉRIO DA DEFESA</h6>
+	<h6>EXÉRCITO BRASILEIRO</h6>
+	<h6>54º Regimento de Cavalaria Blindada</h6>
+	<h6 style="text-decoration: underline;" >2º Esquadrão de Cavalaria Blindada</h6>
 	<br><br><br> 
 </div>

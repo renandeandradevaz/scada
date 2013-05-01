@@ -2,16 +2,37 @@
 <%@ include file="/layoutRelatorios.jsp" %>
 
 <style>
+
+.visto{
+	border: 1px solid;
+	width: 150px;
+	height: 100px;
+	position: absolute;
+	display: none;
+	margin-top: -150px;
+}
+.visto p{
+	text-align: center;
+	padding: 10px;
+	font-size: 10px;
+}
+.visto hr{
+	color: black;
+	background-color: black;
+	height: 1px;
+	margin: 20px;
+	margin-top: 35px;
+}
 	
 .prontoArmamento{
 	width: 100%;
 	margin: auto;
 }
-h4, h5{
+h5, h6{
 	text-align: center;
 }
 p{
-	font-size: 15px;
+	font-size: 13px;
 	text-align: center;
 }
 table{
@@ -33,17 +54,26 @@ td, th {
 
 </style>
 
+<div class="visto" >
+	<p>Visto:</p>
+	
+	<hr>
+	
+	<p style="padding: 0px; margin-top: -20px;" >Cmt Cia</p>
+	
+</div>
+	
 <div class="prontoArmamento" >
 
-	<h4>  PRONTO DO ARMAMENTO  </h4>
+	<h5>  PRONTO DO ARMAMENTO  </h5>
 	
 	<br>
 	
-	<p> Emitido em <fmt:formatDate value="${dataHoraAtual.time}" type="BOTH" />  </p>
+	<p> Emitido em <fmt:formatDate value="${dataHoraAtual.time}" type="BOTH" /> por ${sessaoOperador.operador.postoGraduacao} ${sessaoOperador.operador.nome}  </p>
 	
 	<br>
 	
-	<h5> ACAUTELAMENTOS EM ABERTO </h5>
+	<h6> ACAUTELAMENTOS EM ABERTO </h6>
 	
 	<table class="table table-bordered">
 		<thead>
@@ -68,7 +98,7 @@ td, th {
 	
 	<br>
 	
-	<h5> ARMAMENTOS ACAUTELADOS </h5>
+	<h6> ARMAMENTOS ACAUTELADOS </h6>
 	
 	<table class="table table-bordered">
 		<thead>
@@ -85,7 +115,7 @@ td, th {
 				<tr>
 	                <td> ${item.armamento.tipoArmamento.descricao} - <fmt:formatNumber value="${item.armamento.tipoArmamento.calibre}" /> </td>
 	                <td> ${item.armamento.numeracao} </td>
-	                <td> ${item.cliente.nome} </td>
+	                <td> ${item.cliente.postoGraduacao} ${item.cliente.nome} </td>
 	                <td> ${item.armamento.subUnidade} </td>
 	                <td> ${item.destino} </td>
 				</tr>
@@ -95,7 +125,7 @@ td, th {
 	
 	<br>
 	
-	<h5> RESUMO DAS MOVIMENTAÇÕES </h5>
+	<h6> RESUMO DAS MOVIMENTAÇÕES </h6>
 	
 	<table class="table table-bordered">
 		<thead>
