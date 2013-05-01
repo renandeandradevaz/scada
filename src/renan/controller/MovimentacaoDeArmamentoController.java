@@ -139,6 +139,12 @@ public class MovimentacaoDeArmamentoController {
 
 					validarArmamento(numeracaoArmamento);
 				}
+				
+				if (armamento.getStatus().equals(Armamento.ARMAMENTO_DISPONIVEL_ACAUTELADO) || armamento.getStatus().equals(Armamento.ARMAMENTO_INDISPONIVEL_ACAUTELADO)){
+					validator.add(new ValidationMessage("Armamento " + numeracaoArmamento + " já encontra-se acautelado.", "Erro"));
+
+					validator.onErrorForwardTo(this).acautelarArmamentos();
+				}
 
 				if (armamento.getStatus().equals(Armamento.ARMAMENTO_DISPONIVEL_NÃO_ACAUTELADO)) {
 
