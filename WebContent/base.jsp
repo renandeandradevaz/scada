@@ -53,7 +53,7 @@
 				        <li><a href="<c:url value="/home/sobre"/>" class="last"><span>Sobre</span></a>	        
 				    </ul>
 				    <ul class="menu-operador" >
-				    	<li><span> Logado como: ${sessaoOperador.operador.login} &nbsp; </span> </li>
+				    	<li><span> Logado como: ${sessaoOperador.operador.postoGraduacao} ${sessaoOperador.operador.nome} &nbsp; </span> </li>
 				    </ul>
 				</div>
 			</div>
