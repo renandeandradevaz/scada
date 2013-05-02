@@ -63,7 +63,7 @@ div#menu a {
     float: left;
     line-height: 41px;
     text-decoration: none;
-    font: normal 12px Trebuchet MS;
+    font: normal 10px Trebuchet MS;
 }
 div#menu a:hover, div#menu a:hover span { color: #fff; }
 div#menu li.current a {}
