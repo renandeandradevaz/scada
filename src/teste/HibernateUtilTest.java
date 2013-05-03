@@ -5,19 +5,22 @@ import static org.junit.Assert.assertEquals;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.criterion.Criterion;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import renan.hibernate.HibernateUtil;
+import renan.modelo.Armamento;
 import renan.modelo.Cliente;
 import renan.modelo.FuncionalidadeGrupoOperador;
 import renan.modelo.GrupoOperador;
+import renan.modelo.MovimentacaoDeArmamento;
 import renan.modelo.Operador;
+import renan.modelo.TipoArmamento;
 
 public class HibernateUtilTest {
 
@@ -43,9 +46,13 @@ public class HibernateUtilTest {
 
 	private void limparBanco() {
 
+		hibernateUtil.deletar(hibernateUtil.buscar(new MovimentacaoDeArmamento()));
 		hibernateUtil.deletar(hibernateUtil.buscar(new FuncionalidadeGrupoOperador()));
 		hibernateUtil.deletar(hibernateUtil.buscar(new Operador()));
 		hibernateUtil.deletar(hibernateUtil.buscar(new GrupoOperador()));
+		hibernateUtil.deletar(hibernateUtil.buscar(new Armamento()));
+		hibernateUtil.deletar(hibernateUtil.buscar(new TipoArmamento()));
+		hibernateUtil.deletar(hibernateUtil.buscar(new Cliente()));
 	}
 
 	private void popularBanco() {
@@ -54,7 +61,6 @@ public class HibernateUtilTest {
 
 			GrupoOperador grupoOperador = new GrupoOperador();
 			grupoOperador.setNome("grupo " + i);
-
 			hibernateUtil.salvarOuAtualizar(grupoOperador);
 
 			Operador operador1 = new Operador();
@@ -70,6 +76,18 @@ public class HibernateUtilTest {
 			Cliente cliente = new Cliente();
 			cliente.setNome("Teste");
 			hibernateUtil.salvarOuAtualizar(cliente);
+
+			TipoArmamento tipoArmamento = new TipoArmamento();
+			tipoArmamento.setDescricao("tipoArmamento." + i);
+			hibernateUtil.salvarOuAtualizar(tipoArmamento);
+
+			Armamento armamento = new Armamento();
+			armamento.setTipoArmamento(tipoArmamento);
+			hibernateUtil.salvarOuAtualizar(armamento);
+
+			MovimentacaoDeArmamento movimentacaoDeArmamento = new MovimentacaoDeArmamento();
+			movimentacaoDeArmamento.setArmamento(armamento);
+			hibernateUtil.salvarOuAtualizar(movimentacaoDeArmamento);
 		}
 	}
 
@@ -168,5 +186,30 @@ public class HibernateUtilTest {
 		Operador operador = new Operador();
 		operador.setLogin(".0");
 		assertEquals(new Integer(2), hibernateUtil.contar(operador, MatchMode.END));
+	}
+
+	@Test
+	public void testaPesquisaNivel2() {
+
+		TipoArmamento tipoArmamento = new TipoArmamento();
+		tipoArmamento.setDescricao("tipoArmamento.1");
+
+		Armamento armamento = new Armamento();
+		armamento.setTipoArmamento(tipoArmamento);
+
+		MovimentacaoDeArmamento movimentacaoDeArmamento = new MovimentacaoDeArmamento();
+		movimentacaoDeArmamento.setArmamento(armamento);
+
+		assertEquals(new Integer(1), hibernateUtil.contar(movimentacaoDeArmamento));
+
+		tipoArmamento = new TipoArmamento(hibernateUtil.selecionar(tipoArmamento).getId());
+
+		armamento = new Armamento();
+		armamento.setTipoArmamento(tipoArmamento);
+
+		movimentacaoDeArmamento = new MovimentacaoDeArmamento();
+		movimentacaoDeArmamento.setArmamento(armamento);
+
+		assertEquals(new Integer(1), hibernateUtil.contar(movimentacaoDeArmamento));
 	}
 }
