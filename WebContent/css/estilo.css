@@ -1,4 +1,3 @@
-
 table:hover{
 	cursor: pointer;
 }
@@ -97,5 +96,15 @@ table:hover{
 	th,td{
 		background-color: white !important;
 		font-size: 10px;
+	}
+	
+	#fixed-top, .paginacao, form.well, form.form-inline, a.btn{
+
+		display: none;
+	}
+
+	#divCabecalhoRelatorios, .visto{
+
+		display: block !important;
 	}
 }
