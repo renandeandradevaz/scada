@@ -14,11 +14,11 @@
 	
 	<label style="margin-left: 50px;" > Quantidade de meses </label>
 	
-	<input class="input-mini" type="number" name="quantidadeMeses" min="1" max="12" value="6"  >
+	<input class="input-mini numero-inteiro" type="number" name="quantidadeMeses" min="1" max="12" value="6"  >
 	
 	<label style="margin-left: 50px;" > Quantidade de armamentos mais utilizados </label>
 	
-	<input class="input-mini" type="number" name="quantidadeArmamentosMaisUtilizados" min="1" max="10" value="4"  >
+	<input class="input-mini numero-inteiro" type="number" name="quantidadeArmamentosMaisUtilizados" min="1" max="10" value="4"  >
 
     <button style="margin-left: 30px;" type="submit" class="btn btn-primary">Gerar relatório</button>
 

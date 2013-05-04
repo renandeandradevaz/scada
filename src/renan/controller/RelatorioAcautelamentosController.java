@@ -1,10 +1,11 @@
 package renan.controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
-import java.util.TreeMap;
 
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.MatchMode;
@@ -13,6 +14,7 @@ import org.joda.time.DateTime;
 import org.joda.time.DateTimeFieldType;
 
 import renan.anotacoes.Funcionalidade;
+import renan.auxiliar.RelatorioAcautelamentosAuxiliar;
 import renan.hibernate.HibernateUtil;
 import renan.modelo.Armamento;
 import renan.modelo.MovimentacaoDeArmamento;
@@ -63,7 +65,7 @@ public class RelatorioAcautelamentosController {
 		List<String> mesesEAnos = new ArrayList<String>();
 		DateTime hoje = new DateTime();
 
-		TreeMap<Integer, String> armamentosMaisAcautelados = new TreeMap<Integer, String>();
+		List<RelatorioAcautelamentosAuxiliar> armamentosMaisAcautelados = new ArrayList<RelatorioAcautelamentosAuxiliar>();
 
 		for (Armamento armamento : armamentos) {
 
@@ -98,7 +100,21 @@ public class RelatorioAcautelamentosController {
 				}
 			}
 
-			armamentosMaisAcautelados.put(totalAcautelamentosArmamento, armamento.getNumeracao());
+			armamentosMaisAcautelados.add(new RelatorioAcautelamentosAuxiliar(totalAcautelamentosArmamento, armamento.getNumeracao()));
+		}
+
+		if (Util.preenchido(armamentosMaisAcautelados)) {
+
+			Collections.sort(armamentosMaisAcautelados, new Comparator<RelatorioAcautelamentosAuxiliar>() {
+
+				public int compare(RelatorioAcautelamentosAuxiliar arg0, RelatorioAcautelamentosAuxiliar arg1) {
+
+					Integer quantidade1 = arg0.getQuantidadeAcautelamentos();
+					Integer quantidade2 = arg1.getQuantidadeAcautelamentos();
+
+					return quantidade2.compareTo(quantidade1);
+				}
+			});
 		}
 
 		adicionarMesesEAnosNoResult(mesesEAnos);
@@ -106,30 +122,34 @@ public class RelatorioAcautelamentosController {
 		adicionarArmamentosEQuantidadesNoResult(armamentosEQuantidades, armamentosMaisAcautelados, quantidadeArmamentosMaisUtilizados);
 	}
 
-	private void adicionarArmamentosEQuantidadesNoResult(HashMap<String, List<Integer>> armamentosEQuantidades, TreeMap<Integer, String> armamentosMaisAcautelados, Integer quantidadeArmamentosMaisUtilizados) {
+	private void adicionarArmamentosEQuantidadesNoResult(HashMap<String, List<Integer>> armamentosEQuantidades, List<RelatorioAcautelamentosAuxiliar> armamentosMaisAcautelados, Integer quantidadeArmamentosMaisUtilizados) {
 
-		
-		List<String> armamentosASeremConsiderados = new ArrayList<String>();
-		
-		for (Integer nset : armamentosMaisAcautelados.descendingKeySet()) {
+		List<String> armamentosConsiderados = new ArrayList<String>();
 
-			armamentosASeremConsiderados.add(e);
-			
+		for (RelatorioAcautelamentosAuxiliar armamentoMaisAcautelado : armamentosMaisAcautelados) {
+
+			if (armamentosConsiderados.size() < quantidadeArmamentosMaisUtilizados) {
+
+				armamentosConsiderados.add(armamentoMaisAcautelado.getArmamento());
+			}
 		}
 
 		StringBuffer armamentosEQuantidadesStringBuffer = new StringBuffer();
 
 		for (Entry<String, List<Integer>> armamentoEQuantidades : armamentosEQuantidades.entrySet()) {
 
-			armamentosEQuantidadesStringBuffer.append("{name:" + "'" + armamentoEQuantidades.getKey() + "',");
-			armamentosEQuantidadesStringBuffer.append("data:[");
+			if (armamentosConsiderados.contains(armamentoEQuantidades.getKey())) {
 
-			for (Integer quantidade : armamentoEQuantidades.getValue()) {
+				armamentosEQuantidadesStringBuffer.append("{name:" + "'" + armamentoEQuantidades.getKey() + "',");
+				armamentosEQuantidadesStringBuffer.append("data:[");
 
-				armamentosEQuantidadesStringBuffer.append(quantidade + ",");
+				for (Integer quantidade : armamentoEQuantidades.getValue()) {
+
+					armamentosEQuantidadesStringBuffer.append(quantidade + ",");
+				}
+
+				armamentosEQuantidadesStringBuffer.append("]},");
 			}
-
-			armamentosEQuantidadesStringBuffer.append("]},");
 		}
 
 		result.include("armamentosEQuantidades", armamentosEQuantidadesStringBuffer.toString());
