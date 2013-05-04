@@ -59,4 +59,46 @@ public class Util {
 		return newCalendar;
 	}
 
+	public static String mesAbreviado(Integer mes) {
+
+		if (mes == 1) {
+			return "Jan";
+		}
+		if (mes == 2) {
+			return "Fev";
+		}
+		if (mes == 3) {
+			return "Mar";
+		}
+		if (mes == 4) {
+			return "Abr";
+		}
+		if (mes == 5) {
+			return "Mai";
+		}
+		if (mes == 6) {
+			return "Jun";
+		}
+		if (mes == 7) {
+			return "Jul";
+		}
+		if (mes == 8) {
+			return "Ago";
+		}
+		if (mes == 9) {
+			return "Set";
+		}
+		if (mes == 10) {
+			return "Out";
+		}
+		if (mes == 11) {
+			return "Nov";
+		}
+		if (mes == 12) {
+			return "Dez";
+		}
+
+		return null;
+	}
+
 }

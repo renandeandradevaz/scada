@@ -60,7 +60,7 @@
 	        
 	        <br> <br> 
 	        
-	        <button class="btn btn-large btn-primary" type="submit">Entrar</button>
+	        <button class="btn btn-large btn-primary" type="submit" onclick="this.disabled=true;this.form.submit();" >Entrar</button>
 	      </form>
 	      
 	
