@@ -66,7 +66,7 @@ public class OperadorController {
 
 		List<GrupoOperador> gruposOperador = hibernateUtil.buscar(new GrupoOperador());
 		result.include("gruposOperador", gruposOperador);
-		
+
 		listarGraduacoes();
 	}
 
@@ -109,13 +109,15 @@ public class OperadorController {
 			if (!operador.getLogin().equals(operadoreselecionado.getLogin())) {
 
 				validarNomesRepetidos(operador);
+			}
+			if (!operador.getIdentidade().equals(operadoreselecionado.getIdentidade())) {
+
 				validarIdentidadesRepetidas(operador);
 			}
 
 			operador.setId((Integer) sessaoGeral.getValor("idOperador"));
 		}
 
-	
 		operador.setSenha(GeradorDeMd5.converter(operador.getSenha()));
 		hibernateUtil.salvarOuAtualizar(operador);
 		result.include("sucesso", "Operador salvo com sucesso");
@@ -128,12 +130,11 @@ public class OperadorController {
 		operadorFiltro.setLogin(operador.getLogin());
 
 		if (Util.preenchido(hibernateUtil.buscar(operadorFiltro, MatchMode.EXACT))) {
-			validator.add(new ValidationMessage("Já existe um operador com este nome", "Erro"));
+			validator.add(new ValidationMessage("Já existe um operador com este login", "Erro"));
 		}
 		validator.onErrorForwardTo(this).criarEditarOperador();
 	}
 
-	
 	private void validarIdentidadesRepetidas(Operador operador) {
 
 		Operador operadorFiltro = new Operador();
@@ -144,8 +145,7 @@ public class OperadorController {
 		}
 		validator.onErrorForwardTo(this).criarEditarOperador();
 	}
-	
-	
+
 	@Funcionalidade(nome = "Operadores", modulo = "Controle de acesso")
 	public void listarOperadores(Operador operador, Integer pagina) {
 
@@ -157,7 +157,7 @@ public class OperadorController {
 		List<Operador> operadores = hibernateUtil.buscar(operador, pagina);
 
 		result.include("operadores", operadores);
-		
+
 		listarGraduacoes();
 
 	}
