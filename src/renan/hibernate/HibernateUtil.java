@@ -15,6 +15,7 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
+import renan.modelo.Configuracao;
 import renan.util.Util;
 import renan.util.UtilReflection;
 import br.com.caelum.vraptor.Result;
@@ -33,7 +34,6 @@ public class HibernateUtil {
 
 		this.result = result;
 		this.session = session;
-
 	}
 
 	public HibernateUtil() {
@@ -314,7 +314,7 @@ public class HibernateUtil {
 		Long quantidadeRegistros = (Long) criteria.uniqueResult();
 
 		criteria = gerarFiltros(filtro, matchMode);
-		Integer quantidadeDeRegistrosPorPagina = 10;
+		Integer quantidadeDeRegistrosPorPagina = Integer.valueOf(new Configuracao().retornarConfiguracao("quantidadeRegistrosPorPagina", this));
 		if (pagina == null) {
 			pagina = 1;
 		}

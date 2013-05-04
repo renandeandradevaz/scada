@@ -22,6 +22,7 @@
       <mapping class="renan.modelo.Armamento" />
       <mapping class="renan.modelo.Cliente" />
       <mapping class="renan.modelo.MovimentacaoDeArmamento" />
+      <mapping class="renan.modelo.Configuracao" />
 
 </session-factory>
 </hibernate-configuration>
