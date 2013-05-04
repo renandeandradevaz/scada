@@ -81,6 +81,4 @@ jQuery(function () {
 
 <script type="text/javascript" charset="utf-8" src="<c:url value="/js/highcharts.js"/>"></script>
 
-<div style="width: 1200px;" >
-	<div id="divrelatorio" style="min-width: 1200px; height: 600px;"></div>
-</div>
+<div id="divrelatorio"></div>
