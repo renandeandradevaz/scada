@@ -6,7 +6,6 @@ import org.hibernate.criterion.MatchMode;
 
 import renan.anotacoes.Funcionalidade;
 import renan.hibernate.HibernateUtil;
-import renan.modelo.Armamento;
 import renan.modelo.TipoArmamento;
 import renan.sessao.SessaoGeral;
 import renan.util.Util;
@@ -53,19 +52,19 @@ public class TipoArmamentoController {
 
 	@Funcionalidade(nome = "Criar e editar tipos de armamentos")
 	public void criarEditarTipoArmamento() {
-		
+
 	}
 
 	@Path("/tipoArmamento/excluirTipoArmamento/{tipoArmamento.id}")
 	@Funcionalidade(nome = "Excluir tipos de armamentos")
 	public void excluirTipoArmamento(TipoArmamento tipoArmamento) {
-		
+
 		TipoArmamento tipoArmamentoSelecionado = hibernateUtil.selecionar(tipoArmamento);
-		
+
 		if (tipoArmamentoSelecionado.getArmamentos().size() > 0) {
-			
+
 			validator.add(new ValidationMessage("Existem armamentos vinculados a este tipo. Se quiser remover este tipo de armamento, por favor, exclua os armamentos deste tipo ou vincule-os a outro tipo de armamento.", "Erro"));
-			
+
 			validator.onErrorForwardTo(this).listarTipoArmamentos(null, null);
 		}
 
@@ -81,7 +80,7 @@ public class TipoArmamentoController {
 
 			tipoArmamento.setId((Integer) sessaoGeral.getValor("idTipoArmamento"));
 		}
-		
+
 		validarTipoArmamento(tipoArmamento);
 		hibernateUtil.salvarOuAtualizar(tipoArmamento);
 		result.include("sucesso", "Tipo de armamento salvo(a) com sucesso");
@@ -100,8 +99,7 @@ public class TipoArmamentoController {
 		result.include("tipoArmamentos", tipoArmamentos);
 
 	}
-	
-	
+
 	private void validarTipoArmamento(TipoArmamento tipoArmamento) {
 
 		TipoArmamento tipoArmamentoFiltro = new TipoArmamento();
@@ -134,7 +132,4 @@ public class TipoArmamentoController {
 		validator.onErrorForwardTo(this).criarEditarTipoArmamento();
 	}
 
-
-	
 }
-

@@ -71,7 +71,8 @@
 				</div>
 			</div>
 			
-			<a id="sair" style="float: right; padding-right: 15px; font-weight: bold; margin-top: 5px; " href="<c:url value="/login/logout"/>"> Sair </a>
+			<a id="sair" style="float: right; padding-right: 15px; font-weight: bold; margin-top: 5px; font-size: 12px; cursor: pointer; " href="<c:url value="/login/logout"/>"> Sair </a>
+			<a style="float: right; padding-right: 15px; font-weight: bold; margin-top: 5px; font-size: 12px; cursor: pointer; " href="<c:url value="/login/trocarPropriaSenha"/>"> Trocar senha </a>
 		</div>		
 		
 		<!--

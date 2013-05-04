@@ -100,6 +100,8 @@ public class OperadorController {
 
 			validarNomesRepetidos(operador);
 			validarIdentidadesRepetidas(operador);
+
+			operador.setSenha(GeradorDeMd5.converter(operador.getSenha()));
 		}
 
 		else {
@@ -116,9 +118,9 @@ public class OperadorController {
 			}
 
 			operador.setId((Integer) sessaoGeral.getValor("idOperador"));
+			operador.setSenha(operadoreselecionado.getSenha());
 		}
 
-		operador.setSenha(GeradorDeMd5.converter(operador.getSenha()));
 		hibernateUtil.salvarOuAtualizar(operador);
 		result.include("sucesso", "Operador salvo com sucesso");
 		result.redirectTo(this).listarOperadores(new Operador(), null);
@@ -160,5 +162,35 @@ public class OperadorController {
 
 		listarGraduacoes();
 
+	}
+
+	@Path("/operador/trocarSenha/{operador.id}")
+	@Funcionalidade(nome = "Trocar senha")
+	public void trocarSenha(Operador operador) {
+
+		operador = hibernateUtil.selecionar(operador);
+
+		if (operador.getLogin().equals("administrador")) {
+
+			validator.add(new ValidationMessage("Não é possível trocar a senha do administrador", "Erro"));
+
+			validator.onErrorForwardTo(this).listarOperadores(null, null);
+		}
+
+		sessaoGeral.adicionar("idOperador", operador.getId());
+	}
+
+	@Funcionalidade(filhaDe = "trocarSenha")
+	public void salvarTrocaSenha(String senha) {
+
+		Operador operador = hibernateUtil.selecionar(new Operador((Integer) this.sessaoGeral.getValor("idOperador")));
+
+		operador.setSenha(GeradorDeMd5.converter(senha));
+
+		hibernateUtil.salvarOuAtualizar(operador);
+
+		result.include("sucesso", "Senha trocada com sucesso");
+
+		result.forwardTo(this).listarOperadores(null, null);
 	}
 }

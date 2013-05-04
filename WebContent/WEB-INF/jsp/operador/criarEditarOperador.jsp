@@ -4,6 +4,20 @@
   <fieldset>
     <legend>Criar/editar operador</legend>
     
+    <div class="control-group warning">
+      <label class="control-label">Nome</label>
+      <div class="controls">
+        <input type="text" class="input-xlarge required" name="operador.nome" value="${operador.nome}">
+      </div>
+    </div>
+    
+    <div class="control-group">
+      <label class="control-label">Identidade</label>
+      <div class="controls">
+        <input type="text" class="input-xlarge required"  name="operador.identidade" value="${operador.identidade}" >
+      </div>
+    </div>
+    
     <div class="control-group">
         <label class="control-label">Posto/Graduação</label>
         <div class="controls">
@@ -13,27 +27,6 @@
 			</c:forEach>
 		  </select>
         </div>
-    </div>
-        
-    <div class="control-group warning">
-      <label class="control-label">Nome</label>
-      <div class="controls">
-        <input type="text" class="input-xlarge required" name="operador.nome" value="${operador.nome}">
-      </div>
-    </div>
-        
-    <div class="control-group">
-      <label class="control-label">Identidade</label>
-      <div class="controls">
-        <input type="text" class="input-xlarge required"  name="operador.identidade" value="${operador.identidade}" >
-      </div>
-    </div>
-    
-    <div class="control-group">
-      <label class="control-label">Subunidade</label>
-      <div class="controls">
-        <input type="text" class="input-xlarge required"  name="operador.subUnidade" value="${operador.subUnidade}" >
-      </div>
     </div>
     
     <div class="control-group">
@@ -47,6 +40,13 @@
         </div>
     </div>
     
+    <div class="control-group">
+      <label class="control-label">Subunidade</label>
+      <div class="controls">
+        <input type="text" class="input-xlarge required"  name="operador.subUnidade" value="${operador.subUnidade}" >
+      </div>
+    </div>
+    
     <div class="control-group warning">
       <label class="control-label">Login</label>
       <div class="controls">
@@ -54,13 +54,15 @@
       </div>
     </div>
     
-    <div class="control-group">
-      <label class="control-label">Senha</label>
-      <div class="controls">
-        <input type="password" class="input-xlarge required"  name="operador.senha" value="" >
-      </div>
-    </div>
-            
+    <c:if test="${empty sessaoGeral.valor.get('idOperador')}">
+	    <div class="control-group warning">
+	    	<label class="control-label">Senha</label>
+	    	<div class="controls">
+	    		<input type="password" class="input-xlarge required"  name="operador.senha" value="" >
+			</div>
+		</div>
+    </c:if>
+   
     <button type="submit" class="btn btn-primary">Salvar</button>
     <a class="btn btn-danger" href="<c:url value="/operador/listarOperadores"/>" > Cancelar </a>
   </fieldset>

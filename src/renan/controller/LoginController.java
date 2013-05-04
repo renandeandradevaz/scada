@@ -178,4 +178,47 @@ public class LoginController {
 
 		result.redirectTo(this).telaLogin();
 	}
+
+	@Public
+	public void trocarPropriaSenha() {
+
+		verificarUsuarioLogado();
+	}
+
+	@Public
+	public void salvarTrocarPropriaSenha(String senhaAntiga, String senhaNova) {
+
+		if (!verificarUsuarioLogado()) {
+
+			return;
+		}
+
+		Operador operador = hibernateUtil.selecionar(new Operador(sessaoOperador.getOperador().getId()));
+
+		if (!GeradorDeMd5.converter(senhaAntiga).equals(operador.getSenha())) {
+
+			validator.add(new ValidationMessage("Senha antiga incorreta", "Erro"));
+
+			validator.onErrorRedirectTo(this).trocarPropriaSenha();
+		}
+
+		operador.setSenha(GeradorDeMd5.converter(senhaNova));
+
+		hibernateUtil.salvarOuAtualizar(operador);
+
+		result.include("sucesso", "Senha trocada com sucesso");
+
+		result.redirectTo(HomeController.class).home();
+	}
+
+	private boolean verificarUsuarioLogado() {
+
+		if (sessaoOperador.getOperador() == null) {
+
+			result.redirectTo(this).telaLogin();
+			return false;
+		}
+
+		return true;
+	}
 }

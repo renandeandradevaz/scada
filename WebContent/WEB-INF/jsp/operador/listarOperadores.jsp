@@ -3,6 +3,7 @@
 <ul id="operador" class="dropdown-menu">
 	<li><a href="javascript:gerarLinkCompleto('<c:url value="/operador/editarOperador"/>')">Editar</a></li>
 	<li><a href="javascript:deletar('<c:url value="/operador/excluirOperador"/>')">Excluir</a></li>
+	<li><a href="javascript:gerarLinkCompleto('<c:url value="/operador/trocarSenha"/>')">Trocar a senha</a></li>
 </ul>
 
 <a class="btn" href="<c:url value="/operador/criarOperador"/>" > Criar operador </a>
