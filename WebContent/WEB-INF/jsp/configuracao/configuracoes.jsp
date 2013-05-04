@@ -7,7 +7,7 @@
     <div class="control-group warning">
       <label class="control-label configuracao">Quantidade de registros por página</label>
       <div class="controls">
-        <input type="text" class="input-medium required" name="configuracoes(quantidadeRegistrosPorPagina)" value="${configuracoes.get('quantidadeRegistrosPorPagina')}">
+        <input type="text" class="input-medium required numero-inteiro" name="configuracoes(quantidadeRegistrosPorPagina)" value="${configuracoes.get('quantidadeRegistrosPorPagina')}">
       </div>
     </div>
 
