@@ -90,7 +90,7 @@ td, th {
 					<td>${acautelamentoAberto.tipoArmamento.descricao} - <fmt:formatNumber value="${acautelamentoAberto.tipoArmamento.calibre}" /> </td>
 					<td>${acautelamentoAberto.quantidadePrevista}</td>
 					<td>${acautelamentoAberto.quantidadeAcautelada}</td>
-					<td>${acautelamentoAberto.quantidadeExistente}</td>
+					<td><b>${acautelamentoAberto.quantidadeExistente}</b></td>
 				</tr>
 			</c:forEach>
 		</tbody>
