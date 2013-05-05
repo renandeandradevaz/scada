@@ -4,7 +4,7 @@
 <style>
 
 .visto{
-	border: 1px solid;
+	border: 2px solid;
 	width: 150px;
 	height: 100px;
 	position: absolute;
