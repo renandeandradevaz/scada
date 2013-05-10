@@ -15,14 +15,14 @@
       <property name="hibernate.hbm2ddl.auto">update</property>
       <property name="hibernate.generate_statistics">false</property>
       
-      <mapping class="renan.modelo.Operador" />
-      <mapping class="renan.modelo.GrupoOperador" />
-      <mapping class="renan.modelo.FuncionalidadeGrupoOperador" />
-      <mapping class="renan.modelo.TipoArmamento" />
-      <mapping class="renan.modelo.Armamento" />
-      <mapping class="renan.modelo.Cliente" />
-      <mapping class="renan.modelo.MovimentacaoDeArmamento" />
-      <mapping class="renan.modelo.Configuracao" />
+      <mapping class="scada.modelo.Operador" />
+      <mapping class="scada.modelo.GrupoOperador" />
+      <mapping class="scada.modelo.FuncionalidadeGrupoOperador" />
+      <mapping class="scada.modelo.TipoArmamento" />
+      <mapping class="scada.modelo.Armamento" />
+      <mapping class="scada.modelo.Cliente" />
+      <mapping class="scada.modelo.MovimentacaoDeArmamento" />
+      <mapping class="scada.modelo.Configuracao" />
 
 </session-factory>
 </hibernate-configuration>

@@ -13,14 +13,14 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import renan.hibernate.HibernateUtil;
-import renan.modelo.Armamento;
-import renan.modelo.Cliente;
-import renan.modelo.FuncionalidadeGrupoOperador;
-import renan.modelo.GrupoOperador;
-import renan.modelo.MovimentacaoDeArmamento;
-import renan.modelo.Operador;
-import renan.modelo.TipoArmamento;
+import scada.hibernate.HibernateUtil;
+import scada.modelo.Armamento;
+import scada.modelo.Cliente;
+import scada.modelo.FuncionalidadeGrupoOperador;
+import scada.modelo.GrupoOperador;
+import scada.modelo.MovimentacaoDeArmamento;
+import scada.modelo.Operador;
+import scada.modelo.TipoArmamento;
 
 public class HibernateUtilTest {
 

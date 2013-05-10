@@ -8,7 +8,7 @@
 	
   	<tag>
   		<name>simNao</name>
-  		<tag-class>renan.tags.TagSimNao</tag-class>
+  		<tag-class>scada.tags.TagSimNao</tag-class>
   		<attribute>
   			<name>valor</name>
   			<required>true</required>

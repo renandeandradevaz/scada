@@ -11,12 +11,12 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import renan.controller.GrupoOperadorController;
-import renan.hibernate.HibernateUtil;
-import renan.modelo.FuncionalidadeGrupoOperador;
-import renan.modelo.GrupoOperador;
-import renan.modelo.Operador;
-import renan.sessao.SessaoGeral;
+import scada.controller.GrupoOperadorController;
+import scada.hibernate.HibernateUtil;
+import scada.modelo.FuncionalidadeGrupoOperador;
+import scada.modelo.GrupoOperador;
+import scada.modelo.Operador;
+import scada.sessao.SessaoGeral;
 import br.com.caelum.vraptor.util.test.MockResult;
 import br.com.caelum.vraptor.util.test.MockValidator;
 
@@ -73,7 +73,7 @@ public class GrupoOperadorControllerTest {
 		GrupoOperadorController controller = new GrupoOperadorController(new MockResult(), new MockValidator(), new SessaoGeral(), hibernateUtil);
 
 		GrupoOperador grupoOperador = new GrupoOperador();
-		grupoOperador.setNome("Renan");
+		grupoOperador.setNome("scada");
 
 		controller.salvarGrupoOperador(grupoOperador);
 
