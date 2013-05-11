@@ -35,9 +35,8 @@
 <table class="table table-striped table-bordered tablesorter">
   <thead>
     <tr>
-      <th>Id</th>
-      <th>Post/Grad</th>
       <th>Nome</th>
+      <th>Post/Grad</th>
       <th>Identidade</th>
       <th>Subunidade</th>
       <th>Grupo de operadores</th>
@@ -46,9 +45,8 @@
   <tbody>
   	<c:forEach items="${operadores}" var="item">
 		<tr id="operador_${item.id}">
-		  <td> ${item.id} </td>
-		  <td> ${item.postoGraduacao} </td>
 		  <td> ${item.nome} </td>
+		  <td> ${item.postoGraduacao} </td>
 		  <td> ${item.identidade} </td>
 		  <td> ${item.subUnidade} </td>
 		  <td> ${item.grupoOperador.nome} </td>

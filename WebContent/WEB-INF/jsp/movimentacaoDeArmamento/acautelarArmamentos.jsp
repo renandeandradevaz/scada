@@ -17,7 +17,7 @@ function montarAutoCompleteArmamento(indice){
 	            response( jQuery.map( data.list, function( item ) {
 	            	
 	              return {
-	                label: item.numeracao,
+	                label: item.numeracao + " - " + item.tipoArmamento.descricao + " " + item.tipoArmamento.calibre,
 	                value: item.numeracao
 	              }
 	            }));

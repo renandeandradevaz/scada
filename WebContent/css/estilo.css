@@ -98,7 +98,7 @@ table:hover{
 		font-size: 10px;
 	}
 	
-	#fixed-top, .paginacao, form.well, form.form-inline, a.btn{
+	#fixed-top, .paginacao, form.well, form.form-inline, form.form-horizontal, .highcharts-tooltip, a.btn{
 
 		display: none;
 	}

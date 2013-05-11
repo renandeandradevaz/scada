@@ -34,19 +34,19 @@
 		<table class="table table-striped table-bordered tablesorter">
 			<thead>
 		    	<tr>
-                    <th> Numeração </th>
-                    <th> Status </th>
                     <th> Tipo de armamento </th>
+                    <th> Numeração </th>
                     <th> Subunidade </th>
+                    <th> Status </th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach items="${armamentos}" var="item">
 					<tr id="armamento_${item.id}">
-                        <td> ${item.numeracao} </td>
-                        <td> ${item.status} </td>
                         <td> ${item.tipoArmamento.descricao} - <fmt:formatNumber value="${item.tipoArmamento.calibre}" /> </td>
+                        <td> ${item.numeracao} </td>
                         <td> ${item.subUnidade} </td>
+                        <td> ${item.status} </td>
 					</tr>
 				</c:forEach>
 			</tbody>

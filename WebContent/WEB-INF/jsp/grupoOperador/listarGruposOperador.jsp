@@ -23,14 +23,12 @@
 <table class="table table-striped table-bordered tablesorter">
   <thead>
     <tr>
-      <th>Id</th>
       <th>Nome</th>
     </tr>
   </thead>
   <tbody>
   	<c:forEach items="${gruposOperador}" var="item">
 		<tr id="grupoOperador_${item.id}">
-		  <td> ${item.id} </td>
 		  <td> ${item.nome} </td>
 		</tr>
   	</c:forEach>  	

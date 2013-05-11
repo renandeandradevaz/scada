@@ -57,6 +57,8 @@ jQuery(document).ready(function() {
 		jQuery(".paginacao").hide();
 		jQuery("form.well").hide();
 		jQuery("form.form-inline").hide();
+		jQuery("form.form-horizontal").hide();
+		jQuery(".highcharts-tooltip").hide();
 		jQuery("a.btn").hide();
 		jQuery("#divCabecalhoRelatorios").show();
 		jQuery(".visto").show();
@@ -65,6 +67,8 @@ jQuery(document).ready(function() {
 		jQuery(".paginacao").show();
 		jQuery("form.well").show();
 		jQuery("form.form-inline").show();
+		jQuery("form.form-horizontal").show();
+		jQuery(".highcharts-tooltip").show();
 		jQuery("a.btn").show();
 		jQuery("#divCabecalhoRelatorios").hide();
 		jQuery(".visto").hide();

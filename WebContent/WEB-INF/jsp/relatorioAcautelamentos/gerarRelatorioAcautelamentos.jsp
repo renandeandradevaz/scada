@@ -83,6 +83,7 @@ jQuery(function () {
 	jQuery("legend").click(function() {
 		
 		jQuery("#filtrosRelatorio").fadeIn("slow");
+		jQuery("legend").text("Filtros");
 	});
 });
     

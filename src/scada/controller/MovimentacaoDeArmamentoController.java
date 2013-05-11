@@ -81,7 +81,7 @@ public class MovimentacaoDeArmamentoController {
 
 		List<Armamento> armamentos = hibernateUtil.buscar(armamento, 1, restricoes);
 
-		result.use(Results.json()).from(armamentos).serialize();
+		result.use(Results.json()).from(armamentos).include("tipoArmamento").serialize();
 
 	}
 
@@ -139,8 +139,8 @@ public class MovimentacaoDeArmamentoController {
 
 					validarArmamento(numeracaoArmamento);
 				}
-				
-				if (armamento.getStatus().equals(Armamento.ARMAMENTO_DISPONIVEL_ACAUTELADO) || armamento.getStatus().equals(Armamento.ARMAMENTO_INDISPONIVEL_ACAUTELADO)){
+
+				if (armamento.getStatus().equals(Armamento.ARMAMENTO_DISPONIVEL_ACAUTELADO) || armamento.getStatus().equals(Armamento.ARMAMENTO_INDISPONIVEL_ACAUTELADO)) {
 					validator.add(new ValidationMessage("Armamento " + numeracaoArmamento + " já encontra-se acautelado.", "Erro"));
 
 					validator.onErrorForwardTo(this).acautelarArmamentos();
@@ -195,9 +195,21 @@ public class MovimentacaoDeArmamentoController {
 		if (hibernateUtil.contar(clienteFiltro, MatchMode.EXACT) != 1) {
 
 			validator.add(new ValidationMessage("Não existe nenhum cliente com o nome informado. Por favor, informe o nome completo do cliente", "Erro"));
-
-			validator.onErrorForwardTo(this).acautelarArmamentos();
 		}
+
+		else {
+
+			MovimentacaoDeArmamento movimentacaoDeArmamento = new MovimentacaoDeArmamento();
+			movimentacaoDeArmamento.setCliente(clienteFiltro);
+			movimentacaoDeArmamento.setDevolvido(false);
+
+			if (hibernateUtil.contar(movimentacaoDeArmamento, MatchMode.EXACT) != 0) {
+
+				validator.add(new ValidationMessage("O cliente " + nomeCliente + " possui acautelamentos em aberto que ainda não foram devolvidos. Para acautelar novos armamentos, devolva os antigos primeiro.", "Erro"));
+			}
+		}
+
+		validator.onErrorForwardTo(this).acautelarArmamentos();
 	}
 
 	@Funcionalidade(nome = "Movimentações", modulo = "Controle de armamento")
@@ -306,7 +318,7 @@ public class MovimentacaoDeArmamentoController {
 				hibernateUtil.salvarOuAtualizar(armamento);
 
 			}
-			result.include("sucesso", "Armamentos devolvidos com sucesso");
+			result.include("sucesso", "Armamento(s) devolvido(s) com sucesso.");
 		}
 
 		result.redirectTo(this).listarMovimentacaoDeArmamentos(new MovimentacaoDeArmamento(), new FiltrosMovimentacaoDeArmamento(), null);
