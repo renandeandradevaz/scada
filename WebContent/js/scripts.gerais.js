@@ -179,3 +179,26 @@ function deletar(link) {
 		gerarLinkCompleto(link);
 	}  
 }  
+
+function utf8_encode(string) { 
+	 
+    var
+    str = string,
+    specialChars = [
+        {val:'a', let:'áàãâä'},
+	{val:'e', let:'éèêë'},
+	{val:'i', let:'íìîï'},
+	{val:'o', let:'óòõôö'},
+	{val:'u', let:'úùûü'},
+	{val:'c', let:'ç'},
+    ],
+    regex;
+ 
+    for (var i in  specialChars) {
+	regex = new RegExp('[' + specialChars[i].let + ']', 'g');
+	str = str.replace(regex, specialChars[i].val);
+	regex = null;
+    }
+ 
+    return str;
+};

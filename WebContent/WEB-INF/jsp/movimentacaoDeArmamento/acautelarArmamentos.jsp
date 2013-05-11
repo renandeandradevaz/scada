@@ -101,7 +101,7 @@ function montarAutoCompleteArmamento(indice){
           url: "<c:url value="/movimentacaoDeArmamento/autoCompleteClientes"/>",
           dataType: "json",
           data: {
-            nomeCliente: request.term
+            nomeCliente: utf8_encode(request.term)
           },
           success: function( data ) {
         	  
