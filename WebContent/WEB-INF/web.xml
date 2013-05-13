@@ -5,6 +5,9 @@
     <filter-name>vraptor</filter-name>
     <filter-class>br.com.caelum.vraptor.VRaptor</filter-class>
   </filter>
+  <listener>
+     <listener-class>scada.listener.CounterListener</listener-class>
+  </listener>
   <filter-mapping>
     <filter-name>vraptor</filter-name>
     <url-pattern>/*</url-pattern>
