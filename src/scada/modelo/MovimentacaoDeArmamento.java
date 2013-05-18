@@ -26,7 +26,6 @@ public class MovimentacaoDeArmamento implements Entidade {
 	private GregorianCalendar dataHora;
 	private String destino;
 	private String observacoes;
-	private Boolean validado;
 	private Boolean devolvido;
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -93,14 +92,6 @@ public class MovimentacaoDeArmamento implements Entidade {
 
 	public void setObservacoes(String observacoes) {
 		this.observacoes = observacoes;
-	}
-
-	public Boolean getValidado() {
-		return validado;
-	}
-
-	public void setValidado(Boolean validado) {
-		this.validado = validado;
 	}
 
 	public Operador getOperador() {
