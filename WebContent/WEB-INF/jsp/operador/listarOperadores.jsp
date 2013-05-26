@@ -1,4 +1,5 @@
 <%@ include file="/base.jsp" %> 
+<%@ taglib uri="/tags/tags" prefix="tags"%>
 
 <ul id="operador" class="dropdown-menu">
 	<li><a href="javascript:gerarLinkCompleto('<c:url value="/operador/editarOperador"/>')">Editar</a></li>
@@ -24,6 +25,13 @@
 	<input type="text" class="input-small" name="operador.subUnidade" value="${sessaoGeral.valor.get('operador').subUnidade}" placeholder="Subunidade">
 	<input type="text" class="input-medium" name="operador.grupoOperador.nome" value="${sessaoGeral.valor.get('operador').grupoOperador.nome}" placeholder="Grupo de Operadores">
 			
+	<select name="operador.ativo" >
+		<option value="" style='display:none;' > Ativo </option>
+		<option value="" > Todos </option>
+		<option <c:if test="${sessaoGeral.valor.get('operador').ativo == true}"> selected="selected" </c:if> value="true"> Sim </option>
+		<option <c:if test="${sessaoGeral.valor.get('operador').ativo == false}"> selected="selected" </c:if> value="false"> Não </option>
+	</select>
+			
 	<button type="submit" class="btn btn-info">Pesquisar</button>
 </form>
 
@@ -40,6 +48,7 @@
       <th>Identidade</th>
       <th>Subunidade</th>
       <th>Grupo de operadores</th>
+      <th>Ativo</th>
     </tr>
   </thead>
   <tbody>
@@ -50,6 +59,7 @@
 		  <td> ${item.identidade} </td>
 		  <td> ${item.subUnidade} </td>
 		  <td> ${item.grupoOperador.nome} </td>
+		  <td> <tags:simNao valor="${item.ativo}"/> </td>
 		</tr>
   	</c:forEach>  	
   </tbody>

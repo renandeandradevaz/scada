@@ -1,4 +1,5 @@
-<%@ include file="/base.jsp" %> 
+<%@ include file="/base.jsp" %>
+<%@ taglib uri="/tags/tags" prefix="tags"%> 
 
 <ul id="grupoOperador" class="dropdown-menu">
 	<li><a href="javascript:gerarLinkCompleto('<c:url value="/grupoOperador/vincularFuncionalidades"/>')">Vincular funcionalidades</a></li>
@@ -24,12 +25,14 @@
   <thead>
     <tr>
       <th>Nome</th>
+      <th>Permissão Especial</th>
     </tr>
   </thead>
   <tbody>
   	<c:forEach items="${gruposOperador}" var="item">
 		<tr id="grupoOperador_${item.id}">
 		  <td> ${item.nome} </td>
+		  <td> <tags:simNao valor="${item.permissaoEspecial}"/> </td>
 		</tr>
   	</c:forEach>  	
   </tbody>

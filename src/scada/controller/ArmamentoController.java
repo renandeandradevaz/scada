@@ -10,6 +10,7 @@ import org.hibernate.criterion.Restrictions;
 import scada.anotacoes.Funcionalidade;
 import scada.hibernate.HibernateUtil;
 import scada.modelo.Armamento;
+import scada.modelo.MovimentacaoDeArmamento;
 import scada.modelo.TipoArmamento;
 import scada.sessao.SessaoGeral;
 import scada.util.Util;
@@ -73,6 +74,17 @@ public class ArmamentoController {
 	@Funcionalidade(nome = "Excluir armamento")
 	public void excluirArmamento(Armamento armamento) {
 
+		MovimentacaoDeArmamento movimentacaoDeArmamento = new MovimentacaoDeArmamento();
+		movimentacaoDeArmamento.setArmamento(armamento);
+		
+		if(hibernateUtil.contar(movimentacaoDeArmamento) > 0){
+			
+			validator.add(new ValidationMessage("Não é possível excluir armamento que esteja vinculado a movimentação anterior. Selecione a opção Inativo em editar armamento", "Erro"));
+			validator.onErrorForwardTo(this).listarArmamentos(null, null);
+			
+		}
+		
+		
 		hibernateUtil.deletar(armamento);
 		result.include("sucesso", "Armamento excluído(a) com sucesso");
 		result.forwardTo(this).listarArmamentos(null, null);

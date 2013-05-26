@@ -21,6 +21,15 @@ public class Armamento implements Entidade {
 	private String numeracao;
 	private String status;
 	private String subUnidade;
+	private Boolean ativo;
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
+	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	private TipoArmamento tipoArmamento;

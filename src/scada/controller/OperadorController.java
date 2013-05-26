@@ -7,6 +7,7 @@ import org.hibernate.criterion.MatchMode;
 import scada.anotacoes.Funcionalidade;
 import scada.hibernate.HibernateUtil;
 import scada.modelo.GrupoOperador;
+import scada.modelo.MovimentacaoDeArmamento;
 import scada.modelo.Operador;
 import scada.sessao.SessaoGeral;
 import scada.util.GeradorDeMd5;
@@ -87,6 +88,18 @@ public class OperadorController {
 
 			validator.onErrorForwardTo(this).listarOperadores(null, null);
 		}
+		
+		
+		MovimentacaoDeArmamento movimentacaoDeArmamento = new MovimentacaoDeArmamento();
+		movimentacaoDeArmamento.setOperador(operador);
+		
+		if(hibernateUtil.contar(movimentacaoDeArmamento) > 0){
+			
+			validator.add(new ValidationMessage("Não é possível excluir operador que esteja vinculado a movimentação anterior. Selecione a opção Inativo em editar operador", "Erro"));
+			validator.onErrorForwardTo(this).listarOperadores(null, null);
+			
+		}
+		
 
 		hibernateUtil.deletar(operadoreselecionado);
 		result.include("sucesso", "Operador excluído com sucesso");

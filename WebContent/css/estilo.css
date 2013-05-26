@@ -108,3 +108,7 @@ table:hover{
 		display: block !important;
 	}
 }
+
+.chekboxTabela{
+	float: left;
+}

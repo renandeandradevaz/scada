@@ -41,6 +41,7 @@ public class RelatorioDisponibilidadeArmamentoController {
 		TipoArmamento tipoArmamento = new TipoArmamento(tipoArmamentoSelecionado);
 
 		Armamento armamento = new Armamento();
+		armamento.setAtivo(true);
 		armamento.setTipoArmamento(tipoArmamento);
 
 		StringBuffer resultadoRelatorioDisponibilidade = new StringBuffer();

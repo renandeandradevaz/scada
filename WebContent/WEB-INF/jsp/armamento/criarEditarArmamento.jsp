@@ -37,6 +37,18 @@
         <input type="text" class="input-xlarge required" name="armamento.subUnidade" value="${armamento.subUnidade}">
       </div>
     </div>
+    
+    <div class="control-group warning">
+        <label class="control-label">Ativo</label>
+        <div class="controls">
+          <select name="armamento.ativo" >
+			<option <c:if test="${armamento.ativo == true}"> selected="selected" </c:if> value="true"> Sim </option>
+			<option <c:if test="${armamento.ativo == false}"> selected="selected" </c:if> value="false"> Não </option>
+			
+		  </select>
+        </div>
+    </div>
+    
 
     <button type="submit" class="btn btn-primary">Salvar</button>
     <a class="btn btn-danger" href="<c:url value="/armamento/listarArmamentos"/>" > Cancelar </a>

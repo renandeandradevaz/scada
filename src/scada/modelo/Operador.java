@@ -13,6 +13,16 @@ public class Operador extends Militar {
 
 	private String login;
 	private String senha;
+	private Boolean ativo;
+	
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
+	}
 
 	@NotNull
 	@ManyToOne(fetch = FetchType.LAZY)

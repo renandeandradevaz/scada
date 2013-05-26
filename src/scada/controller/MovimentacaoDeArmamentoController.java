@@ -70,6 +70,7 @@ public class MovimentacaoDeArmamentoController {
 	public void autoCompleteArmamentos(String numeracaoArmamento) {
 
 		Armamento armamento = new Armamento();
+		armamento.setAtivo(true);
 		armamento.setNumeracao(numeracaoArmamento);
 
 		List<String> status = new ArrayList<String>();
@@ -78,6 +79,7 @@ public class MovimentacaoDeArmamentoController {
 
 		List<Criterion> restricoes = new ArrayList<Criterion>();
 		restricoes.add(Restrictions.in("status", status));
+		
 
 		List<Armamento> armamentos = hibernateUtil.buscar(armamento, 1, restricoes);
 
@@ -138,6 +140,13 @@ public class MovimentacaoDeArmamentoController {
 				if (Util.vazio(armamento)) {
 
 					validarArmamento(numeracaoArmamento);
+				}
+				
+				if (armamento.getAtivo() == null || !armamento.getAtivo()){
+					validator.add(new ValidationMessage("Armamento " + numeracaoArmamento + " inativo.", "Erro"));
+
+					validator.onErrorForwardTo(this).acautelarArmamentos();
+					
 				}
 
 				if (armamento.getStatus().equals(Armamento.ARMAMENTO_DISPONIVEL_ACAUTELADO) || armamento.getStatus().equals(Armamento.ARMAMENTO_INDISPONIVEL_ACAUTELADO)) {
@@ -205,7 +214,12 @@ public class MovimentacaoDeArmamentoController {
 
 			if (hibernateUtil.contar(movimentacaoDeArmamento, MatchMode.EXACT) != 0) {
 
-				validator.add(new ValidationMessage("O cliente " + nomeCliente + " possui acautelamentos em aberto que ainda não foram devolvidos. Para acautelar novos armamentos, devolva os antigos primeiro.", "Erro"));
+				if (!this.sessaoOperador.getOperador().getGrupoOperador().getPermissaoEspecial()){
+				
+					validator.add(new ValidationMessage("O cliente " + nomeCliente + " possui acautelamentos em aberto que ainda não foram devolvidos. Para acautelar novos armamentos, devolva os antigos primeiro.", "Erro"));
+	
+				}
+				
 			}
 		}
 
@@ -269,6 +283,7 @@ public class MovimentacaoDeArmamentoController {
 
 		List<Criterion> restricoes = new ArrayList<Criterion>();
 		restricoes.add(Restrictions.in("armamento.status", status));
+		restricoes.add(Restrictions.eq("armamento.ativo", true));
 
 		MovimentacaoDeArmamento movimentacaoDeArmamento = new MovimentacaoDeArmamento();
 		movimentacaoDeArmamento.setDevolvido(false);

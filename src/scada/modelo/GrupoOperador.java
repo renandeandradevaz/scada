@@ -17,6 +17,16 @@ public class GrupoOperador implements Entidade {
 	private Integer id;
 
 	private String nome;
+	
+	private Boolean permissaoEspecial;
+
+	public Boolean getPermissaoEspecial() {
+		return permissaoEspecial;
+	}
+
+	public void setPermissaoEspecial(Boolean permissaoEspecial) {
+		this.permissaoEspecial = permissaoEspecial;
+	}
 
 	@OneToMany(mappedBy = "grupoOperador")
 	private List<Operador> operadores;

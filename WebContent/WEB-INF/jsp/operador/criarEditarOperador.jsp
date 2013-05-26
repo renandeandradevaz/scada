@@ -62,6 +62,16 @@
 			</div>
 		</div>
     </c:if>
+    
+        <div class="control-group warning">
+        <label class="control-label">Ativo</label>
+        <div class="controls">
+          <select name="operador.ativo" >
+			<option <c:if test="${operador.ativo == true}"> selected="selected" </c:if> value="true"> Sim </option>
+			<option <c:if test="${operador.ativo == false}"> selected="selected" </c:if> value="false"> Não </option>
+		  </select>
+        </div>
+    </div>
    
     <button type="submit" class="btn btn-primary">Salvar</button>
     <a class="btn btn-danger" href="<c:url value="/operador/listarOperadores"/>" > Cancelar </a>

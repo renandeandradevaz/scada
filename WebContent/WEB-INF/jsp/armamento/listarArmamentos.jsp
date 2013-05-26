@@ -1,4 +1,5 @@
 <%@ include file="/base.jsp" %> 
+<%@ taglib uri="/tags/tags" prefix="tags"%>
 
 <ul id="armamento" class="dropdown-menu">
 	<li><a href="javascript:gerarLinkCompleto('<c:url value="/armamento/editarArmamento"/>')">Editar</a></li>
@@ -20,6 +21,13 @@
 		</c:forEach>
 	</select>
 
+	<select name="armamento.ativo" >
+		<option value="" style='display:none;' > Ativo </option>
+		<option value="" > Todos </option>
+		<option <c:if test="${sessaoGeral.valor.get('armamento').ativo == true}"> selected="selected" </c:if> value="true"> Sim </option>
+		<option <c:if test="${sessaoGeral.valor.get('armamento').ativo == false}"> selected="selected" </c:if> value="false"> Não </option>
+	</select>
+
 	<button type="submit" class="btn btn-info">Pesquisar</button>
 </form>
 
@@ -38,6 +46,7 @@
                     <th> Numeração </th>
                     <th> Subunidade </th>
                     <th> Status </th>
+                    <th> Ativo </th>
 				</tr>
 			</thead>
 			<tbody>
@@ -47,6 +56,7 @@
                         <td> ${item.numeracao} </td>
                         <td> ${item.subUnidade} </td>
                         <td> ${item.status} </td>
+                        <td> <tags:simNao valor="${item.ativo}"/> </td>
 					</tr>
 				</c:forEach>
 			</tbody>

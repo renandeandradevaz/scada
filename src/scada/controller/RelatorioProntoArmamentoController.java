@@ -50,6 +50,7 @@ public class RelatorioProntoArmamentoController {
 			acautelamentoAberto.setTipoArmamento(tipoArmamento);
 
 			Armamento armamento = new Armamento();
+			armamento.setAtivo(true);
 			armamento.setTipoArmamento(tipoArmamento);
 
 			Integer quantidadePrevista = hibernateUtil.contar(armamento);
@@ -85,9 +86,12 @@ public class RelatorioProntoArmamentoController {
 		List<Criterion> restricoes = new ArrayList<Criterion>();
 		restricoes.add(Restrictions.in("armamento.status", status));
 
+		restricoes.add(Restrictions.eq("armamento.ativo", true));
+		
 		MovimentacaoDeArmamento movimentacaoDeArmamento = new MovimentacaoDeArmamento();
 		movimentacaoDeArmamento.setDevolvido(false);
-
+		
+		
 		List<AliasHibernateUtil> alias = new ArrayList<AliasHibernateUtil>();
 		alias.add(new AliasHibernateUtil("armamento", "armamento"));
 		alias.add(new AliasHibernateUtil("armamento.tipoArmamento", "tipoArmamento"));

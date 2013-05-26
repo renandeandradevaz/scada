@@ -56,6 +56,7 @@ public class RelatorioAcautelamentosController {
 		result.include("tipoArmamentoSelecionado", tipoArmamento.getDescricao() + " - " + tipoArmamento.getCalibre());
 
 		Armamento armamentoFiltro = new Armamento();
+		armamentoFiltro.setAtivo(true);
 		armamentoFiltro.setTipoArmamento(tipoArmamento);
 
 		List<Armamento> armamentos = hibernateUtil.buscar(armamentoFiltro);
