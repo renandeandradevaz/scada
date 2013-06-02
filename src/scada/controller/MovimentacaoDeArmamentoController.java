@@ -115,7 +115,7 @@ public class MovimentacaoDeArmamentoController {
 
 		if (Util.vazio(armamentosNaoRepetidos)) {
 
-			validator.add(new ValidationMessage("Não foi selecionado nenhum armamento", "Erro"));
+			validator.add(new ValidationMessage("Não foi selecionado armamento", "Erro"));
 
 			validator.onErrorForwardTo(this).acautelarArmamentos();
 		}
@@ -186,7 +186,7 @@ public class MovimentacaoDeArmamentoController {
 			}
 		}
 
-		result.include("sucesso", "Acautelamentos realizados com sucesso");
+		result.include("sucesso", "Acautelamento(s) realizado(s) com sucesso");
 
 		result.redirectTo(this).listarMovimentacaoDeArmamentos(new MovimentacaoDeArmamento(), new FiltrosMovimentacaoDeArmamento(), null);
 	}
@@ -203,7 +203,7 @@ public class MovimentacaoDeArmamentoController {
 
 		if (hibernateUtil.contar(clienteFiltro, MatchMode.EXACT) != 1) {
 
-			validator.add(new ValidationMessage("Não existe nenhum cliente com o nome informado. Por favor, informe o nome completo do cliente", "Erro"));
+			validator.add(new ValidationMessage("Não existe cliente com o nome informado. Por favor, informe o nome completo do cliente", "Erro"));
 		}
 
 		else {

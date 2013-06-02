@@ -145,7 +145,7 @@ public class OperadorController {
 		operadorFiltro.setLogin(operador.getLogin());
 
 		if (Util.preenchido(hibernateUtil.buscar(operadorFiltro, MatchMode.EXACT))) {
-			validator.add(new ValidationMessage("Já existe um operador com este login", "Erro"));
+			validator.add(new ValidationMessage("Já existe um operador com este nome", "Erro"));
 		}
 		validator.onErrorForwardTo(this).criarEditarOperador();
 	}
