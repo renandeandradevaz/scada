@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import scada.anotacoes.Funcionalidade;
@@ -359,6 +360,19 @@ public class MovimentacaoDeArmamentoController {
 			validator.add(new ValidationMessage("Não é possível excluir esta movimentação de armamento. O armamento possui movimentações posteriores a esta", "Erro"));
 			validator.onErrorForwardTo(this).listarMovimentacaoDeArmamentos(null, null, null);
 			return;
+		}
+
+		if (movimentacaoDeArmamento.getTipoMovimentacao().equals(MovimentacaoDeArmamento.TIPO_MOVIMENTACAO_DEVOLUCAO_ACAUTELAMENTO)) {
+
+			MovimentacaoDeArmamento acautelamentoQueDeuOrigemADevolucao = new MovimentacaoDeArmamento();
+			acautelamentoQueDeuOrigemADevolucao.setArmamento(armamento);
+			acautelamentoQueDeuOrigemADevolucao.setTipoMovimentacao(MovimentacaoDeArmamento.TIPO_MOVIMENTACAO_ACAUTELAMENTO);
+
+			acautelamentoQueDeuOrigemADevolucao = (MovimentacaoDeArmamento) this.hibernateUtil.buscar(acautelamentoQueDeuOrigemADevolucao, 1, null, Order.desc("id"), MatchMode.EXACT).get(0);
+
+			acautelamentoQueDeuOrigemADevolucao.setDevolvido(false);
+
+			hibernateUtil.salvarOuAtualizar(acautelamentoQueDeuOrigemADevolucao);
 		}
 
 		hibernateUtil.deletar(movimentacaoDeArmamento);
