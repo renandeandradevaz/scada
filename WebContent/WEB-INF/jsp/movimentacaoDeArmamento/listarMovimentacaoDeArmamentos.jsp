@@ -1,6 +1,10 @@
 <%@ include file="/base.jsp" %> 
 <%@ taglib uri="/tags/tags" prefix="tags"%>
 
+<ul id="movimentacaoDeArmamento" class="dropdown-menu">
+	<li><a href="javascript:deletar('<c:url value="/movimentacaoDeArmamento/excluir"/>')">Excluir</a></li>
+</ul>
+
 <a class="btn" href="<c:url value="/movimentacaoDeArmamento/acautelarArmamentos"/>" > Acautelar armamentos </a>
 <a class="btn" href="<c:url value="/movimentacaoDeArmamento/devolverArmamentos"/>" > Devolver armamentos </a>
 

@@ -76,15 +76,14 @@ public class ArmamentoController {
 
 		MovimentacaoDeArmamento movimentacaoDeArmamento = new MovimentacaoDeArmamento();
 		movimentacaoDeArmamento.setArmamento(armamento);
-		
-		if(hibernateUtil.contar(movimentacaoDeArmamento) > 0){
-			
+
+		if (hibernateUtil.contar(movimentacaoDeArmamento) > 0) {
+
 			validator.add(new ValidationMessage("Não é possível excluir armamento que esteja vinculado a movimentação anterior. Selecione a opção Inativo em editar armamento", "Erro"));
 			validator.onErrorForwardTo(this).listarArmamentos(null, null);
-			
+
 		}
-		
-		
+
 		hibernateUtil.deletar(armamento);
 		result.include("sucesso", "Armamento excluído(a) com sucesso");
 		result.forwardTo(this).listarArmamentos(null, null);

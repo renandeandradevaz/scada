@@ -22,6 +22,7 @@ import scada.sessao.SessaoMovimentacao;
 import scada.sessao.SessaoOperador;
 import scada.util.Util;
 import scada.util.UtilController;
+import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.Validator;
@@ -79,7 +80,6 @@ public class MovimentacaoDeArmamentoController {
 
 		List<Criterion> restricoes = new ArrayList<Criterion>();
 		restricoes.add(Restrictions.in("status", status));
-		
 
 		List<Armamento> armamentos = hibernateUtil.buscar(armamento, 1, restricoes);
 
@@ -141,12 +141,12 @@ public class MovimentacaoDeArmamentoController {
 
 					validarArmamento(numeracaoArmamento);
 				}
-				
-				if (armamento.getAtivo() == null || !armamento.getAtivo()){
+
+				if (armamento.getAtivo() == null || !armamento.getAtivo()) {
 					validator.add(new ValidationMessage("Armamento " + numeracaoArmamento + " inativo.", "Erro"));
 
 					validator.onErrorForwardTo(this).acautelarArmamentos();
-					
+
 				}
 
 				if (armamento.getStatus().equals(Armamento.ARMAMENTO_DISPONIVEL_ACAUTELADO) || armamento.getStatus().equals(Armamento.ARMAMENTO_INDISPONIVEL_ACAUTELADO)) {
@@ -214,12 +214,12 @@ public class MovimentacaoDeArmamentoController {
 
 			if (hibernateUtil.contar(movimentacaoDeArmamento, MatchMode.EXACT) != 0) {
 
-				if (!this.sessaoOperador.getOperador().getGrupoOperador().getPermissaoEspecial()){
-				
+				if (!this.sessaoOperador.getOperador().getGrupoOperador().getPermissaoEspecial()) {
+
 					validator.add(new ValidationMessage("O cliente " + nomeCliente + " possui acautelamentos em aberto que ainda não foram devolvidos. Para acautelar novos armamentos, devolva os antigos primeiro.", "Erro"));
-	
+
 				}
-				
+
 			}
 		}
 
@@ -338,5 +338,55 @@ public class MovimentacaoDeArmamentoController {
 
 		result.redirectTo(this).listarMovimentacaoDeArmamentos(new MovimentacaoDeArmamento(), new FiltrosMovimentacaoDeArmamento(), null);
 
+	}
+
+	@Path("/movimentacaoDeArmamento/excluir/{movimentacaoDeArmamento.id}")
+	@Funcionalidade(nome = "Excluir movimentação")
+	public void excluir(MovimentacaoDeArmamento movimentacaoDeArmamento) {
+
+		movimentacaoDeArmamento = this.hibernateUtil.selecionar(movimentacaoDeArmamento);
+
+		Armamento armamento = movimentacaoDeArmamento.getArmamento();
+
+		MovimentacaoDeArmamento possivelMovimentacaoPosterior = new MovimentacaoDeArmamento();
+		possivelMovimentacaoPosterior.setArmamento(armamento);
+
+		List<Criterion> restricoes = new ArrayList<Criterion>();
+		restricoes.add(Restrictions.gt("id", movimentacaoDeArmamento.getId()));
+
+		if (this.hibernateUtil.contar(possivelMovimentacaoPosterior, restricoes) > 0) {
+
+			validator.add(new ValidationMessage("Não é possível excluir esta movimentação de armamento. O armamento possui movimentações posteriores a esta", "Erro"));
+			validator.onErrorForwardTo(this).listarMovimentacaoDeArmamentos(null, null, null);
+			return;
+		}
+
+		hibernateUtil.deletar(movimentacaoDeArmamento);
+
+		if (armamento.getStatus().equals(Armamento.ARMAMENTO_DISPONIVEL_ACAUTELADO)) {
+
+			armamento.setStatus(Armamento.ARMAMENTO_DISPONIVEL_NÃO_ACAUTELADO);
+		}
+
+		else if (armamento.getStatus().equals(Armamento.ARMAMENTO_DISPONIVEL_NÃO_ACAUTELADO)) {
+
+			armamento.setStatus(Armamento.ARMAMENTO_DISPONIVEL_ACAUTELADO);
+		}
+
+		else if (armamento.getStatus().equals(Armamento.ARMAMENTO_INDISPONIVEL_NÃO_ACAUTELADO)) {
+
+			armamento.setStatus(Armamento.ARMAMENTO_INDISPONIVEL_ACAUTELADO);
+		}
+
+		else if (armamento.getStatus().equals(Armamento.ARMAMENTO_INDISPONIVEL_ACAUTELADO)) {
+
+			armamento.setStatus(Armamento.ARMAMENTO_INDISPONIVEL_NÃO_ACAUTELADO);
+		}
+
+		hibernateUtil.salvarOuAtualizar(armamento);
+
+		result.include("sucesso", "Movimentação excluída com sucesso");
+
+		result.redirectTo(this).listarMovimentacaoDeArmamentos(null, null, null);
 	}
 }
